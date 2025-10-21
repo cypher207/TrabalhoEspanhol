@@ -13,25 +13,72 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a0a0a 100%);
             color: #e4e4e4;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            width: 150px;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        body::before {
+            left: 0;
+            background: linear-gradient(90deg, #7b2cbf 0%, transparent 100%);
+        }
+
+        body::after {
+            right: 0;
+            background: linear-gradient(270deg, #7b2cbf 0%, transparent 100%);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 1;
         }
 
         header {
             text-align: center;
             padding: 60px 20px;
-            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
-            border-radius: 20px;
+            background: linear-gradient(135deg, #240046 0%, #3c096c 50%, #240046 100%);
+            border-radius: 25px;
             margin-bottom: 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 50px rgba(123, 44, 191, 0.4);
             animation: fadeInDown 1s ease;
+            border: 2px solid #7b2cbf;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(123, 44, 191, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         @keyframes fadeInDown {
@@ -76,155 +123,194 @@
             }
         }
 
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(123, 44, 191, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(123, 44, 191, 0.8);
+            }
+        }
+
         .flag {
-            width: 200px;
-            height: 120px;
+            width: 220px;
+            height: 130px;
             margin: 0 auto 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(123, 44, 191, 0.6);
             animation: pulse 2s infinite;
+            position: relative;
+            z-index: 2;
         }
 
         h1 {
-            font-size: 3.5em;
-            color: #00d4ff;
-            text-shadow: 2px 2px 10px rgba(0, 212, 255, 0.5);
+            font-size: 3.8em;
+            background: linear-gradient(135deg, #c77dff 0%, #e0aaff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 20px rgba(199, 125, 255, 0.5);
             margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+            font-weight: bold;
         }
 
         .subtitle {
-            font-size: 1.3em;
-            color: #a8dadc;
+            font-size: 1.4em;
+            color: #e0aaff;
             margin-top: 10px;
+            position: relative;
+            z-index: 2;
         }
 
         .section {
-            background: rgba(15, 52, 96, 0.6);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 212, 255, 0.2);
+            background: linear-gradient(135deg, rgba(36, 0, 70, 0.8) 0%, rgba(60, 9, 108, 0.6) 100%);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 40px rgba(123, 44, 191, 0.3);
+            border: 2px solid rgba(123, 44, 191, 0.4);
             animation: fadeInUp 1s ease;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
         }
 
         .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 212, 255, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(199, 125, 255, 0.5);
+            border-color: #c77dff;
         }
 
         .section h2 {
-            color: #00d4ff;
-            font-size: 2em;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #00d4ff;
-            padding-bottom: 10px;
+            background: linear-gradient(135deg, #c77dff 0%, #e0aaff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #7b2cbf;
+            padding-bottom: 15px;
+            font-weight: bold;
         }
 
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            gap: 25px;
+            margin-top: 25px;
         }
 
         .info-card {
-            background: rgba(22, 33, 62, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #00d4ff;
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, rgba(60, 9, 108, 0.9) 0%, rgba(36, 0, 70, 0.9) 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #c77dff;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
         .info-card:hover {
-            background: rgba(22, 33, 62, 1);
-            transform: translateX(10px);
+            background: linear-gradient(135deg, rgba(60, 9, 108, 1) 0%, rgba(36, 0, 70, 1) 100%);
+            transform: translateX(15px) scale(1.03);
+            box-shadow: 0 10px 30px rgba(199, 125, 255, 0.4);
         }
 
         .info-card h3 {
-            color: #00d4ff;
-            margin-bottom: 10px;
-            font-size: 1.3em;
+            color: #e0aaff;
+            margin-bottom: 12px;
+            font-size: 1.4em;
+            font-weight: bold;
         }
 
         .info-card p {
-            line-height: 1.6;
+            line-height: 1.7;
             color: #e4e4e4;
         }
 
         .tourist-spots {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 25px;
         }
 
         .spot-card {
-            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
-            padding: 25px;
-            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(60, 9, 108, 0.8) 0%, rgba(36, 0, 70, 0.8) 100%);
+            padding: 30px;
+            border-radius: 20px;
             text-align: center;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(123, 44, 191, 0.3);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
         }
 
         .spot-card:hover {
-            border-color: #00d4ff;
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+            border-color: #c77dff;
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(199, 125, 255, 0.5);
+            animation: glow 2s infinite;
         }
 
         .spot-card h3 {
-            color: #00d4ff;
+            color: #e0aaff;
             margin-bottom: 15px;
-            font-size: 1.5em;
+            font-size: 1.6em;
+            font-weight: bold;
         }
 
         .spot-card p {
-            line-height: 1.7;
+            line-height: 1.8;
+            color: #e4e4e4;
         }
 
         .culture-section {
-            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 20px;
+            background: linear-gradient(135deg, rgba(60, 9, 108, 0.9) 0%, rgba(36, 0, 70, 0.9) 100%);
+            padding: 35px;
+            border-radius: 20px;
+            margin-top: 25px;
+            border: 2px solid rgba(123, 44, 191, 0.3);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
         }
 
         .culture-section h3 {
-            color: #00d4ff;
-            margin-bottom: 15px;
-            font-size: 1.8em;
+            color: #e0aaff;
+            margin-bottom: 20px;
+            font-size: 1.9em;
+            font-weight: bold;
         }
 
         .culture-section p {
-            line-height: 1.8;
+            line-height: 1.9;
             font-size: 1.1em;
             color: #e4e4e4;
         }
 
         footer {
             text-align: center;
-            padding: 30px;
-            background: rgba(15, 52, 96, 0.6);
-            border-radius: 15px;
-            margin-top: 40px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(36, 0, 70, 0.8) 0%, rgba(60, 9, 108, 0.8) 100%);
+            border-radius: 20px;
+            margin-top: 50px;
             animation: fadeInUp 1.5s ease;
+            border: 2px solid #7b2cbf;
+            box-shadow: 0 10px 40px rgba(123, 44, 191, 0.4);
         }
 
         footer p {
-            color: #a8dadc;
-            font-size: 1.1em;
+            color: #e0aaff;
+            font-size: 1.2em;
+            margin: 8px 0;
         }
 
         .highlight {
-            color: #00d4ff;
+            color: #c77dff;
             font-weight: bold;
+            text-shadow: 0 0 10px rgba(199, 125, 255, 0.5);
         }
 
         .emoji {
-            font-size: 1.5em;
+            font-size: 1.6em;
             margin-right: 10px;
         }
 
@@ -234,54 +320,122 @@
             }
 
             .section {
-                padding: 20px;
+                padding: 25px;
             }
 
             .info-grid {
                 grid-template-columns: 1fr;
             }
+
+            body::before,
+            body::after {
+                width: 80px;
+            }
         }
 
         .scroll-indicator {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: #00d4ff;
+            bottom: 35px;
+            right: 35px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #7b2cbf 0%, #c77dff 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             animation: pulse 2s infinite;
-            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.5);
+            box-shadow: 0 8px 30px rgba(199, 125, 255, 0.6);
             transition: all 0.3s ease;
+            z-index: 1000;
+            border: 3px solid #e0aaff;
         }
 
         .scroll-indicator:hover {
-            transform: scale(1.1);
-            background: #00b8d4;
+            transform: scale(1.15);
+            background: linear-gradient(135deg, #c77dff 0%, #e0aaff 100%);
+            animation: glow 1s infinite;
         }
 
         .scroll-indicator::before {
             content: '↑';
-            color: #1a1a2e;
-            font-size: 2em;
+            color: #ffffff;
+            font-size: 2.2em;
             font-weight: bold;
+        }
+
+        .firebase-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #7b2cbf 0%, #c77dff 100%);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            color: white;
+            box-shadow: 0 5px 20px rgba(199, 125, 255, 0.5);
+            z-index: 1000;
+            animation: pulse 2s infinite;
+            border: 2px solid #e0aaff;
+        }
+
+        .firebase-indicator::before {
+            content: '🔥';
+            margin-right: 8px;
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a0a0a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 6px solid rgba(199, 125, 255, 0.3);
+            border-top-color: #c77dff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
 <body>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+    </div>
+
+    <div class="firebase-indicator">Firebase Conectado</div>
+
     <div class="container">
         <header>
             <div class="flag" style="background: linear-gradient(to bottom, #002b7f 0%, #002b7f 20%, white 20%, white 40%, #ce1126 40%, #ce1126 60%, white 60%, white 80%, #002b7f 80%, #002b7f 100%); position: relative;">
-                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8em;">
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 45px; height: 45px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85em; box-shadow: 0 3px 15px rgba(0, 0, 0, 0.4);">
                     🌟
                 </div>
             </div>
-            <h1>🇨🇷 Costa Rica 🇨🇷</h1>
-            <p class="subtitle">Pura Vida - O Paraíso da América Central</p>
+            <h1>🇨🇷 COSTA RICA 🇨🇷</h1>
+            <p class="subtitle">✨ Pura Vida - O Paraíso da América Central ✨</p>
         </header>
 
         <div class="section">
@@ -312,7 +466,8 @@
                 <p>
                     A Costa Rica está localizada na <span class="highlight">América Central</span>, entre o Mar do Caribe e o Oceano Pacífico. 
                     O país possui uma área de aproximadamente <span class="highlight">51.100 km²</span> e é conhecido por sua 
-                    incrível biodiversidade e paisagens naturais espetaculares.
+                    incrível biodiversidade e paisagens naturais espetaculares. É um dos países mais desenvolvidos da região, 
+                    com alto índice de desenvolvimento humano e qualidade de vida.
                 </p>
             </div>
         </div>
@@ -322,19 +477,19 @@
             <div class="info-grid">
                 <div class="info-card">
                     <h3><span class="emoji">⬆️</span>Norte</h3>
-                    <p>Fronteira com a <span class="highlight">Nicarágua</span></p>
+                    <p>Fronteira com a <span class="highlight">Nicarágua</span><br>309 km de extensão</p>
                 </div>
                 <div class="info-card">
                     <h3><span class="emoji">⬇️</span>Sul</h3>
-                    <p>Fronteira com o <span class="highlight">Panamá</span></p>
+                    <p>Fronteira com o <span class="highlight">Panamá</span><br>330 km de extensão</p>
                 </div>
                 <div class="info-card">
                     <h3><span class="emoji">⬅️</span>Leste</h3>
-                    <p><span class="highlight">Mar do Caribe</span></p>
+                    <p><span class="highlight">Mar do Caribe</span><br>212 km de litoral</p>
                 </div>
                 <div class="info-card">
                     <h3><span class="emoji">➡️</span>Oeste</h3>
-                    <p><span class="highlight">Oceano Pacífico</span></p>
+                    <p><span class="highlight">Oceano Pacífico</span><br>1.016 km de litoral</p>
                 </div>
             </div>
         </div>
@@ -342,12 +497,18 @@
         <div class="section">
             <h2>⚽ Time de Futebol</h2>
             <div class="culture-section">
-                <h3>Seleção Nacional - Los Ticos</h3>
+                <h3>🏆 Seleção Nacional - Los Ticos</h3>
                 <p>
                     A seleção costarriquenha é carinhosamente chamada de <span class="highlight">"Los Ticos"</span>. 
-                    Participou de <span class="highlight">6 Copas do Mundo</span> e teve sua melhor campanha em 2014, 
-                    chegando às quartas de final no Brasil. Jogadores famosos incluem <span class="highlight">Keylor Navas</span> 
-                    (goleiro do PSG e Real Madrid) e <span class="highlight">Joel Campbell</span>.
+                    Participou de <span class="highlight">6 Copas do Mundo</span> (1990, 2002, 2006, 2014, 2018, 2022) 
+                    e teve sua melhor campanha em 2014 no Brasil, chegando às <span class="highlight">quartas de final</span> 
+                    após eliminar Uruguai, Itália e Grécia. 
+                </p>
+                <br>
+                <p>
+                    Jogadores famosos incluem <span class="highlight">Keylor Navas</span> (goleiro tri-campeão da Champions League pelo Real Madrid), 
+                    <span class="highlight">Joel Campbell</span>, <span class="highlight">Bryan Ruiz</span> e 
+                    <span class="highlight">Celso Borges</span>. Os principais clubes do país são Saprissa, Alajuelense e Herediano.
                 </p>
             </div>
         </div>
@@ -355,12 +516,17 @@
         <div class="section">
             <h2>🎵 Música</h2>
             <div class="culture-section">
-                <h3>Ritmos Tradicionais</h3>
+                <h3>🎸 Ritmos Tradicionais e Contemporâneos</h3>
                 <p>
                     A música costarriquenha é rica e diversificada. O ritmo mais tradicional é o <span class="highlight">Punto Guanacasteco</span>, 
-                    típico da província de Guanacaste. Também são populares a <span class="highlight">Cumbia</span>, 
-                    o <span class="highlight">Calypso</span> (na costa caribenha) e a música folclórica com instrumentos 
-                    como a marimba e a guitarra.
+                    típico da província de Guanacaste, acompanhado por marimba, guitarra e quijongo. 
+                </p>
+                <br>
+                <p>
+                    Na costa caribenha, predomina o <span class="highlight">Calypso</span> e o reggae, refletindo a influência afro-caribenha. 
+                    Também são populares a <span class="highlight">Cumbia</span>, o <span class="highlight">Merengue</span> e 
+                    a <span class="highlight">Salsa</span>. A música folclórica utiliza instrumentos tradicionais como 
+                    marimba, ocarina e charrascas.
                 </p>
             </div>
         </div>
@@ -369,20 +535,20 @@
             <h2>⭐ Famosos</h2>
             <div class="info-grid">
                 <div class="info-card">
-                    <h3>Keylor Navas</h3>
-                    <p>Goleiro mundialmente reconhecido, jogou no Real Madrid e PSG</p>
+                    <h3>⚽ Keylor Navas</h3>
+                    <p>Goleiro de elite mundial, tri-campeão da Champions League pelo Real Madrid (2016, 2017, 2018)</p>
                 </div>
                 <div class="info-card">
-                    <h3>Claudia Poll</h3>
-                    <p>Nadadora olímpica, medalha de ouro em Atlanta 1996</p>
+                    <h3>🏊‍♀️ Claudia Poll</h3>
+                    <p>Nadadora olímpica, primeira e única medalha de ouro da Costa Rica em Atlanta 1996</p>
                 </div>
                 <div class="info-card">
-                    <h3>Franklin Chang-Díaz</h3>
-                    <p>Astronauta da NASA com 7 missões espaciais</p>
+                    <h3>🚀 Franklin Chang-Díaz</h3>
+                    <p>Astronauta da NASA com 7 missões espaciais, recorde compartilhado mundialmente</p>
                 </div>
                 <div class="info-card">
-                    <h3>Óscar Arias</h3>
-                    <p>Ex-presidente e ganhador do Prêmio Nobel da Paz</p>
+                    <h3>🏅 Óscar Arias Sánchez</h3>
+                    <p>Ex-presidente e ganhador do Prêmio Nobel da Paz em 1987</p>
                 </div>
             </div>
         </div>
@@ -392,27 +558,27 @@
             <div class="tourist-spots">
                 <div class="spot-card">
                     <h3>🌋 Vulcão Arenal</h3>
-                    <p>Um dos vulcões mais ativos do mundo, cercado por florestas tropicais e fontes termais naturais.</p>
+                    <p>Um dos vulcões mais ativos e icônicos da América Central, cercado por florestas tropicais exuberantes e fontes termais naturais relaxantes.</p>
                 </div>
                 <div class="spot-card">
                     <h3>🌳 Parque Nacional Manuel Antonio</h3>
-                    <p>Praias paradisíacas com rica vida selvagem, incluindo macacos, preguiças e aves exóticas.</p>
+                    <p>Praias paradisíacas de areia branca com rica vida selvagem, incluindo macacos-prego, preguiças e aves exóticas em seu habitat natural.</p>
                 </div>
                 <div class="spot-card">
                     <h3>☁️ Monteverde</h3>
-                    <p>Floresta nublada com pontes suspensas e biodiversidade única, lar do quetzal resplendente.</p>
+                    <p>Floresta nublada mística com pontes suspensas emocionantes e biodiversidade única, lar do raro e deslumbrante quetzal resplendente.</p>
                 </div>
                 <div class="spot-card">
                     <h3>🏖️ Península de Nicoya</h3>
-                    <p>Praias de areia branca, surfe de classe mundial e uma das Zonas Azuis de longevidade do planeta.</p>
+                    <p>Praias de areia dourada, surfe de classe mundial e uma das cinco Zonas Azuis de longevidade do planeta, onde pessoas vivem mais de 100 anos.</p>
                 </div>
                 <div class="spot-card">
                     <h3>🐢 Parque Nacional Tortuguero</h3>
-                    <p>Importante local de desova de tartarugas marinhas, com canais navegáveis pela selva.</p>
+                    <p>Principal local de desova de tartarugas marinhas no Caribe, com canais navegáveis através da selva tropical e vida selvagem abundante.</p>
                 </div>
                 <div class="spot-card">
                     <h3>🏛️ Teatro Nacional</h3>
-                    <p>Joia arquitetônica em San José, construído em 1897, símbolo da cultura costarriquenha.</p>
+                    <p>Joia arquitetônica neoclássica em San José, construída em 1897 com café exportado, símbolo máximo da cultura costarriquenha.</p>
                 </div>
             </div>
         </div>
@@ -420,44 +586,93 @@
         <div class="section">
             <h2>🎭 Cultura</h2>
             <div class="culture-section">
-                <h3>Pura Vida - A Essência Costarriquenha</h3>
+                <h3>🌺 Pura Vida - A Essência Costarriquenha</h3>
                 <p>
-                    A expressão <span class="highlight">"Pura Vida"</span> resume o estilo de vida costarriquenho: 
-                    otimismo, simplicidade e apreciação da vida. A Costa Rica é conhecida por:
+                    A expressão <span class="highlight">"Pura Vida"</span> resume perfeitamente o estilo de vida costarriquenho: 
+                    otimismo contagiante, simplicidade, hospitalidade e profunda apreciação pela vida. É usada como saudação, 
+                    despedida e expressão de contentamento.
                 </p>
                 <br>
                 <p>
-                    🌿 <span class="highlight">Consciência Ambiental:</span> Mais de 25% do território é protegido em parques e reservas.
-                    O país gera quase 100% de sua energia de fontes renováveis.
+                    🌿 <span class="highlight">Consciência Ambiental Exemplar:</span> Mais de 25% do território é protegido 
+                    em parques nacionais e reservas biológicas. O país gera quase 100% de sua energia elétrica de fontes 
+                    renováveis (hidrelétrica, eólica, geotérmica) e tem como meta ser carbono neutro.
                 </p>
                 <br>
                 <p>
-                    ☮️ <span class="highlight">Pacifismo:</span> Aboliu o exército em 1948, sendo um dos poucos países 
-                    sem forças armadas no mundo.
+                    ☮️ <span class="highlight">Tradição Pacifista:</span> Aboliu completamente o exército em 1948, 
+                    sendo um dos poucos países sem forças armadas permanentes no mundo. Os recursos são investidos 
+                    em educação e saúde pública gratuitas.
                 </p>
                 <br>
                 <p>
-                    🎨 <span class="highlight">Arte e Artesanato:</span> Carretas coloridas de Sarchí, cerâmica de Guaitil 
-                    e máscaras tradicionais são símbolos culturais importantes.
+                    🎨 <span class="highlight">Arte e Artesanato Tradicional:</span> As famosas carretas coloridas de Sarchí 
+                    (Patrimônio Cultural Imaterial da Humanidade pela UNESCO), cerâmica indígena chorotega de Guaitil 
+                    e máscaras tradicionais de Boruca são símbolos culturais valiosos.
                 </p>
                 <br>
                 <p>
-                    🍽️ <span class="highlight">Gastronomia:</span> O prato típico é o <span class="highlight">Gallo Pinto</span> 
-                    (arroz com feijão), acompanhado de casado, ceviche e café de alta qualidade.
+                    🍽️ <span class="highlight">Gastronomia Autêntica:</span> O prato típico é o <span class="highlight">Gallo Pinto</span> 
+                    (arroz com feijão preto), acompanhado de casado (arroz, feijão, carne, plátano, salada), ceviche fresco, 
+                    olla de carne e café de altíssima qualidade reconhecido mundialmente.
                 </p>
             </div>
         </div>
 
         <footer>
             <p>🌟 Costa Rica - Pura Vida 🌟</p>
-            <p>Um país pequeno com um coração gigante</p>
+            <p>Um país pequeno com um coração gigante e um futuro sustentável</p>
+            <p style="margin-top: 15px; font-size: 0.9em; color: #c77dff;">🔥 Powered by Firebase</p>
         </footer>
     </div>
 
     <div class="scroll-indicator" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"></div>
 
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { getFirestore, collection, addDoc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDSLy-k6uIOEMm0bYQ-8gRe1IP6Cv-yt5s",
+            authDomain: "trabalhodelapapaya.firebaseapp.com",
+            projectId: "trabalhodelapapaya",
+            storageBucket: "trabalhodelapapaya.firebasestorage.app",
+            messagingSenderId: "364242630841",
+            appId: "1:364242630841:web:3be0182d3aad95f24bc368",
+            measurementId: "G-YE2BC5ND6B"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        console.log("🔥 Firebase inicializado com sucesso!");
+
+        // Registrar visita ao site
+        try {
+            await addDoc(collection(db, "visitas"), {
+                timestamp: serverTimestamp(),
+                pagina: "Costa Rica - Apresentação",
+                userAgent: navigator.userAgent
+            });
+            console.log("✅ Visita registrada no Firestore!");
+        } catch (error) {
+            console.error("❌ Erro ao registrar visita:", error);
+        }
+
+        // Remover tela de carregamento
+        setTimeout(() => {
+            document.getElementById('loadingScreen').classList.add('hidden');
+        }, 1000);
+    </script>
+
     <script>
-        // Animação de scroll suave
+        // Animação de scroll suave e observação de elementos
         document.addEventListener('DOMContentLoaded', function() {
             const sections = document.querySelectorAll('.section');
             
@@ -478,20 +693,387 @@
             sections.forEach(section => {
                 section.style.opacity = '0';
                 section.style.transform = 'translateY(50px)';
-                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
                 observer.observe(section);
             });
 
             // Mostrar/ocultar botão de scroll
             const scrollIndicator = document.querySelector('.scroll-indicator');
             window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
+                if (window.pageYOffset > 400) {
                     scrollIndicator.style.display = 'flex';
                 } else {
                     scrollIndicator.style.display = 'none';
                 }
+                });
+
+            // Efeito parallax suave nas laterais roxas
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const parallaxSpeed = 0.5;
+                document.body.style.backgroundPosition = `center ${scrolled * parallaxSpeed}px`;
+            });
+
+            // Animação de digitação no título
+            const title = document.querySelector('h1');
+            const originalText = title.textContent;
+            title.textContent = '';
+            let charIndex = 0;
+
+            function typeWriter() {
+                if (charIndex < originalText.length) {
+                    title.textContent += originalText.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+
+            setTimeout(typeWriter, 1200);
+
+            // Adicionar efeito de brilho nos cards ao passar o mouse
+            const cards = document.querySelectorAll('.info-card, .spot-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05) translateY(-5px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) translateY(0)';
+                });
+            });
+
+            // Contador de visitantes (exemplo)
+            let visitCount = localStorage.getItem('visitCount') || 0;
+            visitCount++;
+            localStorage.setItem('visitCount', visitCount);
+            console.log(`🎯 Você é o visitante número ${visitCount} deste dispositivo!`);
+
+            // Efeito de partículas de fundo
+            createParticles();
+        });
+
+        // Criar partículas flutuantes de fundo
+        function createParticles() {
+            const particlesContainer = document.createElement('div');
+            particlesContainer.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 0;
+                overflow: hidden;
+            `;
+            document.body.appendChild(particlesContainer);
+
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                const size = Math.random() * 4 + 2;
+                const startX = Math.random() * 100;
+                const duration = Math.random() * 20 + 15;
+                const delay = Math.random() * 5;
+
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: radial-gradient(circle, rgba(199, 125, 255, 0.8), transparent);
+                    border-radius: 50%;
+                    left: ${startX}%;
+                    bottom: -10px;
+                    animation: floatUp ${duration}s linear ${delay}s infinite;
+                    opacity: 0;
+                `;
+
+                particlesContainer.appendChild(particle);
+            }
+
+            // Adicionar animação CSS para partículas
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes floatUp {
+                    0% {
+                        transform: translateY(0) translateX(0) rotate(0deg);
+                        opacity: 0;
+                    }
+                    10% {
+                        opacity: 1;
+                    }
+                    90% {
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: translateY(-100vh) translateX(${Math.random() * 200 - 100}px) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Easter egg: Código Konami
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+
+        document.addEventListener('keydown', function(e) {
+            konamiCode.push(e.key);
+            konamiCode = konamiCode.slice(-10);
+
+            if (konamiCode.join(',') === konamiSequence.join(',')) {
+                activateEasterEgg();
+            }
+        });
+
+        function activateEasterEgg() {
+            document.body.style.animation = 'rainbow 2s linear infinite';
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes rainbow {
+                    0% { filter: hue-rotate(0deg); }
+                    100% { filter: hue-rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+
+            setTimeout(() => {
+                alert('🎉 Pura Vida! Você encontrou o easter egg da Costa Rica! 🇨🇷');
+                document.body.style.animation = '';
+            }, 2000);
+        }
+
+        // Função para compartilhar nas redes sociais
+        function shareOnSocial(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent('Confira esta apresentação incrível sobre a Costa Rica! 🇨🇷');
+            
+            const urls = {
+                twitter: `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+                whatsapp: `https://wa.me/?text=${text}%20${url}`
+            };
+
+            if (urls[platform]) {
+                window.open(urls[platform], '_blank', 'width=600,height=400');
+            }
+        }
+
+        // Adicionar menu de compartilhamento
+        const shareButton = document.createElement('div');
+        shareButton.style.cssText = `
+            position: fixed;
+            bottom: 110px;
+            right: 35px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #7b2cbf 0%, #c77dff 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(199, 125, 255, 0.6);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 3px solid #e0aaff;
+            font-size: 1.5em;
+        `;
+        shareButton.innerHTML = '📤';
+        shareButton.title = 'Compartilhar';
+
+        shareButton.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.15)';
+        });
+
+        shareButton.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+
+        shareButton.addEventListener('click', function() {
+            const shareMenu = document.createElement('div');
+            shareMenu.style.cssText = `
+                position: fixed;
+                bottom: 180px;
+                right: 35px;
+                background: linear-gradient(135deg, rgba(60, 9, 108, 0.95) 0%, rgba(36, 0, 70, 0.95) 100%);
+                padding: 20px;
+                border-radius: 15px;
+                box-shadow: 0 10px 40px rgba(199, 125, 255, 0.5);
+                z-index: 1001;
+                border: 2px solid #7b2cbf;
+                backdrop-filter: blur(10px);
+            `;
+
+            shareMenu.innerHTML = `
+                <div style="color: #e0aaff; font-weight: bold; margin-bottom: 15px; text-align: center;">Compartilhar</div>
+                <button onclick="shareOnSocial('twitter')" style="display: block; width: 100%; padding: 10px; margin: 8px 0; background: linear-gradient(135deg, #1DA1F2, #0d8bd9); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">🐦 Twitter</button>
+                <button onclick="shareOnSocial('facebook')" style="display: block; width: 100%; padding: 10px; margin: 8px 0; background: linear-gradient(135deg, #4267B2, #365899); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">📘 Facebook</button>
+                <button onclick="shareOnSocial('whatsapp')" style="display: block; width: 100%; padding: 10px; margin: 8px 0; background: linear-gradient(135deg, #25D366, #1da851); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">💬 WhatsApp</button>
+                <button onclick="this.parentElement.remove()" style="display: block; width: 100%; padding: 10px; margin-top: 12px; background: rgba(255, 255, 255, 0.1); color: #e0aaff; border: 1px solid #7b2cbf; border-radius: 8px; cursor: pointer; font-weight: bold;">✖ Fechar</button>
+            `;
+
+            document.body.appendChild(shareMenu);
+
+            setTimeout(() => shareMenu.remove(), 10000);
+        });
+
+        document.body.appendChild(shareButton);
+
+        // Sistema de modo claro/escuro (toggle)
+        const themeToggle = document.createElement('div');
+        themeToggle.style.cssText = `
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #7b2cbf 0%, #c77dff 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(199, 125, 255, 0.5);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 2px solid #e0aaff;
+            font-size: 1.3em;
+        `;
+        themeToggle.innerHTML = '🌙';
+        themeToggle.title = 'Alternar tema';
+
+        let isDarkMode = true;
+
+        themeToggle.addEventListener('click', function() {
+            isDarkMode = !isDarkMode;
+            
+            if (isDarkMode) {
+                document.body.style.background = 'linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a0a0a 100%)';
+                this.innerHTML = '🌙';
+            } else {
+                document.body.style.background = 'linear-gradient(135deg, #f0f0f0 0%, #d4c5f9 50%, #f0f0f0 100%)';
+                this.innerHTML = '☀️';
+            }
+
+            this.style.transform = 'rotate(360deg) scale(1.2)';
+            setTimeout(() => {
+                this.style.transform = 'rotate(0deg) scale(1)';
+            }, 300);
+        });
+
+        document.body.appendChild(themeToggle);
+
+        // Adicionar estatísticas do país com contador animado
+        function animateCounter(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value.toLocaleString('pt-BR');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Observar quando a seção de população aparece
+        const populationCard = document.querySelector('.info-card p');
+        const populationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numberElement = entry.target;
+                    animateCounter(numberElement, 0, 5200000, 2000);
+                    populationObserver.unobserve(entry.target);
+                }
             });
         });
+
+        // Adicionar efeito de neve/partículas especial
+        function createSpecialEffect() {
+            setInterval(() => {
+                const emoji = ['🌿', '🦜', '🐒', '🌺', '🦋'][Math.floor(Math.random() * 5)];
+                const particle = document.createElement('div');
+                particle.textContent = emoji;
+                particle.style.cssText = `
+                    position: fixed;
+                    top: -50px;
+                    left: ${Math.random() * 100}%;
+                    font-size: ${Math.random() * 20 + 15}px;
+                    pointer-events: none;
+                    z-index: 9998;
+                    animation: fall ${Math.random() * 5 + 5}s linear;
+                    opacity: 0.7;
+                `;
+                document.body.appendChild(particle);
+
+                setTimeout(() => particle.remove(), 10000);
+            }, 3000);
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fall {
+                    to {
+                        transform: translateY(100vh) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        createSpecialEffect();
+
+        // Adicionar cursor customizado
+        const cursor = document.createElement('div');
+        cursor.style.cssText = `
+            width: 20px;
+            height: 20px;
+            border: 2px solid #c77dff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            box-shadow: 0 0 10px rgba(199, 125, 255, 0.5);
+        `;
+        document.body.appendChild(cursor);
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+        });
+
+        document.addEventListener('mousedown', () => {
+            cursor.style.transform = 'scale(0.8)';
+            cursor.style.borderColor = '#e0aaff';
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.style.transform = 'scale(1)';
+            cursor.style.borderColor = '#c77dff';
+        });
+
+        // Mensagem de boas-vindas personalizada
+        setTimeout(() => {
+            console.log(`
+            ╔═══════════════════════════════════════════╗
+            ║                                           ║
+            ║      🇨🇷  BEM-VINDO À COSTA RICA! 🇨🇷       ║
+            ║                                           ║
+            ║         Pura Vida desde 1821 ✨           ║
+            ║                                           ║
+            ║   🔥 Firebase: Conectado                  ║
+            ║   🌿 Site carregado com sucesso!          ║
+            ║                                           ║
+            ║   Dica: Tente o código Konami! 🎮         ║
+            ║   (↑ ↑ ↓ ↓ ← → ← → B A)                  ║
+            ║                                           ║
+            ╚═══════════════════════════════════════════╝
+            `);
+        }, 1500);
+
+        console.log('%c✨ Site desenvolvido com amor e tecnologia! ✨', 'color: #c77dff; font-size: 16px; font-weight: bold;');
     </script>
 </body>
 </html>
