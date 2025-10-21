@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costa Rica - Apresentação Completa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e4e4e4;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .flag {
+            width: 200px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            color: #00d4ff;
+            text-shadow: 2px 2px 10px rgba(0, 212, 255, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #a8dadc;
+            margin-top: 10px;
+        }
+
+        .section {
+            background: rgba(15, 52, 96, 0.6);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            animation: fadeInUp 1s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .section h2 {
+            color: #00d4ff;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #00d4ff;
+            padding-bottom: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: rgba(22, 33, 62, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #00d4ff;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            background: rgba(22, 33, 62, 1);
+            transform: translateX(10px);
+        }
+
+        .info-card h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .info-card p {
+            line-height: 1.6;
+            color: #e4e4e4;
+        }
+
+        .tourist-spots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .spot-card {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .spot-card:hover {
+            border-color: #00d4ff;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        .spot-card h3 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .spot-card p {
+            line-height: 1.7;
+        }
+
+        .culture-section {
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .culture-section h3 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .culture-section p {
+            line-height: 1.8;
+            font-size: 1.1em;
+            color: #e4e4e4;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(15, 52, 96, 0.6);
+            border-radius: 15px;
+            margin-top: 40px;
+            animation: fadeInUp 1.5s ease;
+        }
+
+        footer p {
+            color: #a8dadc;
+            font-size: 1.1em;
+        }
+
+        .highlight {
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #00d4ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-indicator:hover {
+            transform: scale(1.1);
+            background: #00b8d4;
+        }
+
+        .scroll-indicator::before {
+            content: '↑';
+            color: #1a1a2e;
+            font-size: 2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="flag" style="background: linear-gradient(to bottom, #002b7f 0%, #002b7f 20%, white 20%, white 40%, #ce1126 40%, #ce1126 60%, white 60%, white 80%, #002b7f 80%, #002b7f 100%); position: relative;">
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8em;">
+                    🌟
+                </div>
+            </div>
+            <h1>🇨🇷 Costa Rica 🇨🇷</h1>
+            <p class="subtitle">Pura Vida - O Paraíso da América Central</p>
+        </header>
+
+        <div class="section">
+            <h2>🏛️ Informações Gerais</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><span class="emoji">👨‍💼</span>Presidente</h3>
+                    <p><span class="highlight">Rodrigo Chaves Robles</span><br>Em exercício desde maio de 2022</p>
+                </div>
+                <div class="info-card">
+                    <h3><span class="emoji">💰</span>Moeda</h3>
+                    <p><span class="highlight">Colón Costarriquenho (CRC)</span><br>1 USD ≈ 520 CRC</p>
+                </div>
+                <div class="info-card">
+                    <h3><span class="emoji">🗣️</span>Língua Nativa</h3>
+                    <p><span class="highlight">Espanhol</span><br>Língua oficial do país</p>
+                </div>
+                <div class="info-card">
+                    <h3><span class="emoji">👥</span>População</h3>
+                    <p><span class="highlight">5,2 milhões</span> de habitantes<br>(estimativa 2024)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🌎 Localização Geográfica</h2>
+            <div class="culture-section">
+                <p>
+                    A Costa Rica está localizada na <span class="highlight">América Central</span>, entre o Mar do Caribe e o Oceano Pacífico. 
+                    O país possui uma área de aproximadamente <span class="highlight">51.100 km²</span> e é conhecido por sua 
+                    incrível biodiversidade e paisagens naturais espetaculares.
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🗺️ Fronteiras</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><span class="emoji">⬆️</span>Norte</h3>
+                    <p>Fronteira com a <span class="highlight">Nicarágua</span></p>
+                </div>
+                <div class="info-card">
+                    <h3><span class="emoji">⬇️</span>Sul</h3>
+                    <p>Fronteira com o <span class="highlight">Panamá</span></p>
+                </div>
+                <div class="info-card">
+                    <h3><span class="emoji">⬅️</span>Leste</h3>
+                    <p><span class="highlight">Mar do Caribe</span></p>
+                </div>
+                <div class="info-card">
+                    <h3><span class="emoji">➡️</span>Oeste</h3>
+                    <p><span class="highlight">Oceano Pacífico</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚽ Time de Futebol</h2>
+            <div class="culture-section">
+                <h3>Seleção Nacional - Los Ticos</h3>
+                <p>
+                    A seleção costarriquenha é carinhosamente chamada de <span class="highlight">"Los Ticos"</span>. 
+                    Participou de <span class="highlight">6 Copas do Mundo</span> e teve sua melhor campanha em 2014, 
+                    chegando às quartas de final no Brasil. Jogadores famosos incluem <span class="highlight">Keylor Navas</span> 
+                    (goleiro do PSG e Real Madrid) e <span class="highlight">Joel Campbell</span>.
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎵 Música</h2>
+            <div class="culture-section">
+                <h3>Ritmos Tradicionais</h3>
+                <p>
+                    A música costarriquenha é rica e diversificada. O ritmo mais tradicional é o <span class="highlight">Punto Guanacasteco</span>, 
+                    típico da província de Guanacaste. Também são populares a <span class="highlight">Cumbia</span>, 
+                    o <span class="highlight">Calypso</span> (na costa caribenha) e a música folclórica com instrumentos 
+                    como a marimba e a guitarra.
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⭐ Famosos</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Keylor Navas</h3>
+                    <p>Goleiro mundialmente reconhecido, jogou no Real Madrid e PSG</p>
+                </div>
+                <div class="info-card">
+                    <h3>Claudia Poll</h3>
+                    <p>Nadadora olímpica, medalha de ouro em Atlanta 1996</p>
+                </div>
+                <div class="info-card">
+                    <h3>Franklin Chang-Díaz</h3>
+                    <p>Astronauta da NASA com 7 missões espaciais</p>
+                </div>
+                <div class="info-card">
+                    <h3>Óscar Arias</h3>
+                    <p>Ex-presidente e ganhador do Prêmio Nobel da Paz</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏝️ Pontos Turísticos</h2>
+            <div class="tourist-spots">
+                <div class="spot-card">
+                    <h3>🌋 Vulcão Arenal</h3>
+                    <p>Um dos vulcões mais ativos do mundo, cercado por florestas tropicais e fontes termais naturais.</p>
+                </div>
+                <div class="spot-card">
+                    <h3>🌳 Parque Nacional Manuel Antonio</h3>
+                    <p>Praias paradisíacas com rica vida selvagem, incluindo macacos, preguiças e aves exóticas.</p>
+                </div>
+                <div class="spot-card">
+                    <h3>☁️ Monteverde</h3>
+                    <p>Floresta nublada com pontes suspensas e biodiversidade única, lar do quetzal resplendente.</p>
+                </div>
+                <div class="spot-card">
+                    <h3>🏖️ Península de Nicoya</h3>
+                    <p>Praias de areia branca, surfe de classe mundial e uma das Zonas Azuis de longevidade do planeta.</p>
+                </div>
+                <div class="spot-card">
+                    <h3>🐢 Parque Nacional Tortuguero</h3>
+                    <p>Importante local de desova de tartarugas marinhas, com canais navegáveis pela selva.</p>
+                </div>
+                <div class="spot-card">
+                    <h3>🏛️ Teatro Nacional</h3>
+                    <p>Joia arquitetônica em San José, construído em 1897, símbolo da cultura costarriquenha.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎭 Cultura</h2>
+            <div class="culture-section">
+                <h3>Pura Vida - A Essência Costarriquenha</h3>
+                <p>
+                    A expressão <span class="highlight">"Pura Vida"</span> resume o estilo de vida costarriquenho: 
+                    otimismo, simplicidade e apreciação da vida. A Costa Rica é conhecida por:
+                </p>
+                <br>
+                <p>
+                    🌿 <span class="highlight">Consciência Ambiental:</span> Mais de 25% do território é protegido em parques e reservas.
+                    O país gera quase 100% de sua energia de fontes renováveis.
+                </p>
+                <br>
+                <p>
+                    ☮️ <span class="highlight">Pacifismo:</span> Aboliu o exército em 1948, sendo um dos poucos países 
+                    sem forças armadas no mundo.
+                </p>
+                <br>
+                <p>
+                    🎨 <span class="highlight">Arte e Artesanato:</span> Carretas coloridas de Sarchí, cerâmica de Guaitil 
+                    e máscaras tradicionais são símbolos culturais importantes.
+                </p>
+                <br>
+                <p>
+                    🍽️ <span class="highlight">Gastronomia:</span> O prato típico é o <span class="highlight">Gallo Pinto</span> 
+                    (arroz com feijão), acompanhado de casado, ceviche e café de alta qualidade.
+                </p>
+            </div>
+        </div>
+
+        <footer>
+            <p>🌟 Costa Rica - Pura Vida 🌟</p>
+            <p>Um país pequeno com um coração gigante</p>
+        </footer>
+    </div>
+
+    <div class="scroll-indicator" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"></div>
+
+    <script>
+        // Animação de scroll suave
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(50px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+
+            // Mostrar/ocultar botão de scroll
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollIndicator.style.display = 'flex';
+                } else {
+                    scrollIndicator.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
