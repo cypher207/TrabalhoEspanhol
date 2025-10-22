@@ -3,87 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Costa Rica - Apresentação Completa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <title>Costa Rica - Apresentação de Impacto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Variáveis de Cores para fácil customização */
+        /* Variáveis de Cores de Alto Contraste */
         :root {
-            --cor-primaria: #7b2cbf; /* Roxo principal */
-            --cor-secundaria: #c77dff; /* Roxo claro/Destaque */
-            --cor-fundo-escuro: #0a0a0a;
-            --cor-fundo-medio: #1a0a2e;
-            --cor-texto-claro: #e4e4e4;
-            --cor-texto-destaque: #e0aaff;
-            --tamanho-fonte-base: 1.2em; /* Média/Otimizada para TV */
+            --cor-principal: #a63ff7;    /* Roxo Elétrico */
+            --cor-secundaria: #34e0a1; /* Ciano Neon/Destaque */
+            --cor-fundo-escuro: #08080c;
+            --cor-fundo-card: #150d24;
+            --cor-texto-claro: #ececf1;
+            --tamanho-fonte-base: 1.3em; /* Média/Otimizada para TV */
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Usando Poppins para um visual moderno e limpo */
-            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif; /* Poppins para o corpo do texto */
+            color: var(--cor-texto-claro);
         }
 
         body {
             font-size: var(--tamanho-fonte-base);
-            background: linear-gradient(135deg, var(--cor-fundo-escuro) 0%, var(--cor-fundo-medio) 50%, var(--cor-fundo-escuro) 100%);
-            color: var(--cor-texto-claro);
+            background-color: var(--cor-fundo-escuro);
             overflow-x: hidden;
             position: relative;
-            /* Efeito "Surpreendente" - Imagem de fundo com baixa opacidade */
-            background-image: url('https://i.imgur.com/8wh4t2z.jpeg'); 
-            background-size: cover;
-            background-attachment: fixed;
-            background-blend-mode: color-burn; /* Mistura para manter o tema de cores */
-            backdrop-filter: blur(2px);
         }
 
-        /* Efeitos de borda para profundidade */
+        /* Efeito de Bordas Laterais Roxas */
         body::before,
         body::after {
             content: '';
             position: fixed;
             top: 0;
-            width: 200px; /* Mais largo para TV */
+            width: 100px; /* Largura das bordas */
             height: 100%;
-            z-index: 0;
-            opacity: 0.2; /* Opacidade reduzida */
+            z-index: 999; /* Alto Z-index para manter sobre o fundo, mas abaixo do conteúdo */
+            opacity: 0.3;
+            pointer-events: none;
         }
 
         body::before {
             left: 0;
-            background: linear-gradient(90deg, var(--cor-primaria) 0%, transparent 100%);
+            background: linear-gradient(90deg, var(--cor-principal) 0%, transparent 100%);
         }
 
         body::after {
             right: 0;
-            background: linear-gradient(270deg, var(--cor-primaria) 0%, transparent 100%);
+            background: linear-gradient(270deg, var(--cor-principal) 0%, transparent 100%);
         }
 
         .container {
-            max-width: 1500px; /* Maior para TV */
+            max-width: 1400px; /* Grande para TV */
             margin: 0 auto;
-            padding: 30px; /* Mais padding */
+            padding: 40px;
             position: relative;
-            z-index: 1;
+            z-index: 10; /* Acima das bordas */
         }
 
-        header {
-            text-align: center;
-            padding: 80px 30px; /* Maior padding */
-            background: linear-gradient(135deg, #240046e0 0%, #3c096ce0 50%, #240046e0 100%); /* Fundo semi-transparente */
-            border-radius: 30px;
-            margin-bottom: 50px;
-            box-shadow: 0 20px 60px rgba(123, 44, 191, 0.5);
-            animation: fadeInDown 1.5s ease;
-            border: 3px solid var(--cor-primaria);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Animações (Mantidas e Refinadas) */
+        /* --- ANIMAÇÕES GERAIS --- */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-70px); }
             to { opacity: 1; transform: translateY(0); }
@@ -92,304 +72,378 @@
             from { opacity: 0; transform: translateY(70px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px var(--cor-principal); }
+            50% { box-shadow: 0 0 30px var(--cor-secundaria); }
         }
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 25px var(--cor-primaria); }
-            50% { box-shadow: 0 0 50px var(--cor-secundaria); }
-        }
-
-        .flag {
-            width: 280px; /* Maior bandeira */
-            height: 160px;
-            margin: 0 auto 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(123, 44, 191, 0.7);
-            animation: pulse 2.5s infinite;
-            position: relative;
-            z-index: 2;
+        
+        /* --- ESTILO DO CABEÇALHO --- */
+        header {
+            text-align: center;
+            padding: 90px 40px;
+            background: rgba(21, 13, 36, 0.7); /* Fundo semi-transparente escuro */
+            border-radius: 30px;
+            margin-bottom: 60px;
+            box-shadow: 0 20px 80px rgba(166, 63, 247, 0.5);
+            border: 3px solid var(--cor-principal);
+            backdrop-filter: blur(10px);
+            animation: fadeInDown 1.5s ease;
         }
 
         h1 {
-            font-size: 5em; /* Fonte GIGANTE para TV */
-            background: linear-gradient(135deg, var(--cor-secundaria) 0%, #ffffff 100%);
+            font-family: 'Orbitron', sans-serif; /* Fonte estilosa para títulos */
+            font-size: 5.5em; /* Fonte GIGANTE */
+            background: linear-gradient(45deg, var(--cor-secundaria) 20%, var(--cor-principal) 80%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 3px 3px 25px rgba(199, 125, 255, 0.7);
+            text-shadow: 0 0 15px var(--cor-secundaria);
             margin-bottom: 15px;
-            font-weight: 900; /* Mais impacto */
+            font-weight: 900;
         }
 
         .subtitle {
-            font-size: 1.8em; /* Fonte maior */
-            color: var(--cor-texto-destaque);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2em;
+            color: var(--cor-secundaria);
             margin-top: 15px;
+            text-shadow: 0 0 10px rgba(52, 224, 161, 0.5);
         }
 
-        .section {
-            background: linear-gradient(135deg, rgba(36, 0, 70, 0.85) 0%, rgba(60, 9, 108, 0.75) 100%);
+        .flag {
+            width: 300px;
+            height: 180px;
+            margin: 0 auto 30px;
             border-radius: 25px;
-            padding: 50px; /* Mais padding */
-            margin-bottom: 50px;
-            box-shadow: 0 15px 50px rgba(123, 44, 191, 0.4);
-            border: 3px solid rgba(123, 44, 191, 0.5);
+            box-shadow: 0 10px 50px var(--cor-principal);
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        /* --- ESTILO DAS SEÇÕES --- */
+        .section {
+            background: linear-gradient(135deg, rgba(21, 13, 36, 0.8) 0%, rgba(30, 20, 50, 0.7) 100%);
+            border-radius: 25px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 15px 60px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--cor-principal);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(8px);
             animation: fadeInUp 1.2s ease;
-            transition: all 0.5s ease;
-            backdrop-filter: blur(15px); /* Mais blur para separar do fundo */
         }
 
         .section:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(199, 125, 255, 0.7);
+            transform: translateY(-12px) scale(1.01);
+            box-shadow: 0 25px 80px rgba(166, 63, 247, 0.7);
             border-color: var(--cor-secundaria);
         }
 
         .section h2 {
-            background: linear-gradient(135deg, var(--cor-secundaria) 0%, #ffffff 100%);
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(90deg, var(--cor-principal) 0%, var(--cor-secundaria) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-size: 3em; /* Fonte GIGANTE */
-            margin-bottom: 30px;
-            border-bottom: 4px solid var(--cor-primaria);
+            font-size: 3.5em; /* Fonte GIGANTE */
+            margin-bottom: 35px;
+            border-bottom: 4px solid var(--cor-secundaria);
             padding-bottom: 20px;
-            font-weight: 800;
+            font-weight: 700;
         }
 
         .info-grid {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cards maiores */
-            gap: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px; /* Espaçamento grande */
+            margin-top: 30px;
         }
 
         .info-card {
-            background: linear-gradient(135deg, rgba(60, 9, 108, 0.95) 0%, rgba(36, 0, 70, 0.95) 100%);
-            padding: 30px;
+            background-color: var(--cor-fundo-card);
+            padding: 35px;
             border-radius: 20px;
             border-left: 6px solid var(--cor-secundaria);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
         }
 
         .info-card:hover {
-            transform: translateX(20px) scale(1.05); /* Efeito mais dramático */
+            transform: translateX(20px) scale(1.05);
+            border-left-color: var(--cor-principal);
+            box-shadow: 0 15px 40px var(--cor-principal);
         }
 
         .info-card h3 {
-            color: var(--cor-texto-destaque);
-            margin-bottom: 15px;
-            font-size: 1.6em; /* Fonte maior */
+            color: var(--cor-secundaria);
+            margin-bottom: 18px;
+            font-size: 1.8em;
+            font-weight: 700;
         }
 
         .info-card p {
-            line-height: 1.8;
-            font-size: 1.1em;
-            color: var(--cor-texto-claro);
+            line-height: 1.9;
+            font-size: 1.2em;
         }
 
         .image-container {
-            height: 250px; /* Imagem maior */
-            border: 3px solid rgba(123, 44, 191, 0.5);
+            width: 100%;
+            height: 280px; /* Altura generosa */
+            background: rgba(166, 63, 247, 0.1);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px dashed var(--cor-principal);
         }
 
-        .tourist-spots {
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Cards maiores */
-            gap: 40px;
+        /* Estilo para a imagem de Placeholder (Ícone) */
+        .image-placeholder {
+            font-size: 5em; 
+            color: var(--cor-secundaria);
+            opacity: 0.8;
         }
 
-        .spot-card {
-            padding: 40px;
-            border-radius: 25px;
-            border: 3px solid rgba(123, 44, 191, 0.5);
-        }
-
-        .spot-card:hover {
-            transform: scale(1.05);
-        }
-
-        .spot-card h3 {
-            font-size: 1.8em;
-        }
-
-        .culture-section h3 {
-            font-size: 2.2em;
-        }
-
-        .culture-section p {
-            line-height: 2; /* Espaçamento de linha otimizado para TV */
-            font-size: 1.2em; /* Fonte maior */
-        }
-
-        footer {
-            padding: 60px;
-            border-radius: 25px;
-            margin-top: 60px;
-            border: 3px solid var(--cor-primaria);
-        }
-
-        footer p {
-            font-size: 1.4em; /* Fonte maior */
-        }
-
+        /* Conteúdo principal - Estilo */
         .highlight {
             color: var(--cor-secundaria);
-            font-weight: bold;
-            text-shadow: 0 0 15px rgba(199, 125, 255, 0.7);
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(52, 224, 161, 0.7);
         }
 
         .emoji {
-            font-size: 2em; /* Emojis maiores */
+            font-size: 2.5em; /* Emojis grandes */
+            margin-right: 15px;
         }
 
-        /* --- LOADING SCREEN PERSONALIZADO E ESTILOSO --- */
+        /* Cultura e Pontos Turísticos */
+        .culture-section p {
+            line-height: 2;
+            font-size: 1.3em;
+        }
+
+        .tourist-spots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        /* --- TELA DE CARREGAMENTO (ABERTURA) --- */
         .loading-screen {
-            background: linear-gradient(135deg, var(--cor-fundo-escuro) 0%, var(--cor-fundo-medio) 50%, var(--cor-fundo-escuro) 100%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--cor-fundo-escuro);
             display: flex;
             flex-direction: column;
-            gap: 30px; /* Espaço entre a imagem e a barra */
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 1.5s ease;
         }
 
-        .loading-content {
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .opening-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
+            gap: 30px;
+            width: 90%;
+            max-width: 600px;
         }
 
-        .loading-image {
-            width: 250px; /* Tamanho da imagem na abertura */
-            height: 250px;
+        .opening-header-image {
+            width: 100%;
+            height: 120px; /* Altura média (banner) */
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 0 25px var(--cor-principal);
+            border: 2px solid var(--cor-secundaria);
+            margin-bottom: 20px;
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        .opening-central-image {
+            width: 280px;
+            height: 280px;
             border-radius: 50%;
             object-fit: cover;
-            border: 6px solid var(--cor-primaria);
-            box-shadow: 0 0 40px rgba(199, 125, 255, 0.8);
-            animation: pulse 2s infinite;
+            border: 8px solid var(--cor-secundaria);
+            box-shadow: 0 0 50px var(--cor-principal);
+            animation: fadeInDown 1s ease;
         }
 
-        .loading-text {
-            color: var(--cor-texto-destaque);
-            font-size: 1.5em;
-            font-weight: 600;
-            margin-top: 20px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--cor-primaria);
+        .loading-credits {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8em;
+            color: var(--cor-principal);
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(166, 63, 247, 0.8);
+            margin-top: 15px;
         }
 
+        /* Barra de Carregamento Estilizada */
         .custom-loader-container {
-            width: 400px; /* Largura da barra de carregamento */
-            height: 30px;
-            background: rgba(123, 44, 191, 0.3);
-            border-radius: 15px;
+            width: 100%;
+            height: 25px;
+            background: rgba(52, 224, 161, 0.1);
+            border-radius: 12px;
             overflow: hidden;
-            position: relative;
-            border: 2px solid var(--cor-primaria);
-            margin-top: 30px;
+            border: 2px solid var(--cor-secundaria);
+            margin-top: 50px;
         }
 
         .custom-loader-bar {
             height: 100%;
             width: 0;
-            background: linear-gradient(90deg, var(--cor-secundaria) 0%, var(--cor-primaria) 100%);
-            animation: loadBar 3s ease-out forwards;
-            position: relative;
-            box-shadow: 0 0 15px var(--cor-secundaria);
+            background: linear-gradient(90deg, var(--cor-principal) 0%, var(--cor-secundaria) 100%);
+            animation: loadBar 3.5s ease-out forwards;
+            box-shadow: 0 0 10px var(--cor-secundaria);
         }
         
-        .custom-loader-bar::after {
-            content: 'CARREGANDO...';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-weight: bold;
-            font-size: 1em;
-            text-shadow: 1px 1px 5px black;
-        }
-
+        /* Animação para a barra de carregamento */
         @keyframes loadBar {
             0% { width: 0%; }
             100% { width: 100%; }
         }
 
-        /* Removendo o loader de giro antigo */
-        .loader { display: none; }
-        /* --- FIM LOADING SCREEN PERSONALIZADO --- */
-
-        /* Adicionando a imagem do segundo link no footer para ter a terceira imagem no site */
-        .footer-image-container {
+        /* --- BOTÃO FINALIZAR E MODAL DE ENCERRAMENTO --- */
+        footer {
             text-align: center;
-            margin-top: 25px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(123, 44, 191, 0.5);
-        }
-
-        .footer-image {
-            width: 120px; 
-            height: 70px;
-            object-fit: cover;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(199, 125, 255, 0.5);
-            animation: glow 3s infinite alternate;
+            padding: 50px;
+            margin-top: 70px;
         }
         
-        /* Media Query para Manter a Legibilidade em Dispositivos Menores */
-        @media (max-width: 1024px) {
-            :root {
-                --tamanho-fonte-base: 1em;
-            }
+        .finish-button {
+            padding: 20px 40px;
+            background: linear-gradient(45deg, var(--cor-principal) 0%, var(--cor-secundaria) 100%);
+            border: none;
+            border-radius: 15px;
+            color: var(--cor-fundo-escuro);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2em;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--cor-principal);
+            transition: all 0.3s ease;
+        }
+
+        .finish-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 35px var(--cor-secundaria);
+        }
+
+        .final-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .final-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            text-align: center;
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .modal-image {
+            width: 90vw;
+            height: 80vh;
+            object-fit: contain; /* Garante que a imagem caiba na tela sem cortar */
+            border-radius: 20px;
+            border: 8px solid var(--cor-principal);
+            box-shadow: 0 0 80px var(--cor-secundaria);
+            animation: fadeInUp 1s ease;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--cor-principal);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 2em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 15px var(--cor-principal);
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg) scale(1.1);
+            background: var(--cor-secundaria);
+        }
+
+        /* Efeito de partículas para o Fundo */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: var(--cor-secundaria);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: moveParticle 20s infinite linear;
+        }
+
+        @keyframes moveParticle {
+            0% { transform: translate(0, 0); opacity: 0.6; }
+            50% { transform: translate(var(--dx), var(--dy)); opacity: 1; }
+            100% { transform: translate(0, 0); opacity: 0.6; }
+        }
+
+        /* Media Queries para ajuste de tela */
+        @media (max-width: 768px) {
             h1 { font-size: 3.5em; }
             .section h2 { font-size: 2.5em; }
-            .container { max-width: 90%; padding: 20px; }
-            .info-grid, .tourist-spots { grid-template-columns: 1fr; }
-            .custom-loader-container { width: 300px; height: 25px; }
-            .loading-image { width: 180px; height: 180px; }
+            .container { padding: 20px; }
+            .info-card { padding: 25px; }
+            .opening-central-image { width: 200px; height: 200px; }
+            .loading-credits { font-size: 1.4em; }
         }
     </style>
 </head>
 <body>
+    
     <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content">
-            <img src="https://i.imgur.com/fgrcJGo.jpeg" alt="Imagem de Abertura" class="loading-image">
-            <p class="loading-text">Created and developed by: <span class="highlight">@505voidd</span></p>
+        <img src="https://i.imgur.com/8wh4t2z.jpeg" alt="Banner Topo" class="opening-header-image">
+        <div class="opening-content">
+            <img src="https://i.imgur.com/fgrcJGo.jpeg" alt="Imagem Central" class="opening-central-image">
+            <p class="loading-credits">created and developed by: <span style="color: var(--cor-secundaria);">@505voidd</span></p>
+            
             <div class="custom-loader-container">
                 <div class="custom-loader-bar"></div>
             </div>
         </div>
     </div>
-    <div class="admin-button" onclick="openLoginModal()">👤 Admin Login</div>
-    <div class="firebase-indicator">Firebase Conectado</div>
-
-    <div class="login-modal" id="loginModal">
-        <div class="login-box">
-            <h2>🔐 Login de Administrador</h2>
-            <input type="email" id="adminEmail" placeholder="Email" autocomplete="username">
-            <input type="password" id="adminPassword" placeholder="Senha" autocomplete="current-password">
-            <button onclick="loginAdmin()">Entrar</button>
-            <p style="text-align: center; margin-top: 20px; color: var(--cor-primaria); font-size: 0.9em;">
-                Apenas administradores autorizados
-            </p>
-        </div>
-    </div>
-
-    <div class="image-upload-modal" id="imageUploadModal">
-        <div class="upload-box">
-            <h3>📸 Adicionar/Editar Imagem</h3>
-            <input type="text" id="imageTitle" placeholder="Título da imagem">
-            <input type="file" id="imageFile" accept="image/*">
-            <input type="text" id="imageUrl" placeholder="Ou cole a URL da imagem">
-            <div>
-                <button class="save-btn" onclick="saveImage()">💾 Salvar</button>
-                <button class="cancel-btn" onclick="closeImageModal()">❌ Cancelar</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
+    <div class="container" id="mainContent" style="opacity: 0;">
         <header>
             <div class="flag" style="background: linear-gradient(to bottom, #002b7f 0%, #002b7f 20%, white 20%, white 40%, #ce1126 40%, #ce1126 60%, white 60%, white 80%, #002b7f 80%, #002b7f 100%); position: relative;">
-                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5em; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);">
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8em; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);">
                     🌟
                 </div>
             </div>
@@ -400,35 +454,23 @@
         <div class="section">
             <h2>🏛️ Informações Gerais</h2>
             <div class="info-grid">
-                <div class="info-card" data-id="presidente">
-                    <button class="edit-button" onclick="openImageModal('presidente')">✏️ Editar</button>
-                    <div class="image-container" id="img-presidente">
-                        <span class="image-placeholder">👨‍💼</span>
-                    </div>
+                <div class="info-card">
+                    <div class="image-container"><span class="image-placeholder">👨‍💼</span></div>
                     <h3><span class="emoji">👨‍💼</span>Presidente</h3>
                     <p><span class="highlight">Rodrigo Chaves Robles</span><br>Em exercício desde maio de 2022</p>
                 </div>
-                <div class="info-card" data-id="moeda">
-                    <button class="edit-button" onclick="openImageModal('moeda')">✏️ Editar</button>
-                    <div class="image-container" id="img-moeda">
-                        <span class="image-placeholder">💰</span>
-                    </div>
+                <div class="info-card">
+                    <div class="image-container"><span class="image-placeholder">💰</span></div>
                     <h3><span class="emoji">💰</span>Moeda</h3>
                     <p><span class="highlight">Colón Costarriquenho (CRC)</span><br>1 USD ≈ 520 CRC</p>
                 </div>
-                <div class="info-card" data-id="lingua">
-                    <button class="edit-button" onclick="openImageModal('lingua')">✏️ Editar</button>
-                    <div class="image-container" id="img-lingua">
-                        <span class="image-placeholder">🗣️</span>
-                    </div>
+                <div class="info-card">
+                    <div class="image-container"><span class="image-placeholder">🗣️</span></div>
                     <h3><span class="emoji">🗣️</span>Língua Nativa</h3>
                     <p><span class="highlight">Espanhol</span><br>Língua oficial do país</p>
                 </div>
-                <div class="info-card" data-id="populacao">
-                    <button class="edit-button" onclick="openImageModal('populacao')">✏️ Editar</button>
-                    <div class="image-container" id="img-populacao">
-                        <span class="image-placeholder">👥</span>
-                    </div>
+                <div class="info-card">
+                    <div class="image-container"><span class="image-placeholder">👥</span></div>
                     <h3><span class="emoji">👥</span>População</h3>
                     <p><span class="highlight">5,2 milhões</span> de habitantes<br>(estimativa 2024)</p>
                 </div>
@@ -438,10 +480,8 @@
         <div class="section">
             <h2>🌎 Localização Geográfica</h2>
             <div class="culture-section">
-                <div class="info-card" data-id="mapa" style="border: none; background: transparent; padding: 0; margin-bottom: 20px;">
-                    <button class="edit-button" onclick="openImageModal('mapa')">✏️ Editar Mapa</button>
-                    <div class="image-container" id="img-mapa" style="height: 400px;"> <span class="image-placeholder">🗺️</span>
-                    </div>
+                <div class="info-card" style="border: none; background: transparent; padding: 0; margin-bottom: 30px;">
+                    <div class="image-container" style="height: 450px;"><span class="image-placeholder">🗺️</span></div>
                 </div>
                 <p>
                     A Costa Rica está localizada na <span class="highlight">América Central</span>, entre o Mar do Caribe e o Oceano Pacífico. 
@@ -474,123 +514,35 @@
         </div>
 
         <div class="section">
-            <h2>⚽ Time de Futebol</h2>
-            <div class="culture-section">
-                <div class="info-card" data-id="futebol" style="border: none; background: transparent; padding: 0; margin-bottom: 20px;">
-                    <button class="edit-button" onclick="openImageModal('futebol')">✏️ Editar Imagem</button>
-                    <div class="image-container" id="img-futebol" style="height: 350px;"> <span class="image-placeholder">⚽</span>
-                    </div>
-                </div>
-                <h3>🏆 Seleção Nacional - Los Ticos</h3>
-                <p>
-                    A seleção costarriquenha é carinhosamente chamada de <span class="highlight">"Los Ticos"</span>. 
-                    Participou de <span class="highlight">6 Copas do Mundo</span> e teve sua melhor campanha em 2014.
-                </p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>🎵 Música</h2>
-            <div class="culture-section">
-                <div class="info-card" data-id="musica" style="border: none; background: transparent; padding: 0; margin-bottom: 20px;">
-                    <button class="edit-button" onclick="openImageModal('musica')">✏️ Editar Imagem</button>
-                    <div class="image-container" id="img-musica" style="height: 350px;"> <span class="image-placeholder">🎵</span>
-                    </div>
-                </div>
-                <h3>🎸 Ritmos Tradicionais e Contemporâneos</h3>
-                <p>
-                    A música costarriquenha é rica e diversificada. O ritmo mais tradicional é o <span class="highlight">Punto Guanacasteco</span>, 
-                    típico da província de Guanacaste, acompanhado por marimba, guitarra e quijongo.
-                </p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>⭐ Famosos</h2>
-            <div class="info-grid">
-                <div class="info-card" data-id="keylor">
-                    <button class="edit-button" onclick="openImageModal('keylor')">✏️ Editar</button>
-                    <div class="image-container" id="img-keylor">
-                        <span class="image-placeholder">⚽</span>
-                    </div>
-                    <h3>Keylor Navas</h3>
-                    <p>Goleiro de elite mundial, tri-campeão da Champions League pelo Real Madrid</p>
-                </div>
-                <div class="info-card" data-id="claudia">
-                    <button class="edit-button" onclick="openImageModal('claudia')">✏️ Editar</button>
-                    <div class="image-container" id="img-claudia">
-                        <span class="image-placeholder">🏊‍♀️</span>
-                    </div>
-                    <h3>Claudia Poll</h3>
-                    <p>Nadadora olímpica, medalha de ouro em Atlanta 1996</p>
-                </div>
-                <div class="info-card" data-id="franklin">
-                    <button class="edit-button" onclick="openImageModal('franklin')">✏️ Editar</button>
-                    <div class="image-container" id="img-franklin">
-                        <span class="image-placeholder">🚀</span>
-                    </div>
-                    <h3>Franklin Chang-Díaz</h3>
-                    <p>Astronauta da NASA com 7 missões espaciais</p>
-                </div>
-                <div class="info-card" data-id="oscar">
-                    <button class="edit-button" onclick="openImageModal('oscar')">✏️ Editar</button>
-                    <div class="image-container" id="img-oscar">
-                        <span class="image-placeholder">🏅</span>
-                    </div>
-                    <h3>Óscar Arias Sánchez</h3>
-                    <p>Ex-presidente e Prêmio Nobel da Paz</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
             <h2>🏝️ Pontos Turísticos</h2>
             <div class="tourist-spots">
-                <div class="spot-card" data-id="arenal">
-                    <button class="edit-button" onclick="openImageModal('arenal')">✏️ Editar</button>
-                    <div class="image-container" id="img-arenal">
-                        <span class="image-placeholder">🌋</span>
-                    </div>
+                <div class="info-card">
+                    <div class="image-container"><span class="image-placeholder">🌋</span></div>
                     <h3>Vulcão Arenal</h3>
                     <p>Um dos vulcões mais ativos da América Central, cercado por florestas tropicais.</p>
                 </div>
-                <div class="spot-card" data-id="manuel">
-                    <button class="edit-button" onclick="openImageModal('manuel')">✏️ Editar</button>
-                    <div class="image-container" id="img-manuel">
-                        <span class="image-placeholder">🌳</span>
-                    </div>
+                <div class="info-card">
+                    <div class="image-container"><span class="image-placeholder">🌳</span></div>
                     <h3>Parque Nacional Manuel Antonio</h3>
                     <p>Praias paradisíacas com rica vida selvagem.</p>
                 </div>
-                <div class="spot-card" data-id="monteverde">
-                    <button class="edit-button" onclick="openImageModal('monteverde')">✏️ Editar</button>
-                    <div class="image-container" id="img-monteverde">
-                        <span class="image-placeholder">☁️</span>
-                    </div>
+                <div class="info-card">
+                    <div class="image-container"><span class="image-placeholder">☁️</span></div>
                     <h3>Monteverde</h3>
                     <p>Floresta nublada com biodiversidade única.</p>
                 </div>
-                <div class="spot-card" data-id="nicoya">
-                    <button class="edit-button" onclick="openImageModal('nicoya')">✏️ Editar</button>
-                    <div class="image-container" id="img-nicoya">
-                        <span class="image-placeholder">🏖️</span>
-                    </div>
+                <div class="info-card">
+                    <div class="image-container"><span class="image-placeholder">🏖️</span></div>
                     <h3>Península de Nicoya</h3>
                     <p>Praias de areia dourada e Zona Azul de longevidade.</p>
                 </div>
-                <div class="spot-card" data-id="tortuguero">
-                    <button class="edit-button" onclick="openImageModal('tortuguero')">✏️ Editar</button>
-                    <div class="image-container" id="img-tortuguero">
-                        <span class="image-placeholder">🐢</span>
-                    </div>
+                <div class="info-card">
+                    <div class="image-container"><span class="image-placeholder">🐢</span></div>
                     <h3>Parque Nacional Tortuguero</h3>
                     <p>Local de desova de tartarugas marinhas.</p>
                 </div>
-                <div class="spot-card" data-id="teatro">
-                    <button class="edit-button" onclick="openImageModal('teatro')">✏️ Editar</button>
-                    <div class="image-container" id="img-teatro">
-                        <span class="image-placeholder">🏛️</span>
-                    </div>
+                <div class="info-card">
+                    <div class="image-container"><span class="image-placeholder">🏛️</span></div>
                     <h3>Teatro Nacional</h3>
                     <p>Joia arquitetônica construída em 1897.</p>
                 </div>
@@ -600,10 +552,8 @@
         <div class="section">
             <h2>🎭 Cultura</h2>
             <div class="culture-section">
-                <div class="info-card" data-id="cultura" style="border: none; background: transparent; padding: 0; margin-bottom: 20px;">
-                    <button class="edit-button" onclick="openImageModal('cultura')">✏️ Editar Imagem</button>
-                    <div class="image-container" id="img-cultura" style="height: 400px;"> <span class="image-placeholder">🎭</span>
-                    </div>
+                <div class="info-card" style="border: none; background: transparent; padding: 0; margin-bottom: 30px;">
+                    <div class="image-container" style="height: 450px;"><span class="image-placeholder">🎭</span></div>
                 </div>
                 <h3>🌺 Pura Vida - A Essência Costarriquenha</h3>
                 <p>
@@ -623,485 +573,73 @@
         </div>
 
         <footer>
-            <p>🌟 Costa Rica - Pura Vida 🌟</p>
-            <p>Um país pequeno com um coração gigante</p>
-            <p style="margin-top: 15px; font-size: 1.1em; color: var(--cor-secundaria);">
-                Desenvolvido com paixão por <span class="highlight">@505voidd</span>
-            </p>
-             <div class="footer-image-container">
-                <img src="https://i.imgur.com/87RdhWR.jpeg" alt="Símbolo Footer" class="footer-image">
-             </div>
+            <button class="finish-button" onclick="openFinalModal()">FINALIZAR APRESENTAÇÃO 🚀</button>
         </footer>
     </div>
-
-    <div class="scroll-indicator" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"></div>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-        import { getFirestore, collection, addDoc, getDocs, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDSLy-k6uIOEMm0bYQ-8gRe1IP6Cv-yt5s",
-            authDomain: "trabalhodelapapaya.firebaseapp.com",
-            projectId: "trabalhodelapapaya",
-            storageBucket: "trabalhodelapapaya.firebasestorage.app",
-            messagingSenderId: "364242630841",
-            appId: "1:364242630841:web:3be0182d3aad95f24bc368",
-            measurementId: "G-YE2BC5ND6B"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-        const storage = getStorage(app);
-
-        console.log("🔥 Firebase inicializado com sucesso!");
-
-        // Variáveis globais
-        window.db = db;
-        window.auth = auth;
-        window.storage = storage;
-        window.isAdminLoggedIn = false;
-        window.currentImageId = null;
-
-        // Registrar visita
-        try {
-            await addDoc(collection(db, "visitas"), {
-                timestamp: serverTimestamp(),
-                pagina: "Costa Rica - Apresentação",
-                userAgent: navigator.userAgent
-            });
-            console.log("✅ Visita registrada!");
-        } catch (error) {
-            console.error("❌ Erro ao registrar visita:", error);
-        }
-
-        // Verificar estado de autenticação
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                console.log("✅ Usuário autenticado:", user.email);
-                window.isAdminLoggedIn = true;
-                enableAdminMode();
-            } else {
-                console.log("❌ Usuário não autenticado");
-                window.isAdminLoggedIn = false;
-                disableAdminMode();
-            }
-        });
-
-        // Carregar imagens do Firestore (Esta função será sobrescrita/complementada com as imagens de placeholder no script abaixo)
-        window.loadImagesFromFirestore = async function() {
-            try {
-                const imagesDoc = await getDoc(doc(db, "site-images", "costa-rica"));
-                if (imagesDoc.exists()) {
-                    const images = imagesDoc.data();
-                    Object.keys(images).forEach(key => {
-                        if (key !== 'timestamp') {
-                            displayImage(key, images[key]);
-                        }
-                    });
-                    console.log("✅ Imagens carregadas do Firestore!");
-                } else {
-                    // Carrega as imagens de placeholder se o Firestore estiver vazio
-                    loadPlaceholderImages();
-                }
-            } catch (error) {
-                console.error("❌ Erro ao carregar imagens:", error);
-                // Carrega as imagens de placeholder em caso de erro
-                loadPlaceholderImages();
-            }
-        }
-
-        window.loadImagesFromFirestore();
-
-        // Remover tela de carregamento (Aumentado o tempo para a animação da barra)
-        setTimeout(() => {
-            document.getElementById('loadingScreen').classList.add('hidden');
-        }, 3500); // 3.5 segundos para a barra completar e a transição
-
-    </script>
-
+    
+    <div class="final-modal" id="finalModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeFinalModal()">X</button>
+            <img src="https://i.imgur.com/87RdhWR.jpeg" alt="Imagem de Encerramento" class="modal-image">
+        </div>
+    </div>
     <script>
-        // Restante das funções (Login, Admin, Upload e Efeitos)
-        const PLACEHOLDER_IMAGES = {
-            "presidente": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Rodrigo_Chaves_Robles_2022_%28cropped%29.jpg",
-            "moeda": "https://i.imgur.com/8Qj9SjD.png",
-            "lingua": "https://i.imgur.com/z4bY33W.jpg",
-            "populacao": "https://i.imgur.com/uVzYfM9.jpg",
-            "mapa": "https://i.imgur.com/x5c9S0U.png",
-            "futebol": "https://i.imgur.com/1Gv2x7q.jpg",
-            "musica": "https://i.imgur.com/tC7Fq8h.jpg",
-            "keylor": "https://i.imgur.com/B94z83L.jpg",
-            "claudia": "https://i.imgur.com/6YpZ7Zg.jpg",
-            "franklin": "https://i.imgur.com/XqT271W.jpg",
-            "oscar": "https://i.imgur.com/8Fk7L1E.jpg",
-            "arenal": "https://i.imgur.com/L7H5x0F.jpg",
-            "manuel": "https://i.imgur.com/9qZ2X6y.jpg",
-            "monteverde": "https://i.imgur.com/4hCg87P.jpg",
-            "nicoya": "https://i.imgur.com/h9S9A8E.jpg",
-            "tortuguero": "https://i.imgur.com/3Z6Kz2F.jpg",
-            "teatro": "https://i.imgur.com/N74uX5S.jpg",
-            "cultura": "https://i.imgur.com/vH1Z2yZ.jpg"
-        };
+        // Função para iniciar a apresentação após o carregamento
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const mainContent = document.getElementById('mainContent');
+            const loadTime = 4000; // 4 segundos (tempo da animação da barra)
 
-        function loadPlaceholderImages() {
-            Object.keys(PLACEHOLDER_IMAGES).forEach(key => {
-                displayImage(key, PLACEHOLDER_IMAGES[key]);
-            });
-            console.log("🖼️ Imagens de visualização (Placeholders) carregadas.");
-        }
-        
-        document.addEventListener('DOMContentLoaded', loadPlaceholderImages);
-
-        // Funções de Login
-        function openLoginModal() {
-            document.getElementById('loginModal').classList.add('active');
-        }
-
-        function closeLoginModal() {
-            document.getElementById('loginModal').classList.remove('active');
-        }
-
-        async function loginAdmin() {
-            const email = document.getElementById('adminEmail').value;
-            const password = document.getElementById('adminPassword').value;
-
-            if (!email || !password) {
-                alert('⚠️ Por favor, preencha todos os campos!');
-                return;
-            }
-
-            try {
-                // Necessário garantir que 'window.auth' esteja definido pelo script module
-                const userCredential = await window.auth.signInWithEmailAndPassword(email, password);
-                console.log('✅ Login realizado com sucesso!');
-                alert('✅ Bem-vindo, Administrador!');
-                closeLoginModal();
-                enableAdminMode();
-            } catch (error) {
-                console.error('❌ Erro no login:', error);
-                if (error.code === 'auth/user-not-found') {
-                    alert('❌ Usuário não encontrado!');
-                } else if (error.code === 'auth/wrong-password') {
-                    alert('❌ Senha incorreta!');
-                } else {
-                    alert('❌ Erro ao fazer login: ' + error.message);
-                }
-            }
-        }
-
-        function enableAdminMode() {
-            window.isAdminLoggedIn = true;
-            document.querySelectorAll('.edit-button').forEach(btn => {
-                btn.style.display = 'block';
-                btn.style.opacity = '1';
-            });
-            document.querySelectorAll('.info-card, .spot-card').forEach(card => {
-                card.classList.add('admin-mode');
-            });
-            
-            const adminBtn = document.querySelector('.admin-button');
-            adminBtn.innerHTML = '👤 Logout Admin';
-            adminBtn.onclick = logoutAdmin;
-            
-            console.log('🔓 Modo Administrador Ativado!');
-        }
-
-        function disableAdminMode() {
-            window.isAdminLoggedIn = false;
-            document.querySelectorAll('.edit-button').forEach(btn => {
-                btn.style.display = 'none';
-                btn.style.opacity = '0';
-            });
-            document.querySelectorAll('.info-card, .spot-card').forEach(card => {
-                card.classList.remove('admin-mode');
-            });
-            
-            const adminBtn = document.querySelector('.admin-button');
-            adminBtn.innerHTML = '👤 Admin Login';
-            adminBtn.onclick = openLoginModal;
-            
-            console.log('🔒 Modo Administrador Desativado!');
-        }
-
-        async function logoutAdmin() {
-            try {
-                // Necessário garantir que 'window.auth' esteja definido pelo script module
-                await window.auth.signOut();
-                alert('✅ Logout realizado com sucesso!');
-                disableAdminMode();
-            } catch (error) {
-                console.error('❌ Erro ao fazer logout:', error);
-                alert('❌ Erro ao fazer logout!');
-            }
-        }
-
-        // Funções de Upload de Imagem (ajustadas para usar window.storage/window.db)
-        function openImageModal(imageId) {
-            if (!window.isAdminLoggedIn) {
-                alert('⚠️ Você precisa estar logado como administrador!');
-                openLoginModal();
-                return;
-            }
-            
-            window.currentImageId = imageId;
-            document.getElementById('imageUploadModal').classList.add('active');
-            document.getElementById('imageTitle').value = imageId.charAt(0).toUpperCase() + imageId.slice(1);
-            document.getElementById('imageFile').value = '';
-            document.getElementById('imageUrl').value = '';
-        }
-
-        function closeImageModal() {
-            document.getElementById('imageUploadModal').classList.remove('active');
-            window.currentImageId = null;
-        }
-
-        async function saveImage() {
-            const imageId = window.currentImageId;
-            const imageFile = document.getElementById('imageFile').files[0];
-            const imageUrl = document.getElementById('imageUrl').value;
-
-            if (!imageFile && !imageUrl) {
-                alert('⚠️ Por favor, selecione uma imagem ou cole uma URL!');
-                return;
-            }
-
-            try {
-                let finalUrl = imageUrl;
-
-                const uploadBtn = document.querySelector('.save-btn');
-                uploadBtn.textContent = '⏳ Enviando...';
-                uploadBtn.disabled = true;
-
-                if (imageFile) {
-                    // Usando as referências do script module
-                    const { ref, uploadBytes, getDownloadURL } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js");
-                    const fileRef = ref(window.storage, `costa-rica/${imageId}-${Date.now()}.${imageFile.name.split('.').pop()}`);
-                    
-                    const snapshot = await uploadBytes(fileRef, imageFile); 
-                    finalUrl = await getDownloadURL(snapshot.ref);
-                    
-                    console.log('✅ Imagem enviada para o Storage!');
-                }
-
-                // Usando as referências do script module
-                const { doc, setDoc, serverTimestamp } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
-                const docRef = doc(window.db, "site-images", "costa-rica"); 
-                const updateData = {};
-                updateData[imageId] = finalUrl;
-                updateData.timestamp = serverTimestamp(); 
-
-                await setDoc(docRef, updateData, { merge: true });
-                
-                console.log('✅ URL da imagem salva no Firestore!');
-                
-                displayImage(imageId, finalUrl);
-                
-                alert('✅ Imagem salva com sucesso!');
-                closeImageModal();
-
-            } catch (error) {
-                console.error('❌ Erro ao salvar imagem:', error);
-                alert('❌ Erro ao salvar imagem: ' + error.message);
-            } finally {
-                 const uploadBtn = document.querySelector('.save-btn');
-                 uploadBtn.textContent = '💾 Salvar';
-                 uploadBtn.disabled = false;
-            }
-        }
-
-        function displayImage(imageId, imageUrl) {
-            const container = document.getElementById(`img-${imageId}`);
-            if (container) {
-                container.innerHTML = `<img src="${imageUrl}" alt="${imageId}">`;
-            }
-        }
-
-        // Fechar modais ao clicar fora
-        document.getElementById('loginModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeLoginModal();
-            }
-        });
-
-        document.getElementById('imageUploadModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeImageModal();
-            }
-        });
-
-        // Animações e efeitos (Mantido o código original)
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.section');
-            
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -150px 0px' // Aumentado para TV
-            };
-
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-
-            sections.forEach(section => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(70px)'; // Aumentado
-                section.style.transition = 'opacity 1s ease, transform 1s ease';
-                observer.observe(section);
-            });
-
-            // Mostrar/ocultar botão de scroll
-            const scrollIndicator = document.querySelector('.scroll-indicator');
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 600) { // Maior para TV
-                    scrollIndicator.style.display = 'flex';
-                } else {
-                    scrollIndicator.style.display = 'none';
-                }
-            });
-
-            // Animação de digitação no título
-            const title = document.querySelector('h1');
-            const originalText = title.textContent;
-            title.textContent = '';
-            let charIndex = 0;
-
-            function typeWriter() {
-                if (charIndex < originalText.length) {
-                    title.textContent += originalText.charAt(charIndex);
-                    charIndex++;
-                    setTimeout(typeWriter, 80); // Um pouco mais rápido
-                }
-            }
-
-            // Atraso para começar após a tela de loading
-            setTimeout(typeWriter, 3500); 
-
-            // Criar partículas flutuantes
+            // 1. Cria partículas de fundo (efeito "de outro mundo")
             createParticles();
+
+            // 2. Esconde a tela de loading e mostra o conteúdo principal
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+                mainContent.style.opacity = '1';
+                mainContent.style.transition = 'opacity 1s ease';
+                
+                console.log('✅ Apresentação iniciada!');
+                // Aqui você pode adicionar a animação de digitação do H1 se desejar
+            }, loadTime);
         });
 
+        // Função para abrir o modal final com a última imagem
+        function openFinalModal() {
+            document.getElementById('finalModal').classList.add('active');
+        }
+
+        // Função para fechar o modal final
+        function closeFinalModal() {
+            document.getElementById('finalModal').classList.remove('active');
+        }
+
+        // Efeito de Partículas para o Fundo
         function createParticles() {
-            const particlesContainer = document.createElement('div');
-            particlesContainer.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
-                z-index: 0;
-                overflow: hidden;
-            `;
-            document.body.appendChild(particlesContainer);
-
-            for (let i = 0; i < 40; i++) { // Mais partículas
+            const body = document.body;
+            for (let i = 0; i < 50; i++) { // 50 Partículas
                 const particle = document.createElement('div');
-                const size = Math.random() * 5 + 3; // Partículas maiores
-                const startX = Math.random() * 100;
-                const duration = Math.random() * 25 + 18;
-                const delay = Math.random() * 7;
+                particle.classList.add('particle');
+                
+                // Posições aleatórias
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                particle.style.left = `${x}%`;
+                particle.style.top = `${y}%`;
 
-                particle.style.cssText = `
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    background: radial-gradient(circle, rgba(199, 125, 255, 0.9), transparent);
-                    border-radius: 50%;
-                    left: ${startX}%;
-                    bottom: -10px;
-                    animation: floatUp ${duration}s linear ${delay}s infinite;
-                    opacity: 0;
-                `;
+                // Variações de movimento e tamanho
+                const size = Math.random() * 2 + 2; // 2px a 4px
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.animationDuration = `${Math.random() * 15 + 15}s`; // 15s a 30s
 
-                particlesContainer.appendChild(particle);
+                // Variáveis CSS para movimento
+                particle.style.setProperty('--dx', `${Math.random() * 200 - 100}px`);
+                particle.style.setProperty('--dy', `${Math.random() * 200 - 100}px`);
+
+                body.appendChild(particle);
             }
-
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes floatUp {
-                    0% {
-                        transform: translateY(0) translateX(0) rotate(0deg);
-                        opacity: 0;
-                    }
-                    10% {
-                        opacity: 0.9;
-                    }
-                    90% {
-                        opacity: 0.9;
-                    }
-                    100% {
-                        transform: translateY(-100vh) translateX(${Math.random() * 300 - 150}px) rotate(360deg);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
         }
-
-        function createSpecialEffect() {
-            setInterval(() => {
-                const emoji = ['🌿', '🦜', '🐒', '🌺', '🦋'][Math.floor(Math.random() * 5)];
-                const particle = document.createElement('div');
-                particle.textContent = emoji;
-                particle.style.cssText = `
-                    position: fixed;
-                    top: -50px;
-                    left: ${Math.random() * 100}%;
-                    font-size: ${Math.random() * 30 + 20}px; /* Emojis maiores */
-                    pointer-events: none;
-                    z-index: 9998;
-                    animation: fall ${Math.random() * 7 + 7}s linear;
-                    opacity: 0.8;
-                `;
-                document.body.appendChild(particle);
-
-                setTimeout(() => particle.remove(), 14000); // Aumentado o tempo
-            }, 2500); // Frequência um pouco menor
-
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fall {
-                    to {
-                        transform: translateY(100vh) rotate(360deg);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-
-        createSpecialEffect();
-
-        // Mensagem de boas-vindas
-        setTimeout(() => {
-            console.log(`
-            ╔═══════════════════════════════════════════╗
-            ║                                           ║
-            ║      🇨🇷  BEM-VINDO À COSTA RICA! 🇨🇷       ║
-            ║                                           ║
-            ║         Pura Vida desde 1821 ✨           ║
-            ║                                           ║
-            ║   🔥 Firebase: Conectado                  ║
-            ║   🔐 Sistema Admin: Ativo                 ║
-            ║   📸 Upload de Imagens: OK                ║
-            ║                                           ║
-            ║   Faça login como Admin para editar! 👤   ║
-            ║                                           ║
-            ╚═══════════════════════════════════════════╝
-            `);
-        }, 4000); // Após o loading
-
-        console.log('%c✨ Site com Sistema de Administração! ✨', 'color: #c77dff; font-size: 16px; font-weight: bold;');
     </script>
 </body>
 </html>
