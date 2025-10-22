@@ -3,26 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Costa Rica - Apresentação de Impacto</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title id="pageTitle">Costa Rica - Apresentação de Impacto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* Variáveis de Cores de Alto Contraste */
+        /* Variáveis de Cores (iOS Dark Mode com Roxo) */
         :root {
-            --cor-principal: #a63ff7;    /* Roxo Elétrico */
-            --cor-secundaria: #34e0a1; /* Ciano Neon/Destaque */
-            --cor-fundo-escuro: #08080c;
-            --cor-fundo-card: #150d24;
-            --cor-texto-claro: #ececf1;
-            --tamanho-fonte-base: 1.3em; /* Média/Otimizada para TV */
+            --cor-principal: #9466ff;    /* Roxo iOS */
+            --cor-secundaria: #007aff;  /* Azul Destaque */
+            --cor-fundo-escuro: #1c1c1e; /* Fundo escuro elegante (quase preto) */
+            --cor-fundo-card: #2c2c2e;   /* Fundo de Card mais claro */
+            --cor-texto-claro: #f2f2f7;  /* Texto Principal */
+            --cor-texto-secundario: #a9a9b2;
+            --tamanho-fonte-base: 1.15em;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif; /* Poppins para o corpo do texto */
+            font-family: 'Inter', sans-serif;
             color: var(--cor-texto-claro);
+            transition: color 0.3s, background-color 0.3s;
         }
 
         body {
@@ -32,16 +34,16 @@
             position: relative;
         }
 
-        /* Efeito de Bordas Laterais Roxas */
+        /* Efeito de Bordas Laterais Roxas Suaves */
         body::before,
         body::after {
             content: '';
             position: fixed;
             top: 0;
-            width: 100px; /* Largura das bordas */
+            width: 15px; /* Largura reduzida para minimalismo */
             height: 100%;
-            z-index: 999; /* Alto Z-index para manter sobre o fundo, mas abaixo do conteúdo */
-            opacity: 0.3;
+            z-index: 999;
+            opacity: 0.5;
             pointer-events: none;
         }
 
@@ -56,179 +58,163 @@
         }
 
         .container {
-            max-width: 1400px; /* Grande para TV */
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px;
+            padding: 30px 20px;
             position: relative;
-            z-index: 10; /* Acima das bordas */
+            z-index: 10;
         }
 
-        /* --- ANIMAÇÕES GERAIS --- */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-70px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* --- BOTÕES DE IDIOMA (Segmented Control) --- */
+        .language-switcher {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 25px;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: var(--cor-fundo-escuro);
+            /* Borda sutil */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(70px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .lang-button-group {
+            display: inline-flex;
+            background-color: var(--cor-fundo-card);
+            border-radius: 10px;
+            padding: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 15px var(--cor-principal); }
-            50% { box-shadow: 0 0 30px var(--cor-secundaria); }
+
+        .lang-button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: transparent;
+            color: var(--cor-texto-secundario);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-        
+
+        .lang-button.active {
+            background-color: var(--cor-principal);
+            color: var(--cor-texto-claro);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
         /* --- ESTILO DO CABEÇALHO --- */
         header {
             text-align: center;
-            padding: 90px 40px;
-            background: rgba(21, 13, 36, 0.7); /* Fundo semi-transparente escuro */
-            border-radius: 30px;
-            margin-bottom: 60px;
-            box-shadow: 0 20px 80px rgba(166, 63, 247, 0.5);
-            border: 3px solid var(--cor-principal);
-            backdrop-filter: blur(10px);
-            animation: fadeInDown 1.5s ease;
+            padding: 60px 20px;
+            background: var(--cor-fundo-card);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--cor-principal);
+            transition: all 0.5s ease;
         }
 
         h1 {
-            font-family: 'Orbitron', sans-serif; /* Fonte estilosa para títulos */
-            font-size: 5.5em; /* Fonte GIGANTE */
-            background: linear-gradient(45deg, var(--cor-secundaria) 20%, var(--cor-principal) 80%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 15px var(--cor-secundaria);
-            margin-bottom: 15px;
-            font-weight: 900;
+            font-family: 'Inter', sans-serif;
+            font-size: 4.5em;
+            color: var(--cor-principal);
+            text-shadow: 0 0 10px rgba(148, 102, 255, 0.4);
+            margin-bottom: 10px;
+            font-weight: 800;
         }
 
         .subtitle {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2em;
-            color: var(--cor-secundaria);
-            margin-top: 15px;
-            text-shadow: 0 0 10px rgba(52, 224, 161, 0.5);
-        }
-
-        .flag {
-            width: 300px;
-            height: 180px;
-            margin: 0 auto 30px;
-            border-radius: 25px;
-            box-shadow: 0 10px 50px var(--cor-principal);
-            animation: pulseGlow 3s infinite alternate;
+            font-size: 1.8em;
+            color: var(--cor-texto-secundario);
+            margin-top: 10px;
+            font-weight: 400;
         }
 
         /* --- ESTILO DAS SEÇÕES --- */
         .section {
-            background: linear-gradient(135deg, rgba(21, 13, 36, 0.8) 0%, rgba(30, 20, 50, 0.7) 100%);
-            border-radius: 25px;
-            padding: 50px;
-            margin-bottom: 60px;
-            box-shadow: 0 15px 60px rgba(0, 0, 0, 0.5);
-            border: 2px solid var(--cor-principal);
+            background: var(--cor-fundo-card);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border-left: 5px solid var(--cor-principal);
             transition: all 0.4s ease;
-            backdrop-filter: blur(8px);
-            animation: fadeInUp 1.2s ease;
         }
 
         .section:hover {
-            transform: translateY(-12px) scale(1.01);
-            box-shadow: 0 25px 80px rgba(166, 63, 247, 0.7);
-            border-color: var(--cor-secundaria);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            border-left-color: var(--cor-secundaria);
         }
 
         .section h2 {
-            font-family: 'Orbitron', sans-serif;
-            background: linear-gradient(90deg, var(--cor-principal) 0%, var(--cor-secundaria) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 3.5em; /* Fonte GIGANTE */
-            margin-bottom: 35px;
-            border-bottom: 4px solid var(--cor-secundaria);
-            padding-bottom: 20px;
+            font-size: 2.8em;
+            color: var(--cor-principal);
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(148, 102, 255, 0.3);
             font-weight: 700;
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px; /* Espaçamento grande */
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .info-card {
-            background-color: var(--cor-fundo-card);
-            padding: 35px;
-            border-radius: 20px;
-            border-left: 6px solid var(--cor-secundaria);
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+            background-color: #3a3a3c; /* Fundo de card mais escuro */
+            padding: 25px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .info-card:hover {
-            transform: translateX(20px) scale(1.05);
-            border-left-color: var(--cor-principal);
-            box-shadow: 0 15px 40px var(--cor-principal);
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(148, 102, 255, 0.4);
         }
 
         .info-card h3 {
             color: var(--cor-secundaria);
-            margin-bottom: 18px;
-            font-size: 1.8em;
+            margin-bottom: 12px;
+            font-size: 1.6em;
             font-weight: 700;
         }
 
         .info-card p {
-            line-height: 1.9;
-            font-size: 1.2em;
+            line-height: 1.6;
+            font-size: 1em;
+            color: var(--cor-texto-secundario);
         }
 
         .image-container {
             width: 100%;
-            height: 280px; /* Altura generosa */
-            background: rgba(166, 63, 247, 0.1);
-            border-radius: 15px;
-            margin-bottom: 20px;
+            height: 200px;
+            background: rgba(148, 102, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            border: 2px dashed var(--cor-principal);
+            border: 1px dashed var(--cor-principal);
         }
 
-        /* Estilo para a imagem de Placeholder (Ícone) */
         .image-placeholder {
-            font-size: 5em; 
-            color: var(--cor-secundaria);
-            opacity: 0.8;
+            font-size: 4em; 
+            color: var(--cor-principal);
+            opacity: 0.7;
         }
 
-        /* Conteúdo principal - Estilo */
         .highlight {
             color: var(--cor-secundaria);
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(52, 224, 161, 0.7);
+            font-weight: 600;
         }
 
-        .emoji {
-            font-size: 2.5em; /* Emojis grandes */
-            margin-right: 15px;
-        }
-
-        /* Cultura e Pontos Turísticos */
-        .culture-section p {
-            line-height: 2;
-            font-size: 1.3em;
-        }
-
-        .tourist-spots {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-        }
-        
         /* --- TELA DE CARREGAMENTO (ABERTURA) --- */
         .loading-screen {
             position: fixed;
@@ -242,7 +228,7 @@
             justify-content: center;
             align-items: center;
             z-index: 99999;
-            transition: opacity 1.5s ease;
+            transition: opacity 1.2s ease;
         }
 
         .loading-screen.hidden {
@@ -250,65 +236,58 @@
             pointer-events: none;
         }
 
-        .opening-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
-            width: 90%;
-            max-width: 600px;
-        }
-
         .opening-header-image {
             width: 100%;
-            height: 120px; /* Altura média (banner) */
+            height: 150px; /* Mais alto */
             object-fit: cover;
+            object-position: center;
             border-radius: 15px;
-            box-shadow: 0 0 25px var(--cor-principal);
-            border: 2px solid var(--cor-secundaria);
-            margin-bottom: 20px;
-            animation: pulseGlow 3s infinite alternate;
+            box-shadow: 0 0 25px rgba(148, 102, 255, 0.6);
+            border: 3px solid var(--cor-principal);
+            margin-bottom: 40px;
         }
 
         .opening-central-image {
-            width: 280px;
-            height: 280px;
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
             object-fit: cover;
-            border: 8px solid var(--cor-secundaria);
-            box-shadow: 0 0 50px var(--cor-principal);
-            animation: fadeInDown 1s ease;
+            border: 5px solid var(--cor-secundaria);
+            box-shadow: 0 0 40px rgba(0, 122, 255, 0.5);
+            animation: pulseGlow 3s infinite alternate;
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px var(--cor-principal); }
+            50% { box-shadow: 0 0 30px var(--cor-secundaria); }
         }
 
         .loading-credits {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8em;
-            color: var(--cor-principal);
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(166, 63, 247, 0.8);
-            margin-top: 15px;
+            font-size: 1.5em;
+            color: var(--cor-texto-secundario);
+            margin-top: 20px;
+            font-weight: 600;
         }
 
-        /* Barra de Carregamento Estilizada */
+        /* Barra de Carregamento Estilizada (iOS Progress Bar) */
         .custom-loader-container {
-            width: 100%;
-            height: 25px;
-            background: rgba(52, 224, 161, 0.1);
-            border-radius: 12px;
+            width: 80%;
+            max-width: 400px;
+            height: 8px;
+            background: #3a3a3c;
+            border-radius: 4px;
             overflow: hidden;
-            border: 2px solid var(--cor-secundaria);
-            margin-top: 50px;
+            margin-top: 40px;
         }
 
         .custom-loader-bar {
             height: 100%;
             width: 0;
-            background: linear-gradient(90deg, var(--cor-principal) 0%, var(--cor-secundaria) 100%);
-            animation: loadBar 3.5s ease-out forwards;
-            box-shadow: 0 0 10px var(--cor-secundaria);
+            background: var(--cor-principal);
+            animation: loadBar 3s ease-out forwards;
+            box-shadow: 0 0 5px var(--cor-principal);
         }
         
-        /* Animação para a barra de carregamento */
         @keyframes loadBar {
             0% { width: 0%; }
             100% { width: 100%; }
@@ -317,27 +296,27 @@
         /* --- BOTÃO FINALIZAR E MODAL DE ENCERRAMENTO --- */
         footer {
             text-align: center;
-            padding: 50px;
-            margin-top: 70px;
+            padding: 50px 0;
+            margin-top: 50px;
         }
         
         .finish-button {
-            padding: 20px 40px;
-            background: linear-gradient(45deg, var(--cor-principal) 0%, var(--cor-secundaria) 100%);
+            padding: 15px 35px;
+            background: var(--cor-principal);
             border: none;
-            border-radius: 15px;
-            color: var(--cor-fundo-escuro);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2em;
+            border-radius: 12px;
+            color: var(--cor-texto-claro);
+            font-size: 1.6em;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 0 20px var(--cor-principal);
+            box-shadow: 0 5px 20px rgba(148, 102, 255, 0.6);
             transition: all 0.3s ease;
         }
 
         .finish-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 35px var(--cor-secundaria);
+            transform: scale(1.03);
+            background: var(--cor-secundaria);
+            box-shadow: 0 5px 20px rgba(0, 122, 255, 0.6);
         }
 
         .final-modal {
@@ -347,7 +326,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 99999;
             justify-content: center;
             align-items: center;
@@ -361,79 +340,241 @@
             opacity: 1;
         }
 
-        .modal-content {
-            text-align: center;
-            max-width: 90%;
-            max-height: 90%;
-            position: relative;
-        }
-
         .modal-image {
-            width: 90vw;
-            height: 80vh;
-            object-fit: contain; /* Garante que a imagem caiba na tela sem cortar */
-            border-radius: 20px;
-            border: 8px solid var(--cor-principal);
-            box-shadow: 0 0 80px var(--cor-secundaria);
-            animation: fadeInUp 1s ease;
+            width: 85vw;
+            height: 85vh;
+            max-width: 1000px;
+            max-height: 700px;
+            object-fit: contain;
+            border-radius: 15px;
+            border: 5px solid var(--cor-principal);
+            box-shadow: 0 0 50px rgba(148, 102, 255, 0.8);
         }
 
         .close-btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--cor-principal);
-            color: white;
-            border: none;
+            top: 25px;
+            right: 25px;
+            background: var(--cor-fundo-escuro);
+            color: var(--cor-principal);
+            border: 2px solid var(--cor-principal);
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 2em;
+            width: 45px;
+            height: 45px;
+            font-size: 1.5em;
             cursor: pointer;
-            transition: transform 0.3s ease;
-            box-shadow: 0 0 15px var(--cor-principal);
+            transition: transform 0.3s ease, background-color 0.3s;
+            box-shadow: 0 0 10px rgba(148, 102, 255, 0.5);
         }
 
         .close-btn:hover {
+            background: var(--cor-principal);
+            color: var(--cor-texto-claro);
             transform: rotate(90deg) scale(1.1);
-            background: var(--cor-secundaria);
-        }
-
-        /* Efeito de partículas para o Fundo */
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background-color: var(--cor-secundaria);
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: moveParticle 20s infinite linear;
-        }
-
-        @keyframes moveParticle {
-            0% { transform: translate(0, 0); opacity: 0.6; }
-            50% { transform: translate(var(--dx), var(--dy)); opacity: 1; }
-            100% { transform: translate(0, 0); opacity: 0.6; }
-        }
-
-        /* Media Queries para ajuste de tela */
-        @media (max-width: 768px) {
-            h1 { font-size: 3.5em; }
-            .section h2 { font-size: 2.5em; }
-            .container { padding: 20px; }
-            .info-card { padding: 25px; }
-            .opening-central-image { width: 200px; height: 200px; }
-            .loading-credits { font-size: 1.4em; }
         }
     </style>
 </head>
 <body>
     
+    <script>
+        const translations = {
+            'PT': {
+                'pageTitle': 'Costa Rica - Apresentação de Impacto',
+                'title': '🇨🇷 COSTA RICA 🇨🇷',
+                'subtitle': '✨ Pura Vida - O Paraíso da América Central ✨',
+                'credits': 'criado e desenvolvido por: @505voidd',
+                'section1_title': '🏛️ Informações Gerais',
+                's1_c1_title': '👨‍💼 Presidente',
+                's1_c1_p': 'Rodrigo Chaves Robles<br>Em exercício desde maio de 2022',
+                's1_c2_title': '💰 Moeda',
+                's1_c2_p': 'Colón Costarriquenho (CRC)<br>1 USD ≈ 520 CRC',
+                's1_c3_title': '🗣️ Língua Nativa',
+                's1_c3_p': 'Espanhol<br>Língua oficial do país',
+                's1_c4_title': '👥 População',
+                's1_c4_p': '5,2 milhões de habitantes<br>(estimativa 2024)',
+                'section2_title': '🌎 Localização Geográfica',
+                's2_p1': 'A Costa Rica está localizada na América Central, entre o Mar do Caribe e o Oceano Pacífico. O país possui uma área de aproximadamente 51.100 km² e é conhecido por sua incrível biodiversidade e paisagens naturais espetaculares.',
+                'section3_title': '🗺️ Fronteiras',
+                's3_c1_title': '⬆️ Norte',
+                's3_c1_p': 'Fronteira com a Nicarágua<br>309 km de extensão',
+                's3_c2_title': '⬇️ Sul',
+                's3_c2_p': 'Fronteira com o Panamá<br>330 km de extensão',
+                's3_c3_title': '⬅️ Leste',
+                's3_c3_p': 'Mar do Caribe<br>212 km de litoral',
+                's3_c4_title': '➡️ Oeste',
+                's3_c4_p': 'Oceano Pacífico<br>1.016 km de litoral',
+                'section4_title': '🏝️ Pontos Turísticos',
+                's4_c1_title': 'Vulcão Arenal',
+                's4_c1_p': 'Um dos vulcões mais ativos da América Central, cercado por florestas tropicais.',
+                's4_c2_title': 'Parque Nacional Manuel Antonio',
+                's4_c2_p': 'Praias paradisíacas com rica vida selvagem.',
+                's4_c3_title': 'Monteverde',
+                's4_c3_p': 'Floresta nublada com biodiversidade única.',
+                's4_c4_title': 'Península de Nicoya',
+                's4_c4_p': 'Praias de areia dourada e Zona Azul de longevidade.',
+                's4_c5_title': 'Parque Nacional Tortuguero',
+                's4_c5_p': 'Local de desova de tartarugas marinhas.',
+                's4_c6_title': 'Teatro Nacional',
+                's4_c6_p': 'Joia arquitetônica construída em 1897.',
+                'section5_title': '🎭 Cultura',
+                's5_h3': '🌺 Pura Vida - A Essência Costarriquenha',
+                's5_p1': 'A expressão "Pura Vida" resume o estilo de vida costarriquenho: otimismo, simplicidade e apreciação pela vida.',
+                's5_p2': '🌿 Consciência Ambiental: Mais de 25% do território é protegido em parques nacionais. O país gera quase 100% de sua energia de fontes renováveis.',
+                's5_p3': '☮️ Pacifismo: Aboliu o exército em 1948, investindo em educação e saúde.',
+                'finish_button': 'FINALIZAR APRESENTAÇÃO 🚀',
+                'close_btn': 'X'
+            },
+            'ES': {
+                'pageTitle': 'Costa Rica - Presentación de Impacto',
+                'title': '🇨🇷 COSTA RICA 🇨🇷',
+                'subtitle': '✨ Pura Vida - El Paraíso de América Central ✨',
+                'credits': 'creado y desarrollado por: @505voidd',
+                'section1_title': '🏛️ Información General',
+                's1_c1_title': '👨‍💼 Presidente',
+                's1_c1_p': 'Rodrigo Chaves Robles<br>En ejercicio desde mayo de 2022',
+                's1_c2_title': '💰 Moneda',
+                's1_c2_p': 'Colón Costarricense (CRC)<br>1 USD ≈ 520 CRC',
+                's1_c3_title': '🗣️ Lengua Nativa',
+                's1_c3_p': 'Español<br>Idioma oficial del país',
+                's1_c4_title': '👥 Población',
+                's1_c4_p': '5,2 millones de habitantes<br>(estimación 2024)',
+                'section2_title': '🌎 Ubicación Geográfica',
+                's2_p1': 'Costa Rica se encuentra en América Central, entre el Mar Caribe y el Océano Pacífico. El país tiene una superficie de aproximadamente 51.100 km² y es conocido por su increíble biodiversidad y paisajes naturales espectaculares.',
+                'section3_title': '🗺️ Fronteras',
+                's3_c1_title': '⬆️ Norte',
+                's3_c1_p': 'Frontera con Nicaragua<br>309 km de extensión',
+                's3_c2_title': '⬇️ Sur',
+                's3_c2_p': 'Frontera con Panamá<br>330 km de extensión',
+                's3_c3_title': '⬅️ Este',
+                's3_c3_p': 'Mar Caribe<br>212 km de costa',
+                's3_c4_title': '➡️ Oeste',
+                's3_c4_p': 'Océano Pacífico<br>1.016 km de costa',
+                'section4_title': '🏝️ Puntos Turísticos',
+                's4_c1_title': 'Volcán Arenal',
+                's4_c1_p': 'Uno de los volcanes más activos de Centroamérica, rodeado de selvas tropicales.',
+                's4_c2_title': 'Parque Nacional Manuel Antonio',
+                's4_c2_p': 'Playas paradisíacas con rica vida silvestre.',
+                's4_c3_title': 'Monteverde',
+                's4_c3_p': 'Bosque nuboso con biodiversidad única.',
+                's4_c4_title': 'Península de Nicoya',
+                's4_c4_p': 'Playas de arena dorada y Zona Azul de longevidad.',
+                's4_c5_title': 'Parque Nacional Tortuguero',
+                's4_c5_p': 'Sitio de anidación de tortugas marinas.',
+                's4_c6_title': 'Teatro Nacional',
+                's4_c6_p': 'Joya arquitectónica construida en 1897.',
+                'section5_title': '🎭 Cultura',
+                's5_h3': '🌺 Pura Vida - La Esencia Costarricense',
+                's5_p1': 'La expresión "Pura Vida" resume el estilo de vida costarricense: optimismo, simplicidad y aprecio por la vida.',
+                's5_p2': '🌿 Conciencia Ambiental: Más del 25% del territorio está protegido en parques nacionales. El país genera casi el 100% de su energía a partir de fuentes renovables.',
+                's5_p3': '☮️ Pacifismo: Abolió el ejército en 1948, invirtiendo en educación y salud.',
+                'finish_button': 'FINALIZAR PRESENTACIÓN 🚀',
+                'close_btn': 'X'
+            }
+        };
+
+        let currentLang = 'PT'; // Idioma padrão
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            // Troca o Título da Página
+            document.getElementById('pageTitle').textContent = t.pageTitle;
+
+            // Troca o Conteúdo do Site (Mapeamento de IDs)
+            document.getElementById('mainTitle').innerHTML = t.title;
+            document.getElementById('subTitle').innerHTML = t.subtitle;
+            document.getElementById('loadingCredits').innerHTML = t.credits;
+
+            document.getElementById('section1_title').innerHTML = t.section1_title;
+            document.getElementById('s1_c1_title').innerHTML = t.s1_c1_title;
+            document.getElementById('s1_c1_p').innerHTML = t.s1_c1_p;
+            document.getElementById('s1_c2_title').innerHTML = t.s1_c2_title;
+            document.getElementById('s1_c2_p').innerHTML = t.s1_c2_p;
+            document.getElementById('s1_c3_title').innerHTML = t.s1_c3_title;
+            document.getElementById('s1_c3_p').innerHTML = t.s1_c3_p;
+            document.getElementById('s1_c4_title').innerHTML = t.s1_c4_title;
+            document.getElementById('s1_c4_p').innerHTML = t.s1_c4_p;
+
+            document.getElementById('section2_title').innerHTML = t.section2_title;
+            document.getElementById('s2_p1').innerHTML = t.s2_p1;
+            
+            document.getElementById('section3_title').innerHTML = t.section3_title;
+            document.getElementById('s3_c1_title').innerHTML = t.s3_c1_title;
+            document.getElementById('s3_c1_p').innerHTML = t.s3_c1_p;
+            document.getElementById('s3_c2_title').innerHTML = t.s3_c2_title;
+            document.getElementById('s3_c2_p').innerHTML = t.s3_c2_p;
+            document.getElementById('s3_c3_title').innerHTML = t.s3_c3_title;
+            document.getElementById('s3_c3_p').innerHTML = t.s3_c3_p;
+            document.getElementById('s3_c4_title').innerHTML = t.s3_c4_title;
+            document.getElementById('s3_c4_p').innerHTML = t.s3_c4_p;
+
+            document.getElementById('section4_title').innerHTML = t.section4_title;
+            document.getElementById('s4_c1_title').innerHTML = t.s4_c1_title;
+            document.getElementById('s4_c1_p').innerHTML = t.s4_c1_p;
+            document.getElementById('s4_c2_title').innerHTML = t.s4_c2_title;
+            document.getElementById('s4_c2_p').innerHTML = t.s4_c2_p;
+            document.getElementById('s4_c3_title').innerHTML = t.s4_c3_title;
+            document.getElementById('s4_c3_p').innerHTML = t.s4_c3_p;
+            document.getElementById('s4_c4_title').innerHTML = t.s4_c4_title;
+            document.getElementById('s4_c4_p').innerHTML = t.s4_c4_p;
+            document.getElementById('s4_c5_title').innerHTML = t.s4_c5_title;
+            document.getElementById('s4_c5_p').innerHTML = t.s4_c5_p;
+            document.getElementById('s4_c6_title').innerHTML = t.s4_c6_title;
+            document.getElementById('s4_c6_p').innerHTML = t.s4_c6_p;
+
+            document.getElementById('section5_title').innerHTML = t.section5_title;
+            document.getElementById('s5_h3').innerHTML = t.s5_h3;
+            document.getElementById('s5_p1').innerHTML = t.s5_p1;
+            document.getElementById('s5_p2').innerHTML = t.s5_p2;
+            document.getElementById('s5_p3').innerHTML = t.s5_p3;
+
+            document.getElementById('finishButton').innerHTML = t.finish_button;
+            document.getElementById('closeBtn').innerHTML = t.close_btn;
+
+
+            // Atualiza o estado dos botões (Active/Inactive)
+            document.querySelectorAll('.lang-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(`lang-btn-${lang}`).classList.add('active');
+        }
+
+        // Funções de Modal e Carregamento
+        function openFinalModal() {
+            document.getElementById('finalModal').classList.add('active');
+        }
+
+        function closeFinalModal() {
+            document.getElementById('finalModal').classList.remove('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const mainContent = document.getElementById('mainContent');
+            const loadTime = 3200; // Tempo de carregamento mais rápido (3.2s)
+
+            // Inicia o site no idioma padrão (Português)
+            changeLanguage(currentLang);
+
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+                // Adiciona um pequeno delay antes de mostrar o conteúdo para garantir a fluidez
+                setTimeout(() => {
+                    mainContent.style.opacity = '1';
+                    mainContent.style.transition = 'opacity 0.8s ease';
+                }, 100); 
+                console.log('✅ Apresentação iniciada!');
+            }, loadTime);
+        });
+    </script>
+
+    
     <div class="loading-screen" id="loadingScreen">
-        <img src="https://i.imgur.com/8wh4t2z.jpeg" alt="Banner Topo" class="opening-header-image">
+        <img src="https://i.imgur.com/8wh4t2z.jpeg" alt="Imagem de Abertura (Topo)" class="opening-header-image">
         <div class="opening-content">
             <img src="https://i.imgur.com/fgrcJGo.jpeg" alt="Imagem Central" class="opening-central-image">
-            <p class="loading-credits">created and developed by: <span style="color: var(--cor-secundaria);">@505voidd</span></p>
+            <p class="loading-credits" id="loadingCredits"></p>
             
             <div class="custom-loader-container">
                 <div class="custom-loader-bar"></div>
@@ -441,205 +582,134 @@
         </div>
     </div>
     <div class="container" id="mainContent" style="opacity: 0;">
-        <header>
-            <div class="flag" style="background: linear-gradient(to bottom, #002b7f 0%, #002b7f 20%, white 20%, white 40%, #ce1126 40%, #ce1126 60%, white 60%, white 80%, #002b7f 80%, #002b7f 100%); position: relative;">
-                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8em; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);">
-                    🌟
-                </div>
+
+        <div class="language-switcher">
+            <div class="lang-button-group">
+                <button class="lang-button active" id="lang-btn-PT" onclick="changeLanguage('PT')">PT</button>
+                <button class="lang-button" id="lang-btn-ES" onclick="changeLanguage('ES')">ES</button>
             </div>
-            <h1>🇨🇷 COSTA RICA 🇨🇷</h1>
-            <p class="subtitle">✨ Pura Vida - O Paraíso da América Central ✨</p>
+        </div>
+
+        <header>
+            <h1 id="mainTitle"></h1>
+            <p class="subtitle" id="subTitle"></p>
         </header>
 
         <div class="section">
-            <h2>🏛️ Informações Gerais</h2>
+            <h2 id="section1_title"></h2>
             <div class="info-grid">
                 <div class="info-card">
                     <div class="image-container"><span class="image-placeholder">👨‍💼</span></div>
-                    <h3><span class="emoji">👨‍💼</span>Presidente</h3>
-                    <p><span class="highlight">Rodrigo Chaves Robles</span><br>Em exercício desde maio de 2022</p>
+                    <h3 id="s1_c1_title"></h3>
+                    <p id="s1_c1_p"></p>
                 </div>
                 <div class="info-card">
                     <div class="image-container"><span class="image-placeholder">💰</span></div>
-                    <h3><span class="emoji">💰</span>Moeda</h3>
-                    <p><span class="highlight">Colón Costarriquenho (CRC)</span><br>1 USD ≈ 520 CRC</p>
+                    <h3 id="s1_c2_title"></h3>
+                    <p id="s1_c2_p"></p>
                 </div>
                 <div class="info-card">
                     <div class="image-container"><span class="image-placeholder">🗣️</span></div>
-                    <h3><span class="emoji">🗣️</span>Língua Nativa</h3>
-                    <p><span class="highlight">Espanhol</span><br>Língua oficial do país</p>
+                    <h3 id="s1_c3_title"></h3>
+                    <p id="s1_c3_p"></p>
                 </div>
                 <div class="info-card">
                     <div class="image-container"><span class="image-placeholder">👥</span></div>
-                    <h3><span class="emoji">👥</span>População</h3>
-                    <p><span class="highlight">5,2 milhões</span> de habitantes<br>(estimativa 2024)</p>
+                    <h3 id="s1_c4_title"></h3>
+                    <p id="s1_c4_p"></p>
                 </div>
             </div>
         </div>
 
         <div class="section">
-            <h2>🌎 Localização Geográfica</h2>
-            <div class="culture-section">
-                <div class="info-card" style="border: none; background: transparent; padding: 0; margin-bottom: 30px;">
-                    <div class="image-container" style="height: 450px;"><span class="image-placeholder">🗺️</span></div>
-                </div>
-                <p>
-                    A Costa Rica está localizada na <span class="highlight">América Central</span>, entre o Mar do Caribe e o Oceano Pacífico. 
-                    O país possui uma área de aproximadamente <span class="highlight">51.100 km²</span> e é conhecido por sua 
-                    incrível biodiversidade e paisagens naturais espetaculares.
-                </p>
+            <h2 id="section2_title"></h2>
+            <div class="info-card" style="background: transparent; padding: 0; border: none;">
+                <div class="image-container" style="height: 350px;"><span class="image-placeholder">🗺️</span></div>
             </div>
+            <p id="s2_p1"></p>
         </div>
 
         <div class="section">
-            <h2>🗺️ Fronteiras</h2>
+            <h2 id="section3_title"></h2>
             <div class="info-grid">
                 <div class="info-card">
-                    <h3><span class="emoji">⬆️</span>Norte</h3>
-                    <p>Fronteira com a <span class="highlight">Nicarágua</span><br>309 km de extensão</p>
+                    <h3 id="s3_c1_title"></h3>
+                    <p id="s3_c1_p"></p>
                 </div>
                 <div class="info-card">
-                    <h3><span class="emoji">⬇️</span>Sul</h3>
-                    <p>Fronteira com o <span class="highlight">Panamá</span><br>330 km de extensão</p>
+                    <h3 id="s3_c2_title"></h3>
+                    <p id="s3_c2_p"></p>
                 </div>
                 <div class="info-card">
-                    <h3><span class="emoji">⬅️</span>Leste</h3>
-                    <p><span class="highlight">Mar do Caribe</span><br>212 km de litoral</p>
+                    <h3 id="s3_c3_title"></h3>
+                    <p id="s3_c3_p"></p>
                 </div>
                 <div class="info-card">
-                    <h3><span class="emoji">➡️</span>Oeste</h3>
-                    <p><span class="highlight">Oceano Pacífico</span><br>1.016 km de litoral</p>
+                    <h3 id="s3_c4_title"></h3>
+                    <p id="s3_c4_p"></p>
                 </div>
             </div>
         </div>
 
         <div class="section">
-            <h2>🏝️ Pontos Turísticos</h2>
-            <div class="tourist-spots">
+            <h2 id="section4_title"></h2>
+            <div class="info-grid">
                 <div class="info-card">
                     <div class="image-container"><span class="image-placeholder">🌋</span></div>
-                    <h3>Vulcão Arenal</h3>
-                    <p>Um dos vulcões mais ativos da América Central, cercado por florestas tropicais.</p>
+                    <h3 id="s4_c1_title"></h3>
+                    <p id="s4_c1_p"></p>
                 </div>
                 <div class="info-card">
                     <div class="image-container"><span class="image-placeholder">🌳</span></div>
-                    <h3>Parque Nacional Manuel Antonio</h3>
-                    <p>Praias paradisíacas com rica vida selvagem.</p>
+                    <h3 id="s4_c2_title"></h3>
+                    <p id="s4_c2_p"></p>
                 </div>
                 <div class="info-card">
                     <div class="image-container"><span class="image-placeholder">☁️</span></div>
-                    <h3>Monteverde</h3>
-                    <p>Floresta nublada com biodiversidade única.</p>
+                    <h3 id="s4_c3_title"></h3>
+                    <p id="s4_c3_p"></p>
                 </div>
                 <div class="info-card">
                     <div class="image-container"><span class="image-placeholder">🏖️</span></div>
-                    <h3>Península de Nicoya</h3>
-                    <p>Praias de areia dourada e Zona Azul de longevidade.</p>
+                    <h3 id="s4_c4_title"></h3>
+                    <p id="s4_c4_p"></p>
                 </div>
                 <div class="info-card">
                     <div class="image-container"><span class="image-placeholder">🐢</span></div>
-                    <h3>Parque Nacional Tortuguero</h3>
-                    <p>Local de desova de tartarugas marinhas.</p>
+                    <h3 id="s4_c5_title"></h3>
+                    <p id="s4_c5_p"></p>
                 </div>
                 <div class="info-card">
                     <div class="image-container"><span class="image-placeholder">🏛️</span></div>
-                    <h3>Teatro Nacional</h3>
-                    <p>Joia arquitetônica construída em 1897.</p>
+                    <h3 id="s4_c6_title"></h3>
+                    <p id="s4_c6_p"></p>
                 </div>
             </div>
         </div>
 
         <div class="section">
-            <h2>🎭 Cultura</h2>
-            <div class="culture-section">
-                <div class="info-card" style="border: none; background: transparent; padding: 0; margin-bottom: 30px;">
-                    <div class="image-container" style="height: 450px;"><span class="image-placeholder">🎭</span></div>
-                </div>
-                <h3>🌺 Pura Vida - A Essência Costarriquenha</h3>
-                <p>
-                    A expressão <span class="highlight">"Pura Vida"</span> resume o estilo de vida costarriquenho: 
-                    otimismo, simplicidade e apreciação pela vida.
-                </p>
-                <br>
-                <p>
-                    🌿 <span class="highlight">Consciência Ambiental:</span> Mais de 25% do território é protegido 
-                    em parques nacionais. O país gera quase 100% de sua energia de fontes renováveis.
-                </p>
-                <br>
-                <p>
-                    ☮️ <span class="highlight">Pacifismo:</span> Aboliu o exército em 1948, investindo em educação e saúde.
-                </p>
+            <h2 id="section5_title"></h2>
+            <div class="info-card" style="background: transparent; padding: 0; border: none;">
+                <div class="image-container" style="height: 350px;"><span class="image-placeholder">🎭</span></div>
             </div>
+            <h3 id="s5_h3"></h3>
+            <p id="s5_p1"></p>
+            <br>
+            <p id="s5_p2"></p>
+            <br>
+            <p id="s5_p3"></p>
         </div>
 
         <footer>
-            <button class="finish-button" onclick="openFinalModal()">FINALIZAR APRESENTAÇÃO 🚀</button>
+            <button class="finish-button" id="finishButton" onclick="openFinalModal()"></button>
         </footer>
     </div>
     
     <div class="final-modal" id="finalModal">
         <div class="modal-content">
-            <button class="close-btn" onclick="closeFinalModal()">X</button>
-            <img src="https://i.imgur.com/87RdhWR.jpeg" alt="Imagem de Encerramento" class="modal-image">
+            <button class="close-btn" id="closeBtn" onclick="closeFinalModal()"></button>
+            <img src="https://i.imgur.com/8wh4t2z.jpeg" alt="Imagem de Encerramento" class="modal-image">
         </div>
     </div>
-    <script>
-        // Função para iniciar a apresentação após o carregamento
-        document.addEventListener('DOMContentLoaded', () => {
-            const loadingScreen = document.getElementById('loadingScreen');
-            const mainContent = document.getElementById('mainContent');
-            const loadTime = 4000; // 4 segundos (tempo da animação da barra)
-
-            // 1. Cria partículas de fundo (efeito "de outro mundo")
-            createParticles();
-
-            // 2. Esconde a tela de loading e mostra o conteúdo principal
-            setTimeout(() => {
-                loadingScreen.classList.add('hidden');
-                mainContent.style.opacity = '1';
-                mainContent.style.transition = 'opacity 1s ease';
-                
-                console.log('✅ Apresentação iniciada!');
-                // Aqui você pode adicionar a animação de digitação do H1 se desejar
-            }, loadTime);
-        });
-
-        // Função para abrir o modal final com a última imagem
-        function openFinalModal() {
-            document.getElementById('finalModal').classList.add('active');
-        }
-
-        // Função para fechar o modal final
-        function closeFinalModal() {
-            document.getElementById('finalModal').classList.remove('active');
-        }
-
-        // Efeito de Partículas para o Fundo
-        function createParticles() {
-            const body = document.body;
-            for (let i = 0; i < 50; i++) { // 50 Partículas
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Posições aleatórias
-                const x = Math.random() * 100;
-                const y = Math.random() * 100;
-                particle.style.left = `${x}%`;
-                particle.style.top = `${y}%`;
-
-                // Variações de movimento e tamanho
-                const size = Math.random() * 2 + 2; // 2px a 4px
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.animationDuration = `${Math.random() * 15 + 15}s`; // 15s a 30s
-
-                // Variáveis CSS para movimento
-                particle.style.setProperty('--dx', `${Math.random() * 200 - 100}px`);
-                particle.style.setProperty('--dy', `${Math.random() * 200 - 100}px`);
-
-                body.appendChild(particle);
-            }
-        }
-    </script>
-</body>
+    </body>
 </html>
