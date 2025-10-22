@@ -4,631 +4,360 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Costa Rica - Apresentação Completa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
     <style>
+        /* Variáveis de Cores para fácil customização */
+        :root {
+            --cor-primaria: #7b2cbf; /* Roxo principal */
+            --cor-secundaria: #c77dff; /* Roxo claro/Destaque */
+            --cor-fundo-escuro: #0a0a0a;
+            --cor-fundo-medio: #1a0a2e;
+            --cor-texto-claro: #e4e4e4;
+            --cor-texto-destaque: #e0aaff;
+            --tamanho-fonte-base: 1.2em; /* Média/Otimizada para TV */
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* Usando Poppins para um visual moderno e limpo */
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a0a0a 100%);
-            color: #e4e4e4;
+            font-size: var(--tamanho-fonte-base);
+            background: linear-gradient(135deg, var(--cor-fundo-escuro) 0%, var(--cor-fundo-medio) 50%, var(--cor-fundo-escuro) 100%);
+            color: var(--cor-texto-claro);
             overflow-x: hidden;
             position: relative;
+            /* Efeito "Surpreendente" - Imagem de fundo com baixa opacidade */
+            background-image: url('https://i.imgur.com/8wh4t2z.jpeg'); 
+            background-size: cover;
+            background-attachment: fixed;
+            background-blend-mode: color-burn; /* Mistura para manter o tema de cores */
+            backdrop-filter: blur(2px);
         }
 
+        /* Efeitos de borda para profundidade */
         body::before,
         body::after {
             content: '';
             position: fixed;
             top: 0;
-            width: 150px;
+            width: 200px; /* Mais largo para TV */
             height: 100%;
             z-index: 0;
-            opacity: 0.3;
+            opacity: 0.2; /* Opacidade reduzida */
         }
 
         body::before {
             left: 0;
-            background: linear-gradient(90deg, #7b2cbf 0%, transparent 100%);
+            background: linear-gradient(90deg, var(--cor-primaria) 0%, transparent 100%);
         }
 
         body::after {
             right: 0;
-            background: linear-gradient(270deg, #7b2cbf 0%, transparent 100%);
+            background: linear-gradient(270deg, var(--cor-primaria) 0%, transparent 100%);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1500px; /* Maior para TV */
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px; /* Mais padding */
             position: relative;
             z-index: 1;
         }
 
         header {
             text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #240046 0%, #3c096c 50%, #240046 100%);
-            border-radius: 25px;
-            margin-bottom: 40px;
-            box-shadow: 0 15px 50px rgba(123, 44, 191, 0.4);
-            animation: fadeInDown 1s ease;
-            border: 2px solid #7b2cbf;
+            padding: 80px 30px; /* Maior padding */
+            background: linear-gradient(135deg, #240046e0 0%, #3c096ce0 50%, #240046e0 100%); /* Fundo semi-transparente */
+            border-radius: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(123, 44, 191, 0.5);
+            animation: fadeInDown 1.5s ease;
+            border: 3px solid var(--cor-primaria);
             position: relative;
             overflow: hidden;
         }
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(123, 44, 191, 0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
+        /* Animações (Mantidas e Refinadas) */
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-70px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(70px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
         }
-
         @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(123, 44, 191, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(123, 44, 191, 0.8); }
+            0%, 100% { box-shadow: 0 0 25px var(--cor-primaria); }
+            50% { box-shadow: 0 0 50px var(--cor-secundaria); }
         }
 
         .flag {
-            width: 220px;
-            height: 130px;
-            margin: 0 auto 20px;
-            border-radius: 15px;
-            box-shadow: 0 8px 30px rgba(123, 44, 191, 0.6);
-            animation: pulse 2s infinite;
+            width: 280px; /* Maior bandeira */
+            height: 160px;
+            margin: 0 auto 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(123, 44, 191, 0.7);
+            animation: pulse 2.5s infinite;
             position: relative;
             z-index: 2;
         }
 
         h1 {
-            font-size: 3.8em;
-            background: linear-gradient(135deg, #c77dff 0%, #e0aaff 100%);
+            font-size: 5em; /* Fonte GIGANTE para TV */
+            background: linear-gradient(135deg, var(--cor-secundaria) 0%, #ffffff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 2px 2px 20px rgba(199, 125, 255, 0.5);
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 2;
-            font-weight: bold;
+            text-shadow: 3px 3px 25px rgba(199, 125, 255, 0.7);
+            margin-bottom: 15px;
+            font-weight: 900; /* Mais impacto */
         }
 
         .subtitle {
-            font-size: 1.4em;
-            color: #e0aaff;
-            margin-top: 10px;
-            position: relative;
-            z-index: 2;
+            font-size: 1.8em; /* Fonte maior */
+            color: var(--cor-texto-destaque);
+            margin-top: 15px;
         }
 
         .section {
-            background: linear-gradient(135deg, rgba(36, 0, 70, 0.8) 0%, rgba(60, 9, 108, 0.6) 100%);
-            border-radius: 20px;
-            padding: 35px;
-            margin-bottom: 35px;
-            box-shadow: 0 10px 40px rgba(123, 44, 191, 0.3);
-            border: 2px solid rgba(123, 44, 191, 0.4);
-            animation: fadeInUp 1s ease;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, rgba(36, 0, 70, 0.85) 0%, rgba(60, 9, 108, 0.75) 100%);
+            border-radius: 25px;
+            padding: 50px; /* Mais padding */
+            margin-bottom: 50px;
+            box-shadow: 0 15px 50px rgba(123, 44, 191, 0.4);
+            border: 3px solid rgba(123, 44, 191, 0.5);
+            animation: fadeInUp 1.2s ease;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(15px); /* Mais blur para separar do fundo */
         }
 
         .section:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 50px rgba(199, 125, 255, 0.5);
-            border-color: #c77dff;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(199, 125, 255, 0.7);
+            border-color: var(--cor-secundaria);
         }
 
         .section h2 {
-            background: linear-gradient(135deg, #c77dff 0%, #e0aaff 100%);
+            background: linear-gradient(135deg, var(--cor-secundaria) 0%, #ffffff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-size: 2.2em;
-            margin-bottom: 25px;
-            border-bottom: 3px solid #7b2cbf;
-            padding-bottom: 15px;
-            font-weight: bold;
+            font-size: 3em; /* Fonte GIGANTE */
+            margin-bottom: 30px;
+            border-bottom: 4px solid var(--cor-primaria);
+            padding-bottom: 20px;
+            font-weight: 800;
         }
 
         .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cards maiores */
+            gap: 30px;
         }
 
         .info-card {
-            background: linear-gradient(135deg, rgba(60, 9, 108, 0.9) 0%, rgba(36, 0, 70, 0.9) 100%);
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 5px solid #c77dff;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-            position: relative;
+            background: linear-gradient(135deg, rgba(60, 9, 108, 0.95) 0%, rgba(36, 0, 70, 0.95) 100%);
+            padding: 30px;
+            border-radius: 20px;
+            border-left: 6px solid var(--cor-secundaria);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
         }
 
         .info-card:hover {
-            background: linear-gradient(135deg, rgba(60, 9, 108, 1) 0%, rgba(36, 0, 70, 1) 100%);
-            transform: translateX(15px) scale(1.03);
-            box-shadow: 0 10px 30px rgba(199, 125, 255, 0.4);
+            transform: translateX(20px) scale(1.05); /* Efeito mais dramático */
         }
 
         .info-card h3 {
-            color: #e0aaff;
-            margin-bottom: 12px;
-            font-size: 1.4em;
-            font-weight: bold;
+            color: var(--cor-texto-destaque);
+            margin-bottom: 15px;
+            font-size: 1.6em; /* Fonte maior */
         }
 
         .info-card p {
-            line-height: 1.7;
-            color: #e4e4e4;
+            line-height: 1.8;
+            font-size: 1.1em;
+            color: var(--cor-texto-claro);
         }
 
         .image-container {
-            width: 100%;
-            height: 200px;
-            background: rgba(60, 9, 108, 0.5);
-            border-radius: 10px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-            border: 2px solid rgba(123, 44, 191, 0.3);
-        }
-
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .image-container:hover img {
-            transform: scale(1.05);
-        }
-
-        .image-placeholder {
-            color: #7b2cbf;
-            font-size: 3em;
-        }
-
-        .edit-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: linear-gradient(135deg, #c77dff 0%, #e0aaff 100%);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            color: #1a0a2e;
-            font-weight: bold;
-            cursor: pointer;
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 10;
-            display: none; /* Escondido por padrão, exibido no modo Admin */
-        }
-
-        .info-card:hover .edit-button,
-        .spot-card:hover .edit-button {
-            opacity: 1;
-        }
-
-        .edit-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 20px rgba(199, 125, 255, 0.6);
+            height: 250px; /* Imagem maior */
+            border: 3px solid rgba(123, 44, 191, 0.5);
         }
 
         .tourist-spots {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Cards maiores */
+            gap: 40px;
         }
 
         .spot-card {
-            background: linear-gradient(135deg, rgba(60, 9, 108, 0.8) 0%, rgba(36, 0, 70, 0.8) 100%);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            transition: all 0.4s ease;
-            border: 2px solid rgba(123, 44, 191, 0.3);
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
-            position: relative;
+            padding: 40px;
+            border-radius: 25px;
+            border: 3px solid rgba(123, 44, 191, 0.5);
         }
 
         .spot-card:hover {
-            border-color: #c77dff;
-            transform: scale(1.03); /* Alterado para efeito mais suave */
-            box-shadow: 0 15px 40px rgba(199, 125, 255, 0.5);
+            transform: scale(1.05);
         }
 
         .spot-card h3 {
-            color: #e0aaff;
-            margin-bottom: 15px;
-            font-size: 1.6em;
-            font-weight: bold;
-        }
-
-        .spot-card p {
-            line-height: 1.8;
-            color: #e4e4e4;
-        }
-
-        .culture-section {
-            background: linear-gradient(135deg, rgba(60, 9, 108, 0.9) 0%, rgba(36, 0, 70, 0.9) 100%);
-            padding: 35px;
-            border-radius: 20px;
-            margin-top: 25px;
-            border: 2px solid rgba(123, 44, 191, 0.3);
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+            font-size: 1.8em;
         }
 
         .culture-section h3 {
-            color: #e0aaff;
-            margin-bottom: 20px;
-            font-size: 1.9em;
-            font-weight: bold;
+            font-size: 2.2em;
         }
 
         .culture-section p {
-            line-height: 1.9;
-            font-size: 1.1em;
-            color: #e4e4e4;
+            line-height: 2; /* Espaçamento de linha otimizado para TV */
+            font-size: 1.2em; /* Fonte maior */
         }
 
         footer {
-            text-align: center;
-            padding: 40px;
-            background: linear-gradient(135deg, rgba(36, 0, 70, 0.8) 0%, rgba(60, 9, 108, 0.8) 100%);
-            border-radius: 20px;
-            margin-top: 50px;
-            animation: fadeInUp 1.5s ease;
-            border: 2px solid #7b2cbf;
-            box-shadow: 0 10px 40px rgba(123, 44, 191, 0.4);
+            padding: 60px;
+            border-radius: 25px;
+            margin-top: 60px;
+            border: 3px solid var(--cor-primaria);
         }
 
         footer p {
-            color: #e0aaff;
-            font-size: 1.2em;
-            margin: 8px 0;
+            font-size: 1.4em; /* Fonte maior */
         }
 
         .highlight {
-            color: #c77dff;
+            color: var(--cor-secundaria);
             font-weight: bold;
-            text-shadow: 0 0 10px rgba(199, 125, 255, 0.5);
+            text-shadow: 0 0 15px rgba(199, 125, 255, 0.7);
         }
 
         .emoji {
-            font-size: 1.6em;
-            margin-right: 10px;
+            font-size: 2em; /* Emojis maiores */
         }
 
-        .scroll-indicator {
-            position: fixed;
-            bottom: 35px;
-            right: 35px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #7b2cbf 0%, #c77dff 100%);
-            border-radius: 50%;
-            display: none; /* Escondido por padrão, será exibido via JS */
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            animation: pulse 2s infinite;
-            box-shadow: 0 8px 30px rgba(199, 125, 255, 0.6);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            border: 3px solid #e0aaff;
-        }
-
-        .scroll-indicator:hover {
-            transform: scale(1.15);
-            background: linear-gradient(135deg, #c77dff 0%, #e0aaff 100%);
-            animation: glow 1s infinite;
-        }
-
-        .scroll-indicator::before {
-            content: '↑';
-            color: #ffffff;
-            font-size: 2.2em;
-            font-weight: bold;
-        }
-
-        .firebase-indicator {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #7b2cbf 0%, #c77dff 100%);
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 0.9em;
-            color: white;
-            box-shadow: 0 5px 20px rgba(199, 125, 255, 0.5);
-            z-index: 1000;
-            animation: pulse 2s infinite;
-            border: 2px solid #e0aaff;
-        }
-
-        .firebase-indicator::before {
-            content: '🔥';
-            margin-right: 8px;
-        }
-
+        /* --- LOADING SCREEN PERSONALIZADO E ESTILOSO --- */
         .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a0a0a 100%);
+            background: linear-gradient(135deg, var(--cor-fundo-escuro) 0%, var(--cor-fundo-medio) 50%, var(--cor-fundo-escuro) 100%);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            gap: 30px; /* Espaço entre a imagem e a barra */
+        }
+
+        .loading-content {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
+            text-align: center;
         }
 
-        .loading-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loader {
-            width: 80px;
-            height: 80px;
-            border: 6px solid rgba(199, 125, 255, 0.3);
-            border-top-color: #c77dff;
+        .loading-image {
+            width: 250px; /* Tamanho da imagem na abertura */
+            height: 250px;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            object-fit: cover;
+            border: 6px solid var(--cor-primaria);
+            box-shadow: 0 0 40px rgba(199, 125, 255, 0.8);
+            animation: pulse 2s infinite;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .loading-text {
+            color: var(--cor-texto-destaque);
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-top: 20px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--cor-primaria);
         }
 
-        /* Modal de Login */
-        .login-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+        .custom-loader-container {
+            width: 400px; /* Largura da barra de carregamento */
+            height: 30px;
+            background: rgba(123, 44, 191, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid var(--cor-primaria);
+            margin-top: 30px;
+        }
+
+        .custom-loader-bar {
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(10px);
+            width: 0;
+            background: linear-gradient(90deg, var(--cor-secundaria) 0%, var(--cor-primaria) 100%);
+            animation: loadBar 3s ease-out forwards;
+            position: relative;
+            box-shadow: 0 0 15px var(--cor-secundaria);
         }
-
-        .login-modal.active {
-            display: flex;
-        }
-
-        .login-box {
-            background: linear-gradient(135deg, #240046 0%, #3c096c 100%);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(123, 44, 191, 0.6);
-            border: 2px solid #7b2cbf;
-            max-width: 400px;
-            width: 90%;
-            animation: fadeInUp 0.5s ease;
-        }
-
-        .login-box h2 {
-            color: #e0aaff;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2em;
-        }
-
-        .login-box input {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 2px solid #7b2cbf;
-            border-radius: 10px;
-            background: rgba(0, 0, 0, 0.3);
-            color: #e4e4e4;
+        
+        .custom-loader-bar::after {
+            content: 'CARREGANDO...';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
             font-size: 1em;
+            text-shadow: 1px 1px 5px black;
         }
 
-        .login-box input:focus {
-            outline: none;
-            border-color: #c77dff;
-            box-shadow: 0 0 20px rgba(199, 125, 255, 0.4);
+        @keyframes loadBar {
+            0% { width: 0%; }
+            100% { width: 100%; }
         }
 
-        .login-box button {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #7b2cbf 0%, #c77dff 100%);
-            border: none;
-            border-radius: 10px;
-            color: white;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+        /* Removendo o loader de giro antigo */
+        .loader { display: none; }
+        /* --- FIM LOADING SCREEN PERSONALIZADO --- */
 
-        .login-box button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(199, 125, 255, 0.6);
-        }
-
-        .admin-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: linear-gradient(135deg, #7b2cbf 0%, #c77dff 100%);
-            padding: 12px 25px;
-            border-radius: 25px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 1000;
-            border: 2px solid #e0aaff;
-            box-shadow: 0 5px 20px rgba(199, 125, 255, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .admin-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(199, 125, 255, 0.7);
-        }
-
-        /* Modal de Upload de Imagem */
-        .image-upload-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 10001;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .image-upload-modal.active {
-            display: flex;
-        }
-
-        .upload-box {
-            background: linear-gradient(135deg, #240046 0%, #3c096c 100%);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(123, 44, 191, 0.6);
-            border: 2px solid #7b2cbf;
-            max-width: 500px;
-            width: 90%;
-        }
-
-        .upload-box h3 {
-            color: #e0aaff;
-            margin-bottom: 20px;
-            font-size: 1.8em;
+        /* Adicionando a imagem do segundo link no footer para ter a terceira imagem no site */
+        .footer-image-container {
             text-align: center;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(123, 44, 191, 0.5);
         }
 
-        .upload-box input[type="file"] {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 2px dashed #7b2cbf;
+        .footer-image {
+            width: 120px; 
+            height: 70px;
+            object-fit: cover;
             border-radius: 10px;
-            background: rgba(0, 0, 0, 0.3);
-            color: #e4e4e4;
-            cursor: pointer;
+            box-shadow: 0 0 20px rgba(199, 125, 255, 0.5);
+            animation: glow 3s infinite alternate;
         }
-
-        .upload-box input[type="text"] {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 2px solid #7b2cbf;
-            border-radius: 10px;
-            background: rgba(0, 0, 0, 0.3);
-            color: #e4e4e4;
-            font-size: 1em;
-        }
-
-        .upload-box button {
-            width: 48%;
-            padding: 15px;
-            margin: 1%;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .upload-box .save-btn {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-        }
-
-        .upload-box .cancel-btn {
-            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-            color: white;
-        }
-
-        .upload-box button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(199, 125, 255, 0.6);
-        }
-
-        .admin-mode {
-            border: 3px solid #c77dff !important;
-            box-shadow: 0 0 30px rgba(199, 125, 255, 0.8) !important;
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5em; }
-            .section { padding: 25px; }
-            .info-grid { grid-template-columns: 1fr; }
-            body::before, body::after { width: 80px; }
-            .admin-button { font-size: 0.85em; padding: 10px 20px; }
+        
+        /* Media Query para Manter a Legibilidade em Dispositivos Menores */
+        @media (max-width: 1024px) {
+            :root {
+                --tamanho-fonte-base: 1em;
+            }
+            h1 { font-size: 3.5em; }
+            .section h2 { font-size: 2.5em; }
+            .container { max-width: 90%; padding: 20px; }
+            .info-grid, .tourist-spots { grid-template-columns: 1fr; }
+            .custom-loader-container { width: 300px; height: 25px; }
+            .loading-image { width: 180px; height: 180px; }
         }
     </style>
 </head>
 <body>
     <div class="loading-screen" id="loadingScreen">
-        <div class="loader"></div>
+        <div class="loading-content">
+            <img src="https://i.imgur.com/fgrcJGo.jpeg" alt="Imagem de Abertura" class="loading-image">
+            <p class="loading-text">Created and developed by: <span class="highlight">@505voidd</span></p>
+            <div class="custom-loader-container">
+                <div class="custom-loader-bar"></div>
+            </div>
+        </div>
     </div>
-
     <div class="admin-button" onclick="openLoginModal()">👤 Admin Login</div>
     <div class="firebase-indicator">Firebase Conectado</div>
 
@@ -638,7 +367,7 @@
             <input type="email" id="adminEmail" placeholder="Email" autocomplete="username">
             <input type="password" id="adminPassword" placeholder="Senha" autocomplete="current-password">
             <button onclick="loginAdmin()">Entrar</button>
-            <p style="text-align: center; margin-top: 20px; color: #7b2cbf; font-size: 0.9em;">
+            <p style="text-align: center; margin-top: 20px; color: var(--cor-primaria); font-size: 0.9em;">
                 Apenas administradores autorizados
             </p>
         </div>
@@ -660,7 +389,7 @@
     <div class="container">
         <header>
             <div class="flag" style="background: linear-gradient(to bottom, #002b7f 0%, #002b7f 20%, white 20%, white 40%, #ce1126 40%, #ce1126 60%, white 60%, white 80%, #002b7f 80%, #002b7f 100%); position: relative;">
-                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 45px; height: 45px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85em; box-shadow: 0 3px 15px rgba(0, 0, 0, 0.4);">
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5em; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);">
                     🌟
                 </div>
             </div>
@@ -711,8 +440,7 @@
             <div class="culture-section">
                 <div class="info-card" data-id="mapa" style="border: none; background: transparent; padding: 0; margin-bottom: 20px;">
                     <button class="edit-button" onclick="openImageModal('mapa')">✏️ Editar Mapa</button>
-                    <div class="image-container" id="img-mapa" style="height: 300px;">
-                        <span class="image-placeholder">🗺️</span>
+                    <div class="image-container" id="img-mapa" style="height: 400px;"> <span class="image-placeholder">🗺️</span>
                     </div>
                 </div>
                 <p>
@@ -750,8 +478,7 @@
             <div class="culture-section">
                 <div class="info-card" data-id="futebol" style="border: none; background: transparent; padding: 0; margin-bottom: 20px;">
                     <button class="edit-button" onclick="openImageModal('futebol')">✏️ Editar Imagem</button>
-                    <div class="image-container" id="img-futebol" style="height: 250px;">
-                        <span class="image-placeholder">⚽</span>
+                    <div class="image-container" id="img-futebol" style="height: 350px;"> <span class="image-placeholder">⚽</span>
                     </div>
                 </div>
                 <h3>🏆 Seleção Nacional - Los Ticos</h3>
@@ -767,8 +494,7 @@
             <div class="culture-section">
                 <div class="info-card" data-id="musica" style="border: none; background: transparent; padding: 0; margin-bottom: 20px;">
                     <button class="edit-button" onclick="openImageModal('musica')">✏️ Editar Imagem</button>
-                    <div class="image-container" id="img-musica" style="height: 250px;">
-                        <span class="image-placeholder">🎵</span>
+                    <div class="image-container" id="img-musica" style="height: 350px;"> <span class="image-placeholder">🎵</span>
                     </div>
                 </div>
                 <h3>🎸 Ritmos Tradicionais e Contemporâneos</h3>
@@ -876,8 +602,7 @@
             <div class="culture-section">
                 <div class="info-card" data-id="cultura" style="border: none; background: transparent; padding: 0; margin-bottom: 20px;">
                     <button class="edit-button" onclick="openImageModal('cultura')">✏️ Editar Imagem</button>
-                    <div class="image-container" id="img-cultura" style="height: 300px;">
-                        <span class="image-placeholder">🎭</span>
+                    <div class="image-container" id="img-cultura" style="height: 400px;"> <span class="image-placeholder">🎭</span>
                     </div>
                 </div>
                 <h3>🌺 Pura Vida - A Essência Costarriquenha</h3>
@@ -900,7 +625,12 @@
         <footer>
             <p>🌟 Costa Rica - Pura Vida 🌟</p>
             <p>Um país pequeno com um coração gigante</p>
-            <p style="margin-top: 15px; font-size: 0.9em; color: #c77dff;">credits by: <span class="highlight">@505voidd</span></p>
+            <p style="margin-top: 15px; font-size: 1.1em; color: var(--cor-secundaria);">
+                Desenvolvido com paixão por <span class="highlight">@505voidd</span>
+            </p>
+             <div class="footer-image-container">
+                <img src="https://i.imgur.com/87RdhWR.jpeg" alt="Símbolo Footer" class="footer-image">
+             </div>
         </footer>
     </div>
 
@@ -988,14 +718,15 @@
 
         window.loadImagesFromFirestore();
 
-        // Remover tela de carregamento
+        // Remover tela de carregamento (Aumentado o tempo para a animação da barra)
         setTimeout(() => {
             document.getElementById('loadingScreen').classList.add('hidden');
-        }, 1000);
+        }, 3500); // 3.5 segundos para a barra completar e a transição
+
     </script>
 
     <script>
-        // Imagens de placeholder para melhor visualização
+        // Restante das funções (Login, Admin, Upload e Efeitos)
         const PLACEHOLDER_IMAGES = {
             "presidente": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Rodrigo_Chaves_Robles_2022_%28cropped%29.jpg",
             "moeda": "https://i.imgur.com/8Qj9SjD.png",
@@ -1024,9 +755,7 @@
             console.log("🖼️ Imagens de visualização (Placeholders) carregadas.");
         }
         
-        // Chamada inicial para carregar as imagens de visualização antes do Firebase tentar
         document.addEventListener('DOMContentLoaded', loadPlaceholderImages);
-
 
         // Funções de Login
         function openLoginModal() {
@@ -1047,7 +776,7 @@
             }
 
             try {
-                // Acesso a window.auth do script module
+                // Necessário garantir que 'window.auth' esteja definido pelo script module
                 const userCredential = await window.auth.signInWithEmailAndPassword(email, password);
                 console.log('✅ Login realizado com sucesso!');
                 alert('✅ Bem-vindo, Administrador!');
@@ -1101,6 +830,7 @@
 
         async function logoutAdmin() {
             try {
+                // Necessário garantir que 'window.auth' esteja definido pelo script module
                 await window.auth.signOut();
                 alert('✅ Logout realizado com sucesso!');
                 disableAdminMode();
@@ -1110,7 +840,7 @@
             }
         }
 
-        // Funções de Upload de Imagem
+        // Funções de Upload de Imagem (ajustadas para usar window.storage/window.db)
         function openImageModal(imageId) {
             if (!window.isAdminLoggedIn) {
                 alert('⚠️ Você precisa estar logado como administrador!');
@@ -1134,7 +864,6 @@
             const imageId = window.currentImageId;
             const imageFile = document.getElementById('imageFile').files[0];
             const imageUrl = document.getElementById('imageUrl').value;
-            const imageTitle = document.getElementById('imageTitle').value;
 
             if (!imageFile && !imageUrl) {
                 alert('⚠️ Por favor, selecione uma imagem ou cole uma URL!');
@@ -1144,33 +873,32 @@
             try {
                 let finalUrl = imageUrl;
 
-                // Mostrar loading
                 const uploadBtn = document.querySelector('.save-btn');
                 uploadBtn.textContent = '⏳ Enviando...';
                 uploadBtn.disabled = true;
 
-                // Se um arquivo foi selecionado, fazer upload para o Firebase Storage
                 if (imageFile) {
-                    const storageRef = firebase.storage().ref(); // Simulação do ref no script inline
-                    const fileRef = storageRef.child(`costa-rica/${imageId}-${Date.now()}.${imageFile.name.split('.').pop()}`);
+                    // Usando as referências do script module
+                    const { ref, uploadBytes, getDownloadURL } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js");
+                    const fileRef = ref(window.storage, `costa-rica/${imageId}-${Date.now()}.${imageFile.name.split('.').pop()}`);
                     
-                    const snapshot = await fileRef.put(imageFile); 
-                    finalUrl = await snapshot.ref.getDownloadURL();
+                    const snapshot = await uploadBytes(fileRef, imageFile); 
+                    finalUrl = await getDownloadURL(snapshot.ref);
                     
                     console.log('✅ Imagem enviada para o Storage!');
                 }
 
-                // Salvar URL no Firestore
-                const docRef = firebase.firestore().doc("site-images/costa-rica"); // Simulação do doc no script inline
+                // Usando as referências do script module
+                const { doc, setDoc, serverTimestamp } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+                const docRef = doc(window.db, "site-images", "costa-rica"); 
                 const updateData = {};
                 updateData[imageId] = finalUrl;
-                updateData.timestamp = firebase.firestore.FieldValue.serverTimestamp(); // Simulação do serverTimestamp
+                updateData.timestamp = serverTimestamp(); 
 
-                await docRef.set(updateData, { merge: true });
+                await setDoc(docRef, updateData, { merge: true });
                 
                 console.log('✅ URL da imagem salva no Firestore!');
                 
-                // Exibir a imagem
                 displayImage(imageId, finalUrl);
                 
                 alert('✅ Imagem salva com sucesso!');
@@ -1180,7 +908,6 @@
                 console.error('❌ Erro ao salvar imagem:', error);
                 alert('❌ Erro ao salvar imagem: ' + error.message);
             } finally {
-                 // Resetar botão
                  const uploadBtn = document.querySelector('.save-btn');
                  uploadBtn.textContent = '💾 Salvar';
                  uploadBtn.disabled = false;
@@ -1213,7 +940,7 @@
             
             const observerOptions = {
                 threshold: 0.1,
-                rootMargin: '0px 0px -100px 0px'
+                rootMargin: '0px 0px -150px 0px' // Aumentado para TV
             };
 
             const observer = new IntersectionObserver(function(entries) {
@@ -1227,15 +954,15 @@
 
             sections.forEach(section => {
                 section.style.opacity = '0';
-                section.style.transform = 'translateY(50px)';
-                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                section.style.transform = 'translateY(70px)'; // Aumentado
+                section.style.transition = 'opacity 1s ease, transform 1s ease';
                 observer.observe(section);
             });
 
             // Mostrar/ocultar botão de scroll
             const scrollIndicator = document.querySelector('.scroll-indicator');
             window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 400) {
+                if (window.pageYOffset > 600) { // Maior para TV
                     scrollIndicator.style.display = 'flex';
                 } else {
                     scrollIndicator.style.display = 'none';
@@ -1252,11 +979,12 @@
                 if (charIndex < originalText.length) {
                     title.textContent += originalText.charAt(charIndex);
                     charIndex++;
-                    setTimeout(typeWriter, 100);
+                    setTimeout(typeWriter, 80); // Um pouco mais rápido
                 }
             }
 
-            setTimeout(typeWriter, 1200);
+            // Atraso para começar após a tela de loading
+            setTimeout(typeWriter, 3500); 
 
             // Criar partículas flutuantes
             createParticles();
@@ -1276,18 +1004,18 @@
             `;
             document.body.appendChild(particlesContainer);
 
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 40; i++) { // Mais partículas
                 const particle = document.createElement('div');
-                const size = Math.random() * 4 + 2;
+                const size = Math.random() * 5 + 3; // Partículas maiores
                 const startX = Math.random() * 100;
-                const duration = Math.random() * 20 + 15;
-                const delay = Math.random() * 5;
+                const duration = Math.random() * 25 + 18;
+                const delay = Math.random() * 7;
 
                 particle.style.cssText = `
                     position: absolute;
                     width: ${size}px;
                     height: ${size}px;
-                    background: radial-gradient(circle, rgba(199, 125, 255, 0.8), transparent);
+                    background: radial-gradient(circle, rgba(199, 125, 255, 0.9), transparent);
                     border-radius: 50%;
                     left: ${startX}%;
                     bottom: -10px;
@@ -1306,13 +1034,13 @@
                         opacity: 0;
                     }
                     10% {
-                        opacity: 1;
+                        opacity: 0.9;
                     }
                     90% {
-                        opacity: 1;
+                        opacity: 0.9;
                     }
                     100% {
-                        transform: translateY(-100vh) translateX(${Math.random() * 200 - 100}px) rotate(360deg);
+                        transform: translateY(-100vh) translateX(${Math.random() * 300 - 150}px) rotate(360deg);
                         opacity: 0;
                     }
                 }
@@ -1320,7 +1048,6 @@
             document.head.appendChild(style);
         }
 
-        // Efeito de neve/partículas especial
         function createSpecialEffect() {
             setInterval(() => {
                 const emoji = ['🌿', '🦜', '🐒', '🌺', '🦋'][Math.floor(Math.random() * 5)];
@@ -1330,16 +1057,16 @@
                     position: fixed;
                     top: -50px;
                     left: ${Math.random() * 100}%;
-                    font-size: ${Math.random() * 20 + 15}px;
+                    font-size: ${Math.random() * 30 + 20}px; /* Emojis maiores */
                     pointer-events: none;
                     z-index: 9998;
-                    animation: fall ${Math.random() * 5 + 5}s linear;
-                    opacity: 0.7;
+                    animation: fall ${Math.random() * 7 + 7}s linear;
+                    opacity: 0.8;
                 `;
                 document.body.appendChild(particle);
 
-                setTimeout(() => particle.remove(), 10000);
-            }, 3000);
+                setTimeout(() => particle.remove(), 14000); // Aumentado o tempo
+            }, 2500); // Frequência um pouco menor
 
             const style = document.createElement('style');
             style.textContent = `
@@ -1372,7 +1099,7 @@
             ║                                           ║
             ╚═══════════════════════════════════════════╝
             `);
-        }, 1500);
+        }, 4000); // Após o loading
 
         console.log('%c✨ Site com Sistema de Administração! ✨', 'color: #c77dff; font-size: 16px; font-weight: bold;');
     </script>
