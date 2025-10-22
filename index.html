@@ -4,30 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">Costa Rica - Apresentação Profissional</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --cor-principal: #00d4aa;
-            --cor-secundaria: #0099ff;
-            --cor-acento: #ff6b6b;
-            --cor-fundo-escuro: #0a0e27;
-            --cor-fundo-card: #1a1f3a;
+            --cor-principal: #9466ff;
+            --cor-secundaria: #7c3aed;
+            --cor-acento: #a78bfa;
+            --cor-fundo-escuro: #000000;
+            --cor-fundo-card: #1c1c1e;
+            --cor-fundo-card-hover: #2c2c2e;
             --cor-texto-claro: #ffffff;
-            --cor-texto-secundario: #a8b2d1;
+            --cor-texto-secundario: #8e8e93;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            background: var(--cor-fundo-escuro);
             color: var(--cor-texto-claro);
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Bordas laterais roxas */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            z-index: 999;
+            pointer-events: none;
+        }
+
+        body::before {
+            left: 0;
+            background: linear-gradient(90deg, var(--cor-principal) 0%, transparent 100%);
+            box-shadow: 0 0 30px var(--cor-principal);
+        }
+
+        body::after {
+            right: 0;
+            background: linear-gradient(270deg, var(--cor-principal) 0%, transparent 100%);
+            box-shadow: 0 0 30px var(--cor-principal);
         }
 
         .loading-screen {
@@ -36,13 +62,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0a0e27 0%, #1e2749 100%);
+            background: var(--cor-fundo-escuro);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 99999;
             transition: opacity 1s ease;
+            padding: 40px 20px;
         }
 
         .loading-screen.hidden {
@@ -52,20 +79,22 @@
 
         .opening-header-image {
             width: 90%;
-            max-width: 1200px;
-            height: 280px;
+            max-width: 1000px;
+            height: auto;
+            aspect-ratio: 16/9;
             object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 212, 170, 0.4);
+            object-position: center;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(148, 102, 255, 0.5);
             border: 3px solid var(--cor-principal);
-            margin-bottom: 50px;
-            animation: fadeInScale 1.5s ease-out;
+            margin-bottom: 40px;
+            animation: fadeInScale 1.2s ease-out;
         }
 
         @keyframes fadeInScale {
             0% {
                 opacity: 0;
-                transform: scale(0.9);
+                transform: scale(0.95);
             }
             100% {
                 opacity: 1;
@@ -74,49 +103,50 @@
         }
 
         .opening-central-image {
-            width: 200px;
-            height: 200px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid var(--cor-principal);
-            box-shadow: 0 0 40px rgba(0, 212, 170, 0.6);
-            animation: pulse 2s infinite;
+            box-shadow: 0 0 50px rgba(148, 102, 255, 0.7);
+            animation: pulse 2.5s infinite;
+            margin-top: 20px;
         }
 
         @keyframes pulse {
             0%, 100% {
                 transform: scale(1);
-                box-shadow: 0 0 40px rgba(0, 212, 170, 0.6);
+                box-shadow: 0 0 40px rgba(148, 102, 255, 0.7);
             }
             50% {
                 transform: scale(1.05);
-                box-shadow: 0 0 60px rgba(0, 212, 170, 0.9);
+                box-shadow: 0 0 60px rgba(148, 102, 255, 1);
             }
         }
 
         .loading-credits {
-            font-size: 1.3em;
+            font-size: 1.2em;
             color: var(--cor-texto-secundario);
             margin-top: 30px;
             font-weight: 500;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .custom-loader-container {
-            width: 300px;
-            height: 6px;
+            width: 280px;
+            height: 4px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
+            border-radius: 2px;
             overflow: hidden;
-            margin-top: 40px;
+            margin-top: 35px;
         }
 
         .custom-loader-bar {
             height: 100%;
             width: 0;
-            background: linear-gradient(90deg, var(--cor-principal), var(--cor-secundaria));
+            background: var(--cor-principal);
             animation: loadBar 3s ease-out forwards;
-            box-shadow: 0 0 15px var(--cor-principal);
+            box-shadow: 0 0 20px var(--cor-principal);
         }
 
         @keyframes loadBar {
@@ -125,9 +155,11 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 40px 30px;
+            position: relative;
+            z-index: 10;
         }
 
         .language-switcher {
@@ -141,14 +173,14 @@
             display: inline-flex;
             background: var(--cor-fundo-card);
             border-radius: 12px;
-            padding: 5px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            padding: 4px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
         }
 
         .lang-button {
-            padding: 10px 20px;
+            padding: 10px 22px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             background: transparent;
             color: var(--cor-texto-secundario);
             font-weight: 600;
@@ -158,19 +190,19 @@
         }
 
         .lang-button.active {
-            background: linear-gradient(135deg, var(--cor-principal), var(--cor-secundaria));
+            background: var(--cor-principal);
             color: white;
-            box-shadow: 0 4px 15px rgba(0, 212, 170, 0.4);
+            box-shadow: 0 4px 15px rgba(148, 102, 255, 0.5);
         }
 
         header {
             text-align: center;
-            padding: 80px 30px;
-            background: linear-gradient(135deg, var(--cor-fundo-card) 0%, #242b4d 100%);
-            border-radius: 25px;
-            margin-bottom: 50px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(0, 212, 170, 0.3);
+            padding: 70px 40px;
+            background: var(--cor-fundo-card);
+            border-radius: 24px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(148, 102, 255, 0.3);
             position: relative;
             overflow: hidden;
         }
@@ -182,8 +214,8 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(0, 212, 170, 0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
+            background: radial-gradient(circle, rgba(148, 102, 255, 0.08) 0%, transparent 70%);
+            animation: rotate 25s linear infinite;
         }
 
         @keyframes rotate {
@@ -193,14 +225,12 @@
 
         h1 {
             font-size: 4.5em;
-            background: linear-gradient(135deg, var(--cor-principal), var(--cor-secundaria));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--cor-principal);
             margin-bottom: 15px;
             font-weight: 800;
             position: relative;
-            text-shadow: 0 0 30px rgba(0, 212, 170, 0.3);
+            text-shadow: 0 0 40px rgba(148, 102, 255, 0.5);
+            letter-spacing: -1px;
         }
 
         .subtitle {
@@ -215,47 +245,46 @@
             border-radius: 20px;
             padding: 50px;
             margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.4s ease;
         }
 
         .section:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(0, 212, 170, 0.2);
+            box-shadow: 0 20px 50px rgba(148, 102, 255, 0.3);
+            border-color: rgba(148, 102, 255, 0.4);
         }
 
         .section h2 {
             font-size: 2.5em;
-            background: linear-gradient(135deg, var(--cor-principal), var(--cor-secundaria));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--cor-principal);
             margin-bottom: 35px;
             padding-bottom: 15px;
-            border-bottom: 3px solid rgba(0, 212, 170, 0.2);
+            border-bottom: 2px solid rgba(148, 102, 255, 0.2);
             font-weight: 700;
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
 
         .info-card {
-            background: linear-gradient(135deg, #1e2749 0%, #2a3254 100%);
+            background: var(--cor-fundo-card-hover);
             padding: 30px;
-            border-radius: 15px;
+            border-radius: 16px;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 212, 170, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(148, 102, 255, 0.1);
         }
 
         .info-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 212, 170, 0.3);
+            box-shadow: 0 15px 35px rgba(148, 102, 255, 0.4);
             border-color: var(--cor-principal);
+            background: #3a3a3c;
         }
 
         .info-card h3 {
@@ -274,18 +303,18 @@
         .image-container {
             width: 100%;
             height: 180px;
-            background: rgba(0, 212, 170, 0.05);
+            background: rgba(148, 102, 255, 0.05);
             border-radius: 12px;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px dashed rgba(0, 212, 170, 0.3);
+            border: 2px dashed rgba(148, 102, 255, 0.3);
         }
 
         .image-placeholder {
             font-size: 3.5em;
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
         .text-content {
@@ -310,7 +339,7 @@
             font-size: 1.4em;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.4);
+            box-shadow: 0 10px 30px rgba(148, 102, 255, 0.5);
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -318,7 +347,7 @@
 
         .finish-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 212, 170, 0.6);
+            box-shadow: 0 15px 40px rgba(148, 102, 255, 0.7);
         }
 
         .final-modal {
@@ -349,7 +378,7 @@
             object-fit: contain;
             border-radius: 20px;
             border: 4px solid var(--cor-principal);
-            box-shadow: 0 0 60px rgba(0, 212, 170, 0.6);
+            box-shadow: 0 0 60px rgba(148, 102, 255, 0.8);
         }
 
         .close-btn {
@@ -378,6 +407,7 @@
             h1 { font-size: 3em; }
             .section { padding: 30px 25px; }
             .section h2 { font-size: 2em; }
+            .opening-header-image { height: auto; }
         }
     </style>
 </head>
@@ -389,7 +419,7 @@
                 'pageTitle': 'Costa Rica - Apresentação Profissional',
                 'title': '🇨🇷 COSTA RICA 🇨🇷',
                 'subtitle': '✨ Pura Vida - O Paraíso da América Central ✨',
-                'credits': 'Criado e desenvolvido por: @505voidd',
+                'credits': 'created and developed by: @505voidd',
                 'section1_title': '🏛️ Informações Gerais',
                 's1_c1_title': '👨‍💼 Presidente',
                 's1_c1_p': 'Rodrigo Chaves Robles<br>Mandato iniciado em maio de 2022<br>Partido: Progresso Social Democrático',
@@ -435,7 +465,7 @@
                 'pageTitle': 'Costa Rica - Presentación Profesional',
                 'title': '🇨🇷 COSTA RICA 🇨🇷',
                 'subtitle': '✨ Pura Vida - El Paraíso de América Central ✨',
-                'credits': 'Creado y desarrollado por: @505voidd',
+                'credits': 'created and developed by: @505voidd',
                 'section1_title': '🏛️ Información General',
                 's1_c1_title': '👨‍💼 Presidente',
                 's1_c1_p': 'Rodrigo Chaves Robles<br>Mandato iniciado en mayo de 2022<br>Partido: Progreso Social Democrático',
@@ -547,7 +577,8 @@
         }
 
         function closeFinalModal() {
-            document.getElementById('finalModal').classList.remove('active');
+            document.getElementById('finalModal').```html
+classList.remove('active');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -567,8 +598,8 @@
         });
     </script>
 
-    <div class="loading-screen" id="loadingScreen"> ```html
-        <img src="https://i.imgur.com/PzsCVXm.jpeg" alt="Costa Rica" class="opening-header-image">
+    <div class="loading-screen" id="loadingScreen">
+        <img src="https://i.imgur.com/87RdhWR.jpeg" alt="Costa Rica Header" class="opening-header-image">
         <div class="opening-content">
             <img src="https://i.imgur.com/fgrcJGo.jpeg" alt="Bandeira Costa Rica" class="opening-central-image">
             <p class="loading-credits" id="loadingCredits"></p>
@@ -703,7 +734,7 @@
     
     <div class="final-modal" id="finalModal">
         <button class="close-btn" id="closeBtn" onclick="closeFinalModal()"></button>
-        <img src="https://i.imgur.com/PzsCVXm.jpeg" alt="Costa Rica Final" class="modal-image">
+        <img src="https://i.imgur.com/8wh4t2z.jpeg" alt="Costa Rica Final" class="modal-image">
     </div>
 </body>
 </html>
