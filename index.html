@@ -7,15 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
+        /* Variáveis de Cores (Roxo Intenso - Cyberpunk/iOS Dark) */
         :root {
-            --cor-principal: #9466ff;
-            --cor-secundaria: #7c3aed;
-            --cor-acento: #a78bfa;
-            --cor-fundo-escuro: #000000;
-            --cor-fundo-card: #1c1c1e;
-            --cor-fundo-card-hover: #2c2c2e;
+            --cor-principal: #a855f7;    /* Roxo primário */
+            --cor-secundaria: #9333ea;  /* Roxo secundário */
+            --cor-acento: #c084fc;       /* Roxo claro */
+            --cor-destaque: #d946ef;     /* Magenta/Pink neon */
+            --cor-fundo-escuro: #000000; /* Fundo principal preto */
+            --cor-fundo-card: #1a1a2e;   /* Fundo dos cards escuro-azulado */
+            --cor-fundo-card-hover: #2a2a3e;
             --cor-texto-claro: #ffffff;
-            --cor-texto-secundario: #8e8e93;
+            --cor-texto-secundario: #a0a0b0;
         }
 
         * {
@@ -23,49 +25,66 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--cor-texto-claro);
+            transition: color 0.3s, background-color 0.3s;
         }
 
         body {
-            background: var(--cor-fundo-escuro);
-            color: var(--cor-texto-claro);
+            /* Fundo com gradiente sutil para profundidade */
+            background: linear-gradient(135deg, #000000 0%, #0d0221 50%, #1a0033 100%);
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Bordas laterais roxas com efeito glow */
-        body::before,
+        /* Efeito de partículas de fundo (suaviza o preto) */
         body::after {
             content: '';
             position: fixed;
             top: 0;
-            width: 25px;
+            left: 0;
+            width: 100%;
             height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(217, 70, 239, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Bordas laterais roxas intensas com animação (Foco no Roxo) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* O truque é usar border-image com uma borda grossa e transparente */
+            border-left: 30px solid transparent; 
+            border-right: 30px solid transparent;
+            /* Gradiente da imagem de borda */
+            border-image: linear-gradient(180deg, var(--cor-principal), var(--cor-secundaria), var(--cor-destaque), var(--cor-secundaria), var(--cor-principal)) 1;
             z-index: 999;
             pointer-events: none;
+            /* Sombra interna para o efeito de brilho neon */
+            box-shadow: 
+                inset 30px 0 60px rgba(168, 85, 247, 0.4),
+                inset -30px 0 60px rgba(168, 85, 247, 0.4);
+            animation: borderPulse 6s ease-in-out infinite;
         }
 
-        body::before {
-            left: 0;
-            background: linear-gradient(90deg, var(--cor-principal) 0%, transparent 100%);
-            box-shadow: 0 0 40px var(--cor-principal);
-            animation: pulseLeft 4s ease-in-out infinite;
-        }
-
-        body::after {
-            right: 0;
-            background: linear-gradient(270deg, var(--cor-principal) 0%, transparent 100%);
-            box-shadow: 0 0 40px var(--cor-principal);
-            animation: pulseRight 4s ease-in-out infinite;
-        }
-
-        @keyframes pulseLeft {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
-        }
-
-        @keyframes pulseRight {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+        @keyframes borderPulse {
+            0%, 100% { 
+                box-shadow: 
+                    inset 30px 0 60px rgba(168, 85, 247, 0.4),
+                    inset -30px 0 60px rgba(168, 85, 247, 0.4);
+            }
+            50% { 
+                box-shadow: 
+                    inset 30px 0 80px rgba(168, 85, 247, 0.7),
+                    inset -30px 0 80px rgba(168, 85, 247, 0.7);
+            }
         }
 
         .loading-screen {
@@ -74,7 +93,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #000000 0%, #1a0033 100%);
+            background: linear-gradient(135deg, #000000 0%, #1a0033 50%, #2d0057 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -89,59 +108,72 @@
             pointer-events: none;
         }
 
-        .opening-header-image {
-            width: 85%;
-            max-width: 900px;
-            height: 220px;
+        /* IMAGEM DO TOPO DA ABERTURA (AGORA É A ANTIGA IMAGEM FINAL) */
+        .opening-top-image {
+            width: 90%;
+            max-width: 1100px;
+            height: 200px;
             object-fit: cover;
             object-position: center;
             border-radius: 24px;
-            box-shadow: 0 25px 70px rgba(148, 102, 255, 0.6);
-            border: 4px solid var(--cor-principal);
-            margin-bottom: 40px;
-            animation: fadeInDown 1s ease-out;
+            box-shadow: 
+                0 25px 70px rgba(168, 85, 247, 0.7),
+                0 0 100px rgba(168, 85, 247, 0.4),
+                inset 0 0 30px rgba(168, 85, 247, 0.2);
+            border: 5px solid var(--cor-principal);
+            margin-bottom: 35px;
+            animation: topImageEntry 1.2s ease-out;
         }
 
-        @keyframes fadeInDown {
+        @keyframes topImageEntry {
             0% {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(-50px) scale(0.9);
             }
             100% {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
-
+        
+        /* Imagem Central da Abertura (a original não foi movida, apenas a do topo) */
         .opening-central-image {
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid var(--cor-principal);
-            box-shadow: 0 0 60px rgba(148, 102, 255, 0.8);
-            animation: floatPulse 3s ease-in-out infinite;
-            margin-top: 10px;
+            border: 6px solid var(--cor-principal);
+            box-shadow: 
+                0 0 80px rgba(168, 85, 247, 1),
+                0 0 120px rgba(168, 85, 247, 0.6),
+                inset 0 0 30px rgba(168, 85, 247, 0.3);
+            animation: floatPulseIntense 3s ease-in-out infinite;
+            margin-top: 15px;
         }
 
-        @keyframes floatPulse {
+        @keyframes floatPulseIntense {
             0%, 100% {
                 transform: translateY(0) scale(1);
-                box-shadow: 0 0 60px rgba(148, 102, 255, 0.8);
+                box-shadow: 
+                    0 0 80px rgba(168, 85, 247, 1),
+                    0 0 120px rgba(168, 85, 247, 0.6);
             }
             50% {
-                transform: translateY(-10px) scale(1.03);
-                box-shadow: 0 0 80px rgba(148, 102, 255, 1);
+                transform: translateY(-12px) scale(1.05);
+                box-shadow: 
+                    0 0 100px rgba(168, 85, 247, 1),
+                    0 0 150px rgba(168, 85, 247, 0.8);
             }
         }
 
         .loading-credits {
-            font-size: 1.1em;
-            color: var(--cor-texto-secundario);
+            font-size: 1.15em;
+            color: var(--cor-acento);
             margin-top: 30px;
-            font-weight: 500;
-            letter-spacing: 0.8px;
+            font-weight: 600;
+            letter-spacing: 1px;
             animation: fadeIn 2s ease-out;
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
         }
 
         @keyframes fadeIn {
@@ -150,21 +182,29 @@
         }
 
         .custom-loader-container {
-            width: 320px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.1);
+            width: 350px;
+            height: 6px;
+            background: rgba(168, 85, 247, 0.2);
             border-radius: 3px;
             overflow: hidden;
             margin-top: 35px;
-            box-shadow: 0 0 10px rgba(148, 102, 255, 0.3);
+            box-shadow: 
+                0 0 20px rgba(168, 85, 247, 0.5),
+                inset 0 0 10px rgba(168, 85, 247, 0.3);
+            border: 1px solid var(--cor-principal);
         }
 
         .custom-loader-bar {
             height: 100%;
             width: 0;
-            background: linear-gradient(90deg, var(--cor-principal), var(--cor-secundaria), var(--cor-acento));
-            animation: loadBar 3s ease-out forwards;
-            box-shadow: 0 0 20px var(--cor-principal);
+            background: linear-gradient(90deg, 
+                var(--cor-principal), 
+                var(--cor-destaque), 
+                var(--cor-acento),
+                var(--cor-principal));
+            background-size: 200% 100%;
+            animation: loadBar 3s ease-out forwards, shimmer 2s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.9);
         }
 
         @keyframes loadBar {
@@ -172,67 +212,102 @@
             100% { width: 100%; }
         }
 
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
         .container {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 50px 35px;
+            padding: 60px 40px;
             position: relative;
             z-index: 10;
         }
 
+        /* --- Switch de Idioma (iOS Segmented Control Style) --- */
         .language-switcher {
             display: flex;
             justify-content: flex-end;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
             padding: 25px 0;
             position: sticky;
             top: 0;
             z-index: 50;
-            background: linear-gradient(180deg, var(--cor-fundo-escuro) 80%, transparent 100%);
+            /* Efeito de vidro escuro no topo */
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 70%, transparent 100%);
+            backdrop-filter: blur(10px);
         }
 
         .lang-button-group {
             display: inline-flex;
-            background: var(--cor-fundo-card);
-            border-radius: 14px;
-            padding: 5px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(148, 102, 255, 0.2);
+            background: linear-gradient(135deg, var(--cor-fundo-card), #252540);
+            border-radius: 16px;
+            padding: 6px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.8),
+                0 0 40px rgba(168, 85, 247, 0.3);
+            border: 2px solid rgba(168, 85, 247, 0.4);
         }
 
         .lang-button {
-            padding: 12px 24px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 11px;
+            border-radius: 12px;
             background: transparent;
             color: var(--cor-texto-secundario);
-            font-weight: 700;
+            font-weight: 800;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 1em;
-            letter-spacing: 0.5px;
+            font-size: 1.05em;
+            letter-spacing: 0.8px;
+            position: relative;
+        }
+
+        .lang-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--cor-principal), var(--cor-destaque));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lang-button.active::before {
+            opacity: 1;
+        }
+
+        .lang-button span {
+            position: relative;
+            z-index: 1;
         }
 
         .lang-button.active {
-            background: linear-gradient(135deg, var(--cor-principal), var(--cor-secundaria));
             color: white;
-            box-shadow: 0 5px 20px rgba(148, 102, 255, 0.6);
-            transform: scale(1.02);
+            box-shadow: 
+                0 8px 25px rgba(168, 85, 247, 0.7),
+                0 0 40px rgba(168, 85, 247, 0.5);
+            transform: scale(1.05);
         }
 
         .lang-button:hover:not(.active) {
-            background: rgba(148, 102, 255, 0.1);
-            color: var(--cor-principal);
+            background: rgba(168, 85, 247, 0.15);
+            color: var(--cor-acento);
         }
 
+        /* --- Estilo das Seções (Manteve o seu design Neon/Profissional) --- */
         header {
             text-align: center;
-            padding: 80px 45px;
-            background: linear-gradient(135deg, var(--cor-fundo-card) 0%, #2a2a2e 100%);
-            border-radius: 28px;
-            margin-bottom: 50px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-            border: 2px solid rgba(148, 102, 255, 0.3);
+            padding: 90px 50px;
+            background: linear-gradient(135deg, var(--cor-fundo-card) 0%, #2a2a4e 100%);
+            border-radius: 32px;
+            margin-bottom: 60px;
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.8),
+                0 0 100px rgba(168, 85, 247, 0.4),
+                inset 0 0 60px rgba(168, 85, 247, 0.1);
+            border: 3px solid rgba(168, 85, 247, 0.4);
             position: relative;
             overflow: hidden;
         }
@@ -244,8 +319,8 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(148, 102, 255, 0.1) 0%, transparent 70%);
-            animation: rotateGlow 30s linear infinite;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+            animation: rotateGlow 35s linear infinite;
         }
 
         @keyframes rotateGlow {
@@ -254,33 +329,49 @@
         }
 
         h1 {
-            font-size: 5em;
-            background: linear-gradient(135deg, var(--cor-principal), var(--cor-acento), var(--cor-secundaria));
+            font-size: 5.5em;
+            background: linear-gradient(135deg, 
+                var(--cor-acento) 0%, 
+                var(--cor-principal) 25%, 
+                var(--cor-destaque) 50%,
+                var(--cor-principal) 75%,
+                var(--cor-acento) 100%);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             font-weight: 900;
             position: relative;
             letter-spacing: -2px;
-            text-shadow: 0 0 50px rgba(148, 102, 255, 0.4);
+            animation: gradientShift 4s ease infinite;
+            text-shadow: 0 0 60px rgba(168, 85, 247, 0.6);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .subtitle {
-            font-size: 1.8em;
-            color: var(--cor-texto-secundario);
-            font-weight: 400;
+            font-size: 2em;
+            color: var(--cor-acento);
+            font-weight: 500;
             position: relative;
             letter-spacing: 0.5px;
+            text-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
         }
 
         .section {
-            background: linear-gradient(135deg, var(--cor-fundo-card) 0%, #252528 100%);
-            border-radius: 24px;
-            padding: 55px;
-            margin-bottom: 45px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(148, 102, 255, 0.15);
+            background: linear-gradient(135deg, var(--cor-fundo-card) 0%, #272740 100%);
+            border-radius: 28px;
+            padding: 60px;
+            margin-bottom: 50px;
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.7),
+                0 0 80px rgba(168, 85, 247, 0.3),
+                inset 0 0 40px rgba(168, 85, 247, 0.05);
+            border: 2px solid rgba(168, 85, 247, 0.25);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
@@ -290,18 +381,22 @@
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            width: 5px;
+            left: -5px;
+            width: 6px;
             height: 100%;
-            background: linear-gradient(180deg, var(--cor-principal), var(--cor-secundaria));
+            background: linear-gradient(180deg, var(--cor-principal), var(--cor-destaque), var(--cor-secundaria));
             opacity: 0;
             transition: opacity 0.4s ease;
+            box-shadow: 0 0 20px var(--cor-principal);
         }
 
         .section:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 60px rgba(148, 102, 255, 0.4);
-            border-color: rgba(148, 102, 255, 0.5);
+            transform: translateY(-10px);
+            box-shadow: 
+                0 30px 70px rgba(0, 0, 0, 0.8),
+                0 0 120px rgba(168, 85, 247, 0.6),
+                inset 0 0 60px rgba(168, 85, 247, 0.1);
+            border-color: rgba(168, 85, 247, 0.6);
         }
 
         .section:hover::before {
@@ -309,31 +404,34 @@
         }
 
         .section h2 {
-            font-size: 3em;
+            font-size: 3.2em;
             background: linear-gradient(135deg, var(--cor-principal), var(--cor-acento));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 35px;
-            padding-bottom: 18px;
-            border-bottom: 3px solid rgba(148, 102, 255, 0.2);
-            font-weight: 800;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 4px solid rgba(168, 85, 247, 0.3);
+            font-weight: 900;
             letter-spacing: -1px;
+            text-shadow: 0 0 40px rgba(168, 85, 247, 0.5);
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
         }
 
         .info-card {
-            background: var(--cor-fundo-card-hover);
-            padding: 32px;
-            border-radius: 18px;
+            background: linear-gradient(135deg, var(--cor-fundo-card-hover) 0%, #35354e 100%);
+            padding: 38px;
+            border-radius: 20px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(148, 102, 255, 0.1);
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.6),
+                inset 0 0 30px rgba(168, 85, 247, 0.05);
+            border: 2px solid rgba(168, 85, 247, 0.2);
             position: relative;
             overflow: hidden;
         }
@@ -344,85 +442,147 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--cor-principal), var(--cor-secundaria));
+            height: 4px;
+            background: linear-gradient(90deg, var(--cor-principal), var(--cor-destaque), var(--cor-acento));
             transform: scaleX(0);
             transition: transform 0.4s ease;
         }
 
+        .info-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--cor-principal), var(--cor-destaque));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
         .info-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 45px rgba(148, 102, 255, 0.5);
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 
+                0 25px 55px rgba(0, 0, 0, 0.7),
+                0 0 80px rgba(168, 85, 247, 0.7),
+                inset 0 0 50px rgba(168, 85, 247, 0.15);
             border-color: var(--cor-principal);
-            background: #3a3a3e;
+            background: linear-gradient(135deg, #3a3a5e 0%, #45456e 100%);
         }
 
         .info-card:hover::before {
             transform: scaleX(1);
         }
 
+        .info-card:hover::after {
+            opacity: 1;
+        }
+
         .info-card h3 {
             color: var(--cor-principal);
-            margin-bottom: 18px;
-            font-size: 1.7em;
-            font-weight: 800;
+            margin-bottom: 20px;
+            font-size: 1.85em;
+            font-weight: 900;
             letter-spacing: -0.5px;
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
         }
 
         .info-card p {
-            line-height: 1.9;
-            font-size: 1.05em;
+            line-height: 2;
+            font-size: 1.08em;
             color: var(--cor-texto-secundario);
+        }
+
+        .info-card ul {
+            margin-top: 15px;
+            padding-left: 20px;
+            list-style: none;
+        }
+
+        .info-card ul li {
+            line-height: 1.9;
+            font-size: 1em;
+            color: var(--cor-texto-secundario);
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .info-card ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--cor-principal);
+            font-weight: bold;
+            font-size: 1.3em;
         }
 
         .image-container {
             width: 100%;
-            height: 190px;
-            background: rgba(148, 102, 255, 0.06);
-            border-radius: 14px;
-            margin-bottom: 22px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(217, 70, 239, 0.08) 100%);
+            border-radius: 16px;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px dashed rgba(148, 102, 255, 0.35);
+            border: 3px dashed rgba(168, 85, 247, 0.5);
             transition: all 0.3s ease;
+            box-shadow: inset 0 0 30px rgba(168, 85, 247, 0.1);
         }
 
         .info-card:hover .image-container {
-            background: rgba(148, 102, 255, 0.12);
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.18) 0%, rgba(217, 70, 239, 0.15) 100%);
             border-color: var(--cor-principal);
+            box-shadow: 
+                inset 0 0 40px rgba(168, 85, 247, 0.2),
+                0 0 30px rgba(168, 85, 247, 0.3);
         }
 
         .image-placeholder {
-            font-size: 4em;
-            opacity: 0.7;
+            font-size: 4.5em;
+            opacity: 0.8;
             transition: all 0.3s ease;
+            filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5));
         }
 
         .info-card:hover .image-placeholder {
-            transform: scale(1.15);
+            transform: scale(1.2) rotate(5deg);
             opacity: 1;
+            filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.8));
+        }
+
+        .text-content {
+            line-height: 2;
+            font-size: 1.15em;
+            color: var(--cor-texto-secundario);
+            margin-top: 20px;
         }
 
         footer {
             text-align: center;
-            padding: 70px 0;
-            margin-top: 60px;
+            padding: 80px 0;
+            margin-top: 70px;
         }
 
+        /* --- Botão Finalizar --- */
         .finish-button {
-            padding: 20px 50px;
-            background: linear-gradient(135deg, var(--cor-principal), var(--cor-secundaria));
+            padding: 22px 55px;
+            background: linear-gradient(135deg, var(--cor-principal), var(--cor-destaque));
             border: none;
             border-radius: 50px;
             color: white;
-            font-size: 1.5em;
-            font-weight: 800;
+            font-size: 1.6em;
+            font-weight: 900;
             cursor: pointer;
-            box-shadow: 0 12px 35px rgba(148, 102, 255, 0.6);
+            box-shadow: 
+                0 15px 40px rgba(168, 85, 247, 0.7),
+                0 0 60px rgba(168, 85, 247, 0.5);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             position: relative;
             overflow: hidden;
         }
@@ -434,22 +594,25 @@
             left: 50%;
             width: 0;
             height: 0;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             transition: width 0.6s ease, height 0.6s ease;
         }
 
         .finish-button:hover::before {
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
         }
 
         .finish-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 18px 50px rgba(148, 102, 255, 0.8);
+            transform: translateY(-8px) scale(1.08);
+            box-shadow: 
+                0 20px 60px rgba(168, 85, 247, 0.9),
+                0 0 100px rgba(168, 85, 247, 0.7);
         }
 
+        /* --- Modal Final (Encerramento) --- */
         .final-modal {
             display: none;
             position: fixed;
@@ -457,11 +620,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.96);
+            background: rgba(0, 0, 0, 0.97);
             z-index: 99999;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             opacity: 0;
             transition: opacity 0.5s ease;
         }
@@ -471,67 +634,75 @@
             opacity: 1;
         }
 
+        /* IMAGEM DO MODAL FINAL (AGORA É A ANTIGA IMAGEM DO TOPO DA ABERTURA) */
         .modal-image {
-            width: 88vw;
-            height: 85vh;
-            max-width: 1200px;
+            width: 90vw;
+            height: 87vh;
+            max-width: 1300px;
             object-fit: contain;
-            border-radius: 24px;
-            border: 5px solid var(--cor-principal);
-            box-shadow: 0 0 80px rgba(148, 102, 255, 0.9);
-            animation: modalZoom 0.5s ease-out;
+            border-radius: 28px;
+            border: 6px solid var(--cor-principal);
+            box-shadow: 
+                0 0 100px rgba(168, 85, 247, 1),
+                0 0 150px rgba(168, 85, 247, 0.7);
+            animation: modalZoom 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         @keyframes modalZoom {
             0% {
-                transform: scale(0.8);
+                transform: scale(0.7) rotate(-5deg);
                 opacity: 0;
             }
             100% {
-                transform: scale(1);
+                transform: scale(1) rotate(0deg);
                 opacity: 1;
             }
         }
 
         .close-btn {
             position: absolute;
-            top: 35px;
-            right: 35px;
-            background: var(--cor-fundo-card);
+            top: 40px;
+            right: 40px;
+            background: linear-gradient(135deg, var(--cor-fundo-card), #2a2a4e);
             color: var(--cor-principal);
-            border: 3px solid var(--cor-principal);
+            border: 4px solid var(--cor-principal);
             border-radius: 50%;
-            width: 55px;
-            height: 55px;
-            font-size: 1.6em;
+            width: 60px;
+            height: 60px;
+            font-size: 1.8em;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-weight: 800;
+            font-weight: 900;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 5px 20px rgba(148, 102, 255, 0.5);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.6),
+                0 0 40px rgba(168, 85, 247, 0.6);
         }
 
         .close-btn:hover {
-            background: var(--cor-principal);
+            background: linear-gradient(135deg, var(--cor-principal), var(--cor-destaque));
             color: white;
-            transform: rotate(90deg) scale(1.15);
-            box-shadow: 0 8px 30px rgba(148, 102, 255, 0.8);
+            transform: rotate(90deg) scale(1.2);
+            box-shadow: 
+                0 12px 35px rgba(0, 0, 0, 0.8),
+                0 0 60px rgba(168, 85, 247, 0.9);
         }
 
         @media (max-width: 768px) {
             h1 { font-size: 3.5em; }
-            .section { padding: 35px 25px; }
-            .section h2 { font-size: 2.2em; }
-            .opening-header-image { height: 180px; }
-            body::before, body::after { width: 15px; }
+            .section { padding: 40px 30px; }
+            .section h2 { font-size: 2.4em; }
+            .opening-top-image { height: 150px; }
+            .opening-central-image { width: 150px; height: 150px;}
         }
     </style>
 </head>
 <body>
     
     <script>
+        // --- Estrutura de Tradução Completa ---
         const translations = {
             'PT': {
                 'pageTitle': 'Costa Rica - Apresentação Profissional',
@@ -540,100 +711,104 @@
                 'credits': 'created and developed by: @505voidd',
                 'section1_title': '🏛️ Informações Gerais',
                 's1_c1_title': '👨‍💼 Presidente',
-                's1_c1_p': 'Rodrigo Chaves Robles<br>Em exercício desde maio de 2022',
+                's1_c1_p': '<strong>Rodrigo Chaves Robles</strong><br>Mandato iniciado em maio de 2022<br>Partido: Progresso Social Democrático<br><ul><li>65 anos, economista e ex-funcionário do Banco Mundial</li><li>Primeiro mandato como presidente</li><li>Foco em reformas econômicas e combate à corrupção</li></ul>',
                 's1_c2_title': '💰 Moeda',
-                's1_c2_p': 'Colón Costarriquenho (CRC)<br>1 USD ≈ 520 CRC',
-                's1_c3_title': '🗣️ Língua Nativa',
-                's1_c3_p': 'Espanhol<br>Língua oficial do país',
+                's1_c2_p': '<strong>Colón Costarriquenho (CRC)</strong><br>1 USD ≈ 520 CRC<br><ul><li>Nome em homenagem a Cristóvão Colombo</li><li>Economia estável e dolarizada</li><li>PIB per capita: ~$12.500 USD</li><li>Principais setores: turismo, agricultura e tecnologia</li></ul>',
+                's1_c3_title': '🗣️ Idioma',
+                's1_c3_p': '<strong>Espanhol</strong> (Língua Oficial)<br><ul><li>Sotaque neutro reconhecido internacionalmente</li><li>Inglês amplamente falado em zonas turísticas</li><li>Línguas indígenas: Bribri, Cabécar, Maleku</li><li>Taxa de alfabetização: 97,9%</li></ul>',
                 's1_c4_title': '👥 População',
-                's1_c4_p': '5,2 milhões de habitantes<br>(estimativa 2024)',
-                'section2_title': '🌎 Localização Geográfica',
-                's2_p1': 'A Costa Rica está localizada na América Central, entre o Mar do Caribe e o Oceano Pacífico. O país possui uma área de aproximadamente 51.100 km² e é conhecido por sua incrível biodiversidade e paisagens naturais espetaculares.',
-                'section3_title': '🗺️ Fronteiras',
+                's1_c4_p': '<strong>5,2 milhões de habitantes</strong> (2024)<br><ul><li>Densidade: 102 hab/km²</li><li>Expectativa de vida: 80 anos</li><li>População urbana: 80%</li><li>Capital San José: 340.000 habitantes</li><li>Composição: 84% mestiços, 8% brancos, 7% afrodescendentes</li></ul>',
+                'section2_title': '🌎 Geografia e Localização',
+                's2_p1': '<strong>Localização Estratégica:</strong> A Costa Rica está situada na América Central, atuando como ponte natural entre o Mar do Caribe e o Oceano Pacífico. Com aproximadamente 51.100 km² de território, o país é reconhecido mundialmente por sua extraordinária biodiversidade - abriga 5% de todas as espécies do planeta em apenas 0,03% da superfície terrestre.<br><br><strong>Relevo e Clima:</strong> Seu relevo montanhoso inclui vulcões ativos (mais de 200 formações vulcânicas), florestas tropicais exuberantes e praias paradisíacas em ambas as costas (212 km no Caribe e 1.016 km no Pacífico). O clima é tropical, com duas estações: seca (Dez-Abr) e chuvosa (Mai-Nov).',
+                'section3_title': '🗺️ Fronteiras e Limites',
                 's3_c1_title': '⬆️ Norte',
-                's3_c1_p': 'Fronteira com a Nicarágua<br>309 km de extensão',
+                's3_c1_p': 'Fronteira terrestre com a <strong>Nicarágua</strong> (309 km).',
                 's3_c2_title': '⬇️ Sul',
-                's3_c2_p': 'Fronteira com o Panamá<br>330 km de extensão',
+                's3_c2_p': 'Fronteira terrestre com o <strong>Panamá</strong> (330 km).',
                 's3_c3_title': '⬅️ Leste',
-                's3_c3_p': 'Mar do Caribe<br>212 km de litoral',
+                's3_c3_p': 'Litoral banhado pelo <strong>Mar do Caribe</strong>. Famoso por praias de areia escura e ecoturismo.',
                 's3_c4_title': '➡️ Oeste',
-                's3_c4_p': 'Oceano Pacífico<br>1.016 km de litoral',
-                'section4_title': '🏝️ Pontos Turísticos',
-                's4_c1_title': 'Vulcão Arenal',
-                's4_c1_p': 'Um dos vulcões mais ativos da América Central, cercado por florestas tropicais.',
-                's4_c2_title': 'Parque Nacional Manuel Antonio',
-                's4_c2_p': 'Praias paradisíacas com rica vida selvagem.',
-                's4_c3_title': 'Monteverde',
-                's4_c3_p': 'Floresta nublada com biodiversidade única.',
-                's4_c4_title': 'Península de Nicoya',
-                's4_c4_p': 'Praias de areia dourada e Zona Azul de longevidade.',
-                's4_c5_title': 'Parque Nacional Tortuguero',
-                's4_c5_p': 'Local de desova de tartarugas marinhas.',
-                's4_c6_title': 'Teatro Nacional',
-                's4_c6_p': 'Joia arquitetônica construída em 1897.',
-                'section5_title': '🎭 Cultura',
+                's3_c4_p': 'Litoral banhado pelo <strong>Oceano Pacífico</strong>. Famoso pelas praias para surf e resorts.',
+                'section4_title': '🏝️ Pontos Turísticos e Natureza',
+                's4_c1_title': '🌋 Vulcão Arenal',
+                's4_c1_p': 'Localizado em La Fortuna. Famoso pela forma cônica perfeita e pelas águas termais.',
+                's4_c2_title': '🌳 Parque Nacional Manuel Antonio',
+                's4_c2_p': 'O parque mais visitado, combina praias de areia branca com floresta tropical e vida selvagem intensa (preguiças e macacos).',
+                's4_c3_title': '☁️ Monteverde',
+                's4_c3_p': 'A "Floresta Nublada" (Cloud Forest), conhecida por tirolesas e pontes suspensas sobre as copas das árvores.',
+                's4_c4_title': '🏖️ Península de Nicoya',
+                's4_c4_p': 'Uma das cinco Zonas Azuis do mundo (onde as pessoas vivem mais e com mais saúde). Destaque para as praias de Santa Teresa e Nosara.',
+                's4_c5_title': '🐢 Parque Nacional Tortuguero',
+                's4_c5_p': 'Uma das áreas mais úmidas. Famoso por ser um importante local de desova de tartarugas-verdes.',
+                's4_c6_title': '🌊 Guanacaste',
+                's4_c6_p': 'A região de praias mais ensolarada, com resorts de luxo e fazendas (haciendas) históricas.',
+                'section5_title': '🎭 Cultura e Estilo de Vida',
                 's5_h3': '🌺 Pura Vida - A Essência Costarriquenha',
-                's5_p1': 'A expressão "Pura Vida" resume o estilo de vida costarriquenho: otimismo, simplicidade e apreciação pela vida.',
-                's5_p2': '🌿 Consciência Ambiental: Mais de 25% do território é protegido em parques nacionais. O país gera quase 100% de sua energia de fontes renováveis.',
-                's5_p3': '☮️ Pacifismo: Aboliu o exército em 1948, investindo em educação e saúde.',
+                's5_p1': '<strong>Pura Vida:</strong> Mais que um lema, é uma filosofia. Significa otimismo, apreciação pela natureza, paz e alegria em meio às dificuldades. É usado como saudação, despedida ou para expressar satisfação.',
+                's5_p2': '<strong>Consciência Ambiental:</strong> O país é líder global em sustentabilidade. Quase 100% da eletricidade é gerada por fontes renováveis e mais de 25% do território é protegido por parques nacionais e reservas biológicas.',
+                's5_p3': '<strong>Pacifismo e Sociedade:</strong> A Costa Rica aboliu suas forças armadas em 1948. Os recursos antes destinados à defesa são aplicados em educação e saúde, resultando em altos índices de desenvolvimento humano.',
                 'finish_button': 'FINALIZAR APRESENTAÇÃO 🚀',
-                'close_btn': '✕'
+                'close_btn': 'X'
             },
             'ES': {
                 'pageTitle': 'Costa Rica - Presentación Profesional',
                 'title': '🇨🇷 COSTA RICA 🇨🇷',
                 'subtitle': '✨ Pura Vida - El Paraíso de América Central ✨',
-                'credits': 'created and developed by: @505voidd',
+                'credits': 'creado y desarrollado por: @505voidd',
                 'section1_title': '🏛️ Información General',
                 's1_c1_title': '👨‍💼 Presidente',
-                's1_c1_p': 'Rodrigo Chaves Robles<br>En ejercicio desde mayo de 2022',
+                's1_c1_p': '<strong>Rodrigo Chaves Robles</strong><br>Mandato iniciado en mayo de 2022<br>Partido: Progreso Social Democrático<br><ul><li>65 años, economista y ex-funcionario del Banco Mundial</li><li>Primer mandato como presidente</li><li>Foco en reformas económicas y combate a la corrupción</li></ul>',
                 's1_c2_title': '💰 Moneda',
-                's1_c2_p': 'Colón Costarricense (CRC)<br>1 USD ≈ 520 CRC',
-                's1_c3_title': '🗣️ Lengua Nativa',
-                's1_c3_p': 'Español<br>Idioma oficial del país',
+                's1_c2_p': '<strong>Colón Costarricense (CRC)</strong><br>1 USD ≈ 520 CRC<br><ul><li>Nombre en honor a Cristóbal Colón</li><li>Economía estable y dolarizada</li><li>PIB per cápita: ~$12.500 USD</li><li>Sectores principales: turismo, agricultura y tecnología</li></ul>',
+                's1_c3_title': '🗣️ Idioma',
+                's1_c3_p': '<strong>Español</strong> (Idioma Oficial)<br><ul><li>Acento neutro reconocido internacionalmente</li><li>Inglés ampliamente hablado en zonas turísticas</li><li>Lenguas indígenas: Bribri, Cabécar, Maleku</li><li>Tasa de alfabetización: 97,9%</li></ul>',
                 's1_c4_title': '👥 Población',
-                's1_c4_p': '5,2 millones de habitantes<br>(estimación 2024)',
-                'section2_title': '🌎 Ubicación Geográfica',
-                's2_p1': 'Costa Rica se encuentra en América Central, entre el Mar Caribe y el Océano Pacífico. El país tiene una superficie de aproximadamente 51.100 km² y es conocido por su increíble biodiversidad y paisajes naturales espectaculares.',
-                'section3_title': '🗺️ Fronteras',
+                's1_c4_p': '<strong>5,2 millones de habitantes</strong> (2024)<br><ul><li>Densidad: 102 hab/km²</li><li>Esperanza de vida: 80 años</li><li>Población urbana: 80%</li><li>Capital San José: 340.000 habitantes</li><li>Composición: 84% mestizos, 8% blancos, 7% afrodescendientes</li></ul>',
+                'section2_title': '🌎 Geografía y Ubicación',
+                's2_p1': '<strong>Ubicación Estratégica:</strong> Costa Rica está situada en América Central, actuando como puente natural entre el Mar Caribe y el Océano Pacífico. Con aproximadamente 51.100 km² de territorio, el país es reconocido mundialmente por su extraordinaria biodiversidad: alberga el 5% de todas las especies del planeta en solo el 0,03% de la superficie terrestre.<br><br><strong>Relieve y Clima:</strong> Su relieve montañoso incluye volcanes activos (más de 200 formaciones volcánicas), exuberantes selvas tropicales y playas paradisíacas en ambas costas (212 km en el Caribe y 1.016 km en el Pacífico). El clima es tropical, con dos estaciones: seca (Dic-Abr) y lluviosa (May-Nov).',
+                'section3_title': '🗺️ Fronteras y Límites',
                 's3_c1_title': '⬆️ Norte',
-                's3_c1_p': 'Frontera con Nicaragua<br>309 km de extensión',
+                's3_c1_p': 'Frontera terrestre con <strong>Nicaragua</strong> (309 km).',
                 's3_c2_title': '⬇️ Sur',
-                's3_c2_p': 'Frontera con Panamá<br>330 km de extensión',
+                's3_c2_p': 'Frontera terrestre con <strong>Panamá</strong> (330 km).',
                 's3_c3_title': '⬅️ Este',
-                's3_c3_p': 'Mar Caribe<br>212 km de costa',
+                's3_c3_p': 'Litoral bañado por el <strong>Mar Caribe</strong>. Famoso por playas de arena oscura y ecoturismo.',
                 's3_c4_title': '➡️ Oeste',
-                's3_c4_p': 'Océano Pacífico<br>1.016 km de costa',
-                'section4_title': '🏝️ Puntos Turísticos',
-                's4_c1_title': 'Volcán Arenal',
-                's4_c1_p': 'Uno de los volcanes más activos de Centroamérica, rodeado de selvas tropicales.',
-                's4_c2_title': 'Parque Nacional Manuel Antonio',
-                's4_c2_p': 'Playas paradisíacas con rica vida silvestre.',
-                's4_c3_title': 'Monteverde',
-                's4_c3_p': 'Bosque nuboso con biodiversidad única.',
-                's4_c4_title': 'Península de Nicoya',
-                's4_c4_p': 'Playas de arena dorada y Zona Azul de longevidad.',
-                's4_c5_title': 'Parque Nacional Tortuguero',
-                's4_c5_p': 'Sitio de anidación de tortugas marinas.',
-                's4_c6_title': 'Teatro Nacional',
-                's4_c6_p': 'Joya arquitectónica construida en 1897.',
-                'section5_title': '🎭 Cultura',
+                's3_c4_p': 'Litoral bañado por el <strong>Océano Pacífico</strong>. Famoso por las playas para surf y resorts.',
+                'section4_title': '🏝️ Puntos Turísticos y Naturaleza',
+                's4_c1_title': '🌋 Volcán Arenal',
+                's4_c1_p': 'Ubicado en La Fortuna. Famoso por su forma cónica perfecta y por las aguas termales.',
+                's4_c2_title': '🌳 Parque Nacional Manuel Antonio',
+                's4_c2_p': 'El parque más visitado, combina playas de arena blanca con selva tropical y vida silvestre intensa (perezosos y monos).',
+                's4_c3_title': '☁️ Monteverde',
+                's4_c3_p': 'El "Bosque Nuboso" (Cloud Forest), conocido por tirolinas y puentes colgantes sobre las copas de los árboles.',
+                's4_c4_title': '🏖️ Península de Nicoya',
+                's4_c4_p': 'Una de las cinco Zonas Azules del mundo (donde las personas viven más y con más salud). Destacan las playas de Santa Teresa y Nosara.',
+                's4_c5_title': '🐢 Parque Nacional Tortuguero',
+                's4_c5_p': 'Una de las áreas más húmedas. Famoso por ser un importante lugar de anidación de tortugas verdes.',
+                's4_c6_title': '🌊 Guanacaste',
+                's4_c6_p': 'La región de playas más soleada, con resorts de lujo y haciendas históricas.',
+                'section5_title': '🎭 Cultura y Estilo de Vida',
                 's5_h3': '🌺 Pura Vida - La Esencia Costarricense',
-                's5_p1': 'La expresión "Pura Vida" resume el estilo de vida costarricense: optimismo, simplicidad y aprecio por la vida.',
-                's5_p2': '🌿 Conciencia Ambiental: Más del 25% del territorio está protegido en parques nacionales. El país genera casi el 100% de su energía a partir de fuentes renovables.',
-                's5_p3': '☮️ Pacifismo: Abolió el ejército en 1948, invirtiendo en educación y salud.',
+                's5_p1': '<strong>Pura Vida:</strong> Más que un lema, es una filosofía. Significa optimismo, aprecio por la naturaleza, paz y alegría en medio de las dificultades. Se utiliza como saludo, despedida o para expresar satisfacción.',
+                's5_p2': '<strong>Conciencia Ambiental:</strong> El país es líder global en sostenibilidad. Casi el 100% de la electricidad es generada por fuentes renovables y más del 25% del territorio está protegido por parques nacionales y reservas biológicas.',
+                's5_p3': '<strong>Pacifismo y Sociedad:</strong> Costa Rica abolió sus fuerzas armadas en 1948. Los recursos antes destinados a la defensa se aplican en educación y salud, lo que resulta en altos índices de desarrollo humano.',
                 'finish_button': 'FINALIZAR PRESENTACIÓN 🚀',
-                'close_btn': '✕'
+                'close_btn': 'X'
             }
         };
 
         let currentLang = 'PT';
 
+        // --- Função Central de Troca de Idioma ---
         function changeLanguage(lang) {
             currentLang = lang;
             const t = translations[lang];
 
+            // Troca o Título da Página
             document.getElementById('pageTitle').textContent = t.pageTitle;
+
+            // Mapeamento de todos os textos
             document.getElementById('mainTitle').innerHTML = t.title;
             document.getElementById('subTitle').innerHTML = t.subtitle;
             document.getElementById('loadingCredits').innerHTML = t.credits;
@@ -672,7 +847,8 @@
             document.getElementById('s4_c4_p').innerHTML = t.s4_c4_p;
             document.getElementById('s4_c5_title').innerHTML = t.s4_c5_title;
             document.getElementById('s4_c5_p').innerHTML = t.s4_c5_p;
-            document.getElementById('s4_c6_title').innerHTML = t.s4_c6_p;
+            document.getElementById('s4_c6_title').innerHTML = t.s4_c6_title;
+            document.getElementById('s4_c6_p').innerHTML = t.s4_c6_p;
 
             document.getElementById('section5_title').innerHTML = t.section5_title;
             document.getElementById('s5_h3').innerHTML = t.s5_h3;
@@ -683,12 +859,15 @@
             document.getElementById('finishButton').innerHTML = t.finish_button;
             document.getElementById('closeBtn').innerHTML = t.close_btn;
 
+
+            // Atualiza o estado dos botões (Active/Inactive)
             document.querySelectorAll('.lang-button').forEach(button => {
                 button.classList.remove('active');
             });
             document.getElementById(`lang-btn-${lang}`).classList.add('active');
         }
 
+        // Funções de Modal e Carregamento
         function openFinalModal() {
             document.getElementById('finalModal').classList.add('active');
         }
@@ -700,38 +879,42 @@
         document.addEventListener('DOMContentLoaded', () => {
             const loadingScreen = document.getElementById('loadingScreen');
             const mainContent = document.getElementById('mainContent');
-            const loadTime = 3200;
+            const loadTime = 3200; // Tempo de carregamento
 
-            changeLanguage(currentLang);
+            // 1. Define o idioma inicial e carrega o conteúdo.
+            changeLanguage('PT'); 
 
+            // 2. Controla a transição da tela de carregamento para o conteúdo principal.
             setTimeout(() => {
                 loadingScreen.classList.add('hidden');
                 setTimeout(() => {
                     mainContent.style.opacity = '1';
                     mainContent.style.transition = 'opacity 0.8s ease';
-                }, 100);
+                }, 100); 
+                console.log('✅ Apresentação iniciada!');
             }, loadTime);
         });
     </script>
 
+    
     <div class="loading-screen" id="loadingScreen">
-        <img src="https://i.imgur.com/8wh4t2z.jpeg" alt="Costa Rica Header" class="opening-header-image">
+        <img src="https://i.imgur.com/87RdhWR.jpeg" alt="Imagem de Abertura Topo" class="opening-top-image">
+        
         <div class="opening-content">
-            <img src="https://i.imgur.com/fgrcJGo.jpeg" alt="Bandeira Costa Rica" class="opening-central-image">
-            <p class="loading-credits" id="loadingCredits">created and developed by: @505voidd</p>
+            <img src="https://i.imgur.com/fgrcJGo.jpeg" alt="Imagem Central" class="opening-central-image">
+            <p class="loading-credits" id="loadingCredits"></p>
             
             <div class="custom-loader-container">
                 <div class="custom-loader-bar"></div>
             </div>
         </div>
     </div>
-
     <div class="container" id="mainContent" style="opacity: 0;">
 
         <div class="language-switcher">
             <div class="lang-button-group">
-                <button class="lang-button active" id="lang-btn-PT" onclick="changeLanguage('PT')">PT</button>
-                <button class="lang-button" id="lang-btn-ES" onclick="changeLanguage('ES')">ES</button>
+                <button class="lang-button" id="lang-btn-PT" onclick="changeLanguage('PT')"><span>PT</span></button>
+                <button class="lang-button" id="lang-btn-ES" onclick="changeLanguage('ES')"><span>ES</span></button>
             </div>
         </div>
 
@@ -768,10 +951,10 @@
 
         <div class="section">
             <h2 id="section2_title"></h2>
-            <div class="image-container" style="height: 350px; margin-bottom: 25px;">
-                <span class="image-placeholder">🗺️</span>
+            <div class="info-card" style="background: transparent; padding: 0; border: none; box-shadow: none;">
+                <div class="image-container" style="height: 380px;"><span class="image-placeholder">🗺️</span></div>
+                <div class="text-content" id="s2_p1"></div>
             </div>
-            <p id="s2_p1" style="line-height: 1.9; font-size: 1.1em; color: var(--cor-texto-secundario);"></p>
         </div>
 
         <div class="section">
@@ -825,7 +1008,7 @@
                     <p id="s4_c5_p"></p>
                 </div>
                 <div class="info-card">
-                    <div class="image-container"><span class="image-placeholder">🏛️</span></div>
+                    <div class="image-container"><span class="image-placeholder">🌊</span></div>
                     <h3 id="s4_c6_title"></h3>
                     <p id="s4_c6_p"></p>
                 </div>
@@ -834,13 +1017,15 @@
 
         <div class="section">
             <h2 id="section5_title"></h2>
-            <div class="image-container" style="height: 350px; margin-bottom: 25px;">
-                <span class="image-placeholder">🎭</span>
+            <div class="info-card" style="background: transparent; padding: 0; border: none; box-shadow: none;">
+                <div class="image-container" style="height: 380px;"><span class="image-placeholder">🎭</span></div>
             </div>
-            <h3 id="s5_h3" style="color: var(--cor-principal); font-size: 1.9em; margin-bottom: 20px; font-weight: 800;"></h3>
-            <p id="s5_p1" style="line-height: 1.9; font-size: 1.1em; color: var(--cor-texto-secundario); margin-bottom: 20px;"></p>
-            <p id="s5_p2" style="line-height: 1.9; font-size: 1.1em; color: var(--cor-texto-secundario); margin-bottom: 20px;"></p>
-            <p id="s5_p3" style="line-height: 1.9; font-size: 1.1em; color: var(--cor-texto-secundario);"></p>
+            <div class="text-content">
+                <h3 id="s5_h3" style="color: var(--cor-destaque); font-size: 1.8em; margin-bottom: 20px;"></h3>
+                <p id="s5_p1" style="margin-bottom: 20px;"></p>
+                <p id="s5_p2" style="margin-bottom: 20px;"></p>
+                <p id="s5_p3"></p>
+            </div>
         </div>
 
         <footer>
@@ -849,8 +1034,10 @@
     </div>
     
     <div class="final-modal" id="finalModal">
-        <button class="close-btn" id="closeBtn" onclick="closeFinalModal()"></button>
-        <img src="https://i.imgur.com/8wh4t2z.jpeg" alt="Costa Rica Final" class="modal-image">
+        <div class="modal-content">
+            <button class="close-btn" id="closeBtn" onclick="closeFinalModal()"></button>
+            <img src="https://i.imgur.com/8wh4t2z.jpeg" alt="Imagem de Encerramento" class="modal-image">
+        </div>
     </div>
-</body>
+    </body>
 </html>
