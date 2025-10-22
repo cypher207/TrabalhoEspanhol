@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">Costa Rica - Apresentação Profissional</title>
-    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -22,7 +22,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
@@ -32,13 +32,13 @@
             position: relative;
         }
 
-        /* Bordas laterais roxas */
+        /* Bordas laterais roxas com efeito glow */
         body::before,
         body::after {
             content: '';
             position: fixed;
             top: 0;
-            width: 20px;
+            width: 25px;
             height: 100%;
             z-index: 999;
             pointer-events: none;
@@ -47,13 +47,25 @@
         body::before {
             left: 0;
             background: linear-gradient(90deg, var(--cor-principal) 0%, transparent 100%);
-            box-shadow: 0 0 30px var(--cor-principal);
+            box-shadow: 0 0 40px var(--cor-principal);
+            animation: pulseLeft 4s ease-in-out infinite;
         }
 
         body::after {
             right: 0;
             background: linear-gradient(270deg, var(--cor-principal) 0%, transparent 100%);
-            box-shadow: 0 0 30px var(--cor-principal);
+            box-shadow: 0 0 40px var(--cor-principal);
+            animation: pulseRight 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseLeft {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes pulseRight {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
         }
 
         .loading-screen {
@@ -62,14 +74,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--cor-fundo-escuro);
+            background: linear-gradient(135deg, #000000 0%, #1a0033 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 99999;
-            transition: opacity 1s ease;
-            padding: 20px;
+            transition: opacity 1.2s ease;
+            padding: 30px;
         }
 
         .loading-screen.hidden {
@@ -78,72 +90,79 @@
         }
 
         .opening-header-image {
-            width: 90%;
-            max-width: 1100px;
-            height: 250px;
+            width: 85%;
+            max-width: 900px;
+            height: 220px;
             object-fit: cover;
             object-position: center;
             border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(148, 102, 255, 0.5);
-            border: 3px solid var(--cor-principal);
-            margin-bottom: 35px;
-            animation: fadeInScale 1.2s ease-out;
+            box-shadow: 0 25px 70px rgba(148, 102, 255, 0.6);
+            border: 4px solid var(--cor-principal);
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
         }
 
-        @keyframes fadeInScale {
+        @keyframes fadeInDown {
             0% {
                 opacity: 0;
-                transform: scale(0.95);
+                transform: translateY(-30px);
             }
             100% {
                 opacity: 1;
-                transform: scale(1);
+                transform: translateY(0);
             }
         }
 
         .opening-central-image {
-            width: 180px;
-            height: 180px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid var(--cor-principal);
-            box-shadow: 0 0 50px rgba(148, 102, 255, 0.7);
-            animation: pulse 2.5s infinite;
+            border: 5px solid var(--cor-principal);
+            box-shadow: 0 0 60px rgba(148, 102, 255, 0.8);
+            animation: floatPulse 3s ease-in-out infinite;
             margin-top: 10px;
         }
 
-        @keyframes pulse {
+        @keyframes floatPulse {
             0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 0 40px rgba(148, 102, 255, 0.7);
+                transform: translateY(0) scale(1);
+                box-shadow: 0 0 60px rgba(148, 102, 255, 0.8);
             }
             50% {
-                transform: scale(1.05);
-                box-shadow: 0 0 60px rgba(148, 102, 255, 1);
+                transform: translateY(-10px) scale(1.03);
+                box-shadow: 0 0 80px rgba(148, 102, 255, 1);
             }
         }
 
         .loading-credits {
             font-size: 1.1em;
             color: var(--cor-texto-secundario);
-            margin-top: 25px;
+            margin-top: 30px;
             font-weight: 500;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         .custom-loader-container {
-            width: 280px;
-            height: 4px;
+            width: 320px;
+            height: 5px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
+            border-radius: 3px;
             overflow: hidden;
-            margin-top: 30px;
+            margin-top: 35px;
+            box-shadow: 0 0 10px rgba(148, 102, 255, 0.3);
         }
 
         .custom-loader-bar {
             height: 100%;
             width: 0;
-            background: var(--cor-principal);
+            background: linear-gradient(90deg, var(--cor-principal), var(--cor-secundaria), var(--cor-acento));
             animation: loadBar 3s ease-out forwards;
             box-shadow: 0 0 20px var(--cor-principal);
         }
@@ -154,9 +173,9 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 40px 30px;
+            padding: 50px 35px;
             position: relative;
             z-index: 10;
         }
@@ -164,44 +183,56 @@
         .language-switcher {
             display: flex;
             justify-content: flex-end;
-            margin-bottom: 30px;
-            padding: 20px 0;
+            margin-bottom: 35px;
+            padding: 25px 0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: linear-gradient(180deg, var(--cor-fundo-escuro) 80%, transparent 100%);
         }
 
         .lang-button-group {
             display: inline-flex;
             background: var(--cor-fundo-card);
-            border-radius: 12px;
-            padding: 4px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+            border-radius: 14px;
+            padding: 5px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(148, 102, 255, 0.2);
         }
 
         .lang-button {
-            padding: 10px 22px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 10px;
+            border-radius: 11px;
             background: transparent;
             color: var(--cor-texto-secundario);
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 1em;
+            letter-spacing: 0.5px;
         }
 
         .lang-button.active {
-            background: var(--cor-principal);
+            background: linear-gradient(135deg, var(--cor-principal), var(--cor-secundaria));
             color: white;
-            box-shadow: 0 4px 15px rgba(148, 102, 255, 0.5);
+            box-shadow: 0 5px 20px rgba(148, 102, 255, 0.6);
+            transform: scale(1.02);
+        }
+
+        .lang-button:hover:not(.active) {
+            background: rgba(148, 102, 255, 0.1);
+            color: var(--cor-principal);
         }
 
         header {
             text-align: center;
-            padding: 70px 40px;
-            background: var(--cor-fundo-card);
-            border-radius: 24px;
-            margin-bottom: 40px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(148, 102, 255, 0.3);
+            padding: 80px 45px;
+            background: linear-gradient(135deg, var(--cor-fundo-card) 0%, #2a2a2e 100%);
+            border-radius: 28px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(148, 102, 255, 0.3);
             position: relative;
             overflow: hidden;
         }
@@ -213,140 +244,210 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(148, 102, 255, 0.08) 0%, transparent 70%);
-            animation: rotate 25s linear infinite;
+            background: radial-gradient(circle, rgba(148, 102, 255, 0.1) 0%, transparent 70%);
+            animation: rotateGlow 30s linear infinite;
         }
 
-        @keyframes rotate {
+        @keyframes rotateGlow {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
         h1 {
-            font-size: 4.5em;
-            color: var(--cor-principal);
-            margin-bottom: 15px;
-            font-weight: 800;
+            font-size: 5em;
+            background: linear-gradient(135deg, var(--cor-principal), var(--cor-acento), var(--cor-secundaria));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 18px;
+            font-weight: 900;
             position: relative;
-            text-shadow: 0 0 40px rgba(148, 102, 255, 0.5);
-            letter-spacing: -1px;
+            letter-spacing: -2px;
+            text-shadow: 0 0 50px rgba(148, 102, 255, 0.4);
         }
 
         .subtitle {
-            font-size: 1.6em;
+            font-size: 1.8em;
             color: var(--cor-texto-secundario);
             font-weight: 400;
             position: relative;
+            letter-spacing: 0.5px;
         }
 
         .section {
-            background: var(--cor-fundo-card);
-            border-radius: 20px;
-            padding: 50px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s ease;
+            background: linear-gradient(135deg, var(--cor-fundo-card) 0%, #252528 100%);
+            border-radius: 24px;
+            padding: 55px;
+            margin-bottom: 45px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(148, 102, 255, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--cor-principal), var(--cor-secundaria));
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
         .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(148, 102, 255, 0.3);
-            border-color: rgba(148, 102, 255, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(148, 102, 255, 0.4);
+            border-color: rgba(148, 102, 255, 0.5);
+        }
+
+        .section:hover::before {
+            opacity: 1;
         }
 
         .section h2 {
-            font-size: 2.5em;
-            color: var(--cor-principal);
+            font-size: 3em;
+            background: linear-gradient(135deg, var(--cor-principal), var(--cor-acento));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 35px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(148, 102, 255, 0.2);
-            font-weight: 700;
+            padding-bottom: 18px;
+            border-bottom: 3px solid rgba(148, 102, 255, 0.2);
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .info-card {
             background: var(--cor-fundo-card-hover);
-            padding: 30px;
-            border-radius: 16px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            padding: 32px;
+            border-radius: 18px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(148, 102, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cor-principal), var(--cor-secundaria));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
 
         .info-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(148, 102, 255, 0.4);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 45px rgba(148, 102, 255, 0.5);
             border-color: var(--cor-principal);
-            background: #3a3a3c;
+            background: #3a3a3e;
+        }
+
+        .info-card:hover::before {
+            transform: scaleX(1);
         }
 
         .info-card h3 {
             color: var(--cor-principal);
-            margin-bottom: 15px;
-            font-size: 1.5em;
-            font-weight: 700;
+            margin-bottom: 18px;
+            font-size: 1.7em;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
 
         .info-card p {
-            line-height: 1.8;
-            font-size: 1em;
+            line-height: 1.9;
+            font-size: 1.05em;
             color: var(--cor-texto-secundario);
         }
 
         .image-container {
             width: 100%;
-            height: 180px;
-            background: rgba(148, 102, 255, 0.05);
-            border-radius: 12px;
-            margin-bottom: 20px;
+            height: 190px;
+            background: rgba(148, 102, 255, 0.06);
+            border-radius: 14px;
+            margin-bottom: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px dashed rgba(148, 102, 255, 0.3);
+            border: 2px dashed rgba(148, 102, 255, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover .image-container {
+            background: rgba(148, 102, 255, 0.12);
+            border-color: var(--cor-principal);
         }
 
         .image-placeholder {
-            font-size: 3.5em;
-            opacity: 0.6;
+            font-size: 4em;
+            opacity: 0.7;
+            transition: all 0.3s ease;
         }
 
-        .text-content {
-            line-height: 1.9;
-            font-size: 1.1em;
-            color: var(--cor-texto-secundario);
-            margin-top: 20px;
+        .info-card:hover .image-placeholder {
+            transform: scale(1.15);
+            opacity: 1;
         }
 
         footer {
             text-align: center;
-            padding: 60px 0;
-            margin-top: 50px;
+            padding: 70px 0;
+            margin-top: 60px;
         }
 
         .finish-button {
-            padding: 18px 45px;
+            padding: 20px 50px;
             background: linear-gradient(135deg, var(--cor-principal), var(--cor-secundaria));
             border: none;
             border-radius: 50px;
             color: white;
-            font-size: 1.4em;
-            font-weight: 700;
+            font-size: 1.5em;
+            font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(148, 102, 255, 0.5);
-            transition: all 0.3s ease;
+            box-shadow: 0 12px 35px rgba(148, 102, 255, 0.6);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .finish-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .finish-button:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .finish-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(148, 102, 255, 0.7);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 18px 50px rgba(148, 102, 255, 0.8);
         }
 
         .final-modal {
@@ -356,11 +457,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.96);
             z-index: 99999;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             opacity: 0;
             transition: opacity 0.5s ease;
         }
@@ -371,42 +472,60 @@
         }
 
         .modal-image {
-            width: 90vw;
+            width: 88vw;
             height: 85vh;
             max-width: 1200px;
             object-fit: contain;
-            border-radius: 20px;
-            border: 4px solid var(--cor-principal);
-            box-shadow: 0 0 60px rgba(148, 102, 255, 0.8);
+            border-radius: 24px;
+            border: 5px solid var(--cor-principal);
+            box-shadow: 0 0 80px rgba(148, 102, 255, 0.9);
+            animation: modalZoom 0.5s ease-out;
+        }
+
+        @keyframes modalZoom {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         .close-btn {
             position: absolute;
-            top: 30px;
-            right: 30px;
+            top: 35px;
+            right: 35px;
             background: var(--cor-fundo-card);
             color: var(--cor-principal);
-            border: 2px solid var(--cor-principal);
+            border: 3px solid var(--cor-principal);
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.5em;
+            width: 55px;
+            height: 55px;
+            font-size: 1.6em;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(148, 102, 255, 0.5);
         }
 
         .close-btn:hover {
             background: var(--cor-principal);
             color: white;
-            transform: rotate(90deg);
+            transform: rotate(90deg) scale(1.15);
+            box-shadow: 0 8px 30px rgba(148, 102, 255, 0.8);
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 3em; }
-            .section { padding: 30px 25px; }
-            .section h2 { font-size: 2em; }
-            .opening-header-image { height: 200px; }
+            h1 { font-size: 3.5em; }
+            .section { padding: 35px 25px; }
+            .section h2 { font-size: 2.2em; }
+            .opening-header-image { height: 180px; }
+            body::before, body::after { width: 15px; }
         }
     </style>
 </head>
@@ -421,43 +540,43 @@
                 'credits': 'created and developed by: @505voidd',
                 'section1_title': '🏛️ Informações Gerais',
                 's1_c1_title': '👨‍💼 Presidente',
-                's1_c1_p': 'Rodrigo Chaves Robles<br>Mandato iniciado em maio de 2022<br>Partido: Progresso Social Democrático',
+                's1_c1_p': 'Rodrigo Chaves Robles<br>Em exercício desde maio de 2022',
                 's1_c2_title': '💰 Moeda',
-                's1_c2_p': 'Colón Costarriquenho (CRC)<br>1 USD ≈ 520 CRC<br>Economia estável e dolarizada',
-                's1_c3_title': '🗣️ Idioma',
-                's1_c3_p': 'Espanhol (oficial)<br>Inglês falado em zonas turísticas<br>Diversidade linguística nas comunidades indígenas',
+                's1_c2_p': 'Colón Costarriquenho (CRC)<br>1 USD ≈ 520 CRC',
+                's1_c3_title': '🗣️ Língua Nativa',
+                's1_c3_p': 'Espanhol<br>Língua oficial do país',
                 's1_c4_title': '👥 População',
-                's1_c4_p': '5,2 milhões de habitantes (2024)<br>Densidade: 102 hab/km²<br>Expectativa de vida: 80 anos',
-                'section2_title': '🌎 Geografia e Localização',
-                's2_p1': 'A Costa Rica está estrategicamente localizada na América Central, atuando como ponte entre o Mar do Caribe e o Oceano Pacífico. Com aproximadamente 51.100 km² de território, o país é reconhecido mundialmente por sua extraordinária biodiversidade - abriga 5% de todas as espécies do planeta em apenas 0,03% da superfície terrestre. Seu relevo montanhoso inclui vulcões ativos, florestas tropicais exuberantes e praias paradisíacas em ambas as costas.',
-                'section3_title': '🗺️ Fronteiras e Limites',
+                's1_c4_p': '5,2 milhões de habitantes<br>(estimativa 2024)',
+                'section2_title': '🌎 Localização Geográfica',
+                's2_p1': 'A Costa Rica está localizada na América Central, entre o Mar do Caribe e o Oceano Pacífico. O país possui uma área de aproximadamente 51.100 km² e é conhecido por sua incrível biodiversidade e paisagens naturais espetaculares.',
+                'section3_title': '🗺️ Fronteiras',
                 's3_c1_title': '⬆️ Norte',
-                's3_c1_p': 'Fronteira com a Nicarágua<br>309 km de extensão<br>Rio San Juan como limite natural',
+                's3_c1_p': 'Fronteira com a Nicarágua<br>309 km de extensão',
                 's3_c2_title': '⬇️ Sul',
-                's3_c2_p': 'Fronteira com o Panamá<br>330 km de extensão<br>Região montanhosa de Talamanca',
+                's3_c2_p': 'Fronteira com o Panamá<br>330 km de extensão',
                 's3_c3_title': '⬅️ Leste',
-                's3_c3_p': 'Mar do Caribe<br>212 km de litoral<br>Clima tropical úmido e biodiversidade marinha',
+                's3_c3_p': 'Mar do Caribe<br>212 km de litoral',
                 's3_c4_title': '➡️ Oeste',
-                's3_c4_p': 'Oceano Pacífico<br>1.016 km de litoral<br>Principais destinos turísticos de praia',
-                'section4_title': '🏝️ Principais Destinos Turísticos',
-                's4_c1_title': '🌋 Vulcão Arenal',
-                's4_c1_p': 'Vulcão icônico com 1.670m de altura, cercado por fontes termais naturais e floresta tropical. Oferece trilhas, observação de vida selvagem e vistas espetaculares.',
-                's4_c2_title': '🌳 Parque Nacional Manuel Antonio',
-                's4_c2_p': 'Combina praias de areia branca com floresta tropical exuberante. Habitat de macacos, preguiças e aves tropicais. Um dos parques mais visitados do país.',
-                's4_c3_title': '☁️ Monteverde',
-                's4_c3_p': 'Reserva de floresta nublada com biodiversidade única, incluindo o raro quetzal. Famosa por pontes suspensas e canopy tours em meio às nuvens.',
-                's4_c4_title': '🏖️ Península de Nicoya',
-                's4_c4_p': 'Praias paradisíacas de areia dourada e águas cristalinas. Conhecida como Zona Azul, onde as pessoas vivem mais tempo devido ao estilo de vida saudável.',
-                's4_c5_title': '🐢 Tortuguero',
-                's4_c5_p': 'Canais naturais navegáveis e importante local de desova de tartarugas marinhas. Acessível apenas por barco ou avião, oferece experiência única na natureza.',
-                's4_c6_title': '🏛️ Teatro Nacional',
-                's4_c6_p': 'Joia arquitetônica neoclássica inaugurada em 1897 na capital San José. Inspirado na Ópera de Paris, representa o patrimônio cultural do país.',
-                'section5_title': '🎭 Cultura e Estilo de Vida',
-                's5_h3': '🌺 Pura Vida - A Filosofia Nacional',
-                's5_p1': 'A expressão "Pura Vida" é mais que um cumprimento - representa a essência da cultura costarriquenha: otimismo, simplicidade, gratidão pela vida e conexão profunda com a natureza. É usada para saudar, despedir-se e expressar contentamento.',
-                's5_p2': '🌿 <strong>Pioneiros em Sustentabilidade:</strong> A Costa Rica protege mais de 25% de seu território em parques nacionais e reservas. É líder mundial em energia limpa, gerando quase 100% da eletricidade a partir de fontes renováveis (hidrelétrica, geotérmica, eólica e solar). Meta de se tornar carbono neutro até 2050.',
-                's5_p3': '☮️ <strong>Nação sem Exército:</strong> Em 1948, aboliu constitucionalmente as forças armadas, sendo um dos poucos países do mundo sem exército permanente. Os recursos são direcionados para educação (gratuita e obrigatória), saúde pública universal e proteção ambiental.',
-                'finish_button': 'Finalizar Apresentação 🚀',
+                's3_c4_p': 'Oceano Pacífico<br>1.016 km de litoral',
+                'section4_title': '🏝️ Pontos Turísticos',
+                's4_c1_title': 'Vulcão Arenal',
+                's4_c1_p': 'Um dos vulcões mais ativos da América Central, cercado por florestas tropicais.',
+                's4_c2_title': 'Parque Nacional Manuel Antonio',
+                's4_c2_p': 'Praias paradisíacas com rica vida selvagem.',
+                's4_c3_title': 'Monteverde',
+                's4_c3_p': 'Floresta nublada com biodiversidade única.',
+                's4_c4_title': 'Península de Nicoya',
+                's4_c4_p': 'Praias de areia dourada e Zona Azul de longevidade.',
+                's4_c5_title': 'Parque Nacional Tortuguero',
+                's4_c5_p': 'Local de desova de tartarugas marinhas.',
+                's4_c6_title': 'Teatro Nacional',
+                's4_c6_p': 'Joia arquitetônica construída em 1897.',
+                'section5_title': '🎭 Cultura',
+                's5_h3': '🌺 Pura Vida - A Essência Costarriquenha',
+                's5_p1': 'A expressão "Pura Vida" resume o estilo de vida costarriquenho: otimismo, simplicidade e apreciação pela vida.',
+                's5_p2': '🌿 Consciência Ambiental: Mais de 25% do território é protegido em parques nacionais. O país gera quase 100% de sua energia de fontes renováveis.',
+                's5_p3': '☮️ Pacifismo: Aboliu o exército em 1948, investindo em educação e saúde.',
+                'finish_button': 'FINALIZAR APRESENTAÇÃO 🚀',
                 'close_btn': '✕'
             },
             'ES': {
@@ -467,43 +586,43 @@
                 'credits': 'created and developed by: @505voidd',
                 'section1_title': '🏛️ Información General',
                 's1_c1_title': '👨‍💼 Presidente',
-                's1_c1_p': 'Rodrigo Chaves Robles<br>Mandato iniciado en mayo de 2022<br>Partido: Progreso Social Democrático',
+                's1_c1_p': 'Rodrigo Chaves Robles<br>En ejercicio desde mayo de 2022',
                 's1_c2_title': '💰 Moneda',
-                's1_c2_p': 'Colón Costarricense (CRC)<br>1 USD ≈ 520 CRC<br>Economía estable y dolarizada',
-                's1_c3_title': '🗣️ Idioma',
-                's1_c3_p': 'Español (oficial)<br>Inglés hablado en zonas turísticas<br>Diversidad lingüística en comunidades indígenas',
+                's1_c2_p': 'Colón Costarricense (CRC)<br>1 USD ≈ 520 CRC',
+                's1_c3_title': '🗣️ Lengua Nativa',
+                's1_c3_p': 'Español<br>Idioma oficial del país',
                 's1_c4_title': '👥 Población',
-                's1_c4_p': '5,2 millones de habitantes (2024)<br>Densidad: 102 hab/km²<br>Esperanza de vida: 80 años',
-                'section2_title': '🌎 Geografía y Ubicación',
-                's2_p1': 'Costa Rica está estratégicamente ubicada en América Central, actuando como puente entre el Mar Caribe y el Océano Pacífico. Con aproximadamente 51.100 km² de territorio, el país es reconocido mundialmente por su extraordinaria biodiversidad - alberga el 5% de todas las especies del planeta en solo el 0,03% de la superficie terrestre. Su relieve montañoso incluye volcanes activos, bosques tropicales exuberantes y playas paradisíacas en ambas costas.',
-                'section3_title': '🗺️ Fronteras y Límites',
+                's1_c4_p': '5,2 millones de habitantes<br>(estimación 2024)',
+                'section2_title': '🌎 Ubicación Geográfica',
+                's2_p1': 'Costa Rica se encuentra en América Central, entre el Mar Caribe y el Océano Pacífico. El país tiene una superficie de aproximadamente 51.100 km² y es conocido por su increíble biodiversidad y paisajes naturales espectaculares.',
+                'section3_title': '🗺️ Fronteras',
                 's3_c1_title': '⬆️ Norte',
-                's3_c1_p': 'Frontera con Nicaragua<br>309 km de extensión<br>Río San Juan como límite natural',
+                's3_c1_p': 'Frontera con Nicaragua<br>309 km de extensión',
                 's3_c2_title': '⬇️ Sur',
-                's3_c2_p': 'Frontera con Panamá<br>330 km de extensión<br>Región montañosa de Talamanca',
+                's3_c2_p': 'Frontera con Panamá<br>330 km de extensión',
                 's3_c3_title': '⬅️ Este',
-                's3_c3_p': 'Mar Caribe<br>212 km de litoral<br>Clima tropical húmedo y biodiversidad marina',
+                's3_c3_p': 'Mar Caribe<br>212 km de costa',
                 's3_c4_title': '➡️ Oeste',
-                's3_c4_p': 'Océano Pacífico<br>1.016 km de litoral<br>Principales destinos turísticos de playa',
-                'section4_title': '🏝️ Principales Destinos Turísticos',
-                's4_c1_title': '🌋 Volcán Arenal',
-                's4_c1_p': 'Volcán icónico con 1.670m de altura, rodeado de aguas termales naturales y bosque tropical. Ofrece senderos, observación de vida silvestre y vistas espectaculares.',
-                's4_c2_title': '🌳 Parque Nacional Manuel Antonio',
-                's4_c2_p': 'Combina playas de arena blanca con bosque tropical exuberante. Hábitat de monos, perezosos y aves tropicales. Uno de los parques más visitados del país.',
-                's4_c3_title': '☁️ Monteverde',
-                's4_c3_p': 'Reserva de bosque nuboso con biodiversidad única, incluyendo el raro quetzal. Famosa por puentes colgantes y canopy tours entre las nubes.',
-                's4_c4_title': '🏖️ Península de Nicoya',
-                's4_c4_p': 'Playas paradisíacas de arena dorada y aguas cristalinas. Conocida como Zona Azul, donde las personas viven más tiempo debido al estilo de vida saludable.',
-                's4_c5_title': '🐢 Tortuguero',
-                's4_c5_p': 'Canales naturales navegables e importante sitio de anidación de tortugas marinas. Accesible solo por barco o avión, ofrece experiencia única en la naturaleza.',
-                's4_c6_title': '🏛️ Teatro Nacional',
-                's4_c6_p': 'Joya arquitectónica neoclásica inaugurada en 1897 en la capital San José. Inspirado en la Ópera de París, representa el patrimonio cultural del país.',
-                'section5_title': '🎭 Cultura y Estilo de Vida',
-                's5_h3': '🌺 Pura Vida - La Filosofía Nacional',
-                's5_p1': 'La expresión "Pura Vida" es más que un saludo - representa la esencia de la cultura costarricense: optimismo, simplicidad, gratitud por la vida y conexión profunda con la naturaleza. Se usa para saludar, despedirse y expresar satisfacción.',
-                's5_p2': '🌿 <strong>Pioneros en Sostenibilidad:</strong> Costa Rica protege más del 25% de su territorio en parques nacionales y reservas. Es líder mundial en energía limpia, generando casi el 100% de la electricidad a partir de fuentes renovables (hidroeléctrica, geotérmica, eólica y solar). Meta de ser carbono neutral para 2050.',
-                's5_p3': '☮️ <strong>Nación sin Ejército:</strong> En 1948, abolió constitucionalmente las fuerzas armadas, siendo uno de los pocos países del mundo sin ejército permanente. Los recursos se destinan a educación (gratuita y obligatoria), salud pública universal y protección ambiental.',
-                'finish_button': 'Finalizar Presentación 🚀',
+                's3_c4_p': 'Océano Pacífico<br>1.016 km de costa',
+                'section4_title': '🏝️ Puntos Turísticos',
+                's4_c1_title': 'Volcán Arenal',
+                's4_c1_p': 'Uno de los volcanes más activos de Centroamérica, rodeado de selvas tropicales.',
+                's4_c2_title': 'Parque Nacional Manuel Antonio',
+                's4_c2_p': 'Playas paradisíacas con rica vida silvestre.',
+                's4_c3_title': 'Monteverde',
+                's4_c3_p': 'Bosque nuboso con biodiversidad única.',
+                's4_c4_title': 'Península de Nicoya',
+                's4_c4_p': 'Playas de arena dorada y Zona Azul de longevidad.',
+                's4_c5_title': 'Parque Nacional Tortuguero',
+                's4_c5_p': 'Sitio de anidación de tortugas marinas.',
+                's4_c6_title': 'Teatro Nacional',
+                's4_c6_p': 'Joya arquitectónica construida en 1897.',
+                'section5_title': '🎭 Cultura',
+                's5_h3': '🌺 Pura Vida - La Esencia Costarricense',
+                's5_p1': 'La expresión "Pura Vida" resume el estilo de vida costarricense: optimismo, simplicidad y aprecio por la vida.',
+                's5_p2': '🌿 Conciencia Ambiental: Más del 25% del territorio está protegido en parques nacionales. El país genera casi el 100% de su energía a partir de fuentes renovables.',
+                's5_p3': '☮️ Pacifismo: Abolió el ejército en 1948, invirtiendo en educación y salud.',
+                'finish_button': 'FINALIZAR PRESENTACIÓN 🚀',
                 'close_btn': '✕'
             }
         };
@@ -553,8 +672,7 @@
             document.getElementById('s4_c4_p').innerHTML = t.s4_c4_p;
             document.getElementById('s4_c5_title').innerHTML = t.s4_c5_title;
             document.getElementById('s4_c5_p').innerHTML = t.s4_c5_p;
-            document.getElementById('s4_c6_title').innerHTML = t.s4_c6_title;
-            document.getElementById('s4_c6_p').innerHTML = t.s4_c6_p;
+            document.getElementById('s4_c6_title').innerHTML = t.s4_c6_p;
 
             document.getElementById('section5_title').innerHTML = t.section5_title;
             document.getElementById('s5_h3').innerHTML = t.s5_h3;
@@ -579,7 +697,7 @@
             document.getElementById('finalModal').classList.remove('active');
         }
 
-document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
             const loadingScreen = document.getElementById('loadingScreen');
             const mainContent = document.getElementById('mainContent');
             const loadTime = 3200;
@@ -590,13 +708,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 loadingScreen.classList.add('hidden');
                 setTimeout(() => {
                     mainContent.style.opacity = '1';
+                    mainContent.style.transition = 'opacity 0.8s ease';
                 }, 100);
             }, loadTime);
         });
     </script>
 
     <div class="loading-screen" id="loadingScreen">
-        <img src="https://i.imgur.com/87RdhWR.jpeg" alt="Costa Rica Header" class="opening-header-image">
+        <img src="https://i.imgur.com/8wh4t2z.jpeg" alt="Costa Rica Header" class="opening-header-image">
         <div class="opening-content">
             <img src="https://i.imgur.com/fgrcJGo.jpeg" alt="Bandeira Costa Rica" class="opening-central-image">
             <p class="loading-credits" id="loadingCredits">created and developed by: @505voidd</p>
@@ -649,10 +768,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         <div class="section">
             <h2 id="section2_title"></h2>
-            <div class="image-container" style="height: 300px; margin-bottom: 25px;">
+            <div class="image-container" style="height: 350px; margin-bottom: 25px;">
                 <span class="image-placeholder">🗺️</span>
             </div>
-            <p class="text-content" id="s2_p1"></p>
+            <p id="s2_p1" style="line-height: 1.9; font-size: 1.1em; color: var(--cor-texto-secundario);"></p>
         </div>
 
         <div class="section">
@@ -715,13 +834,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         <div class="section">
             <h2 id="section5_title"></h2>
-            <div class="image-container" style="height: 300px; margin-bottom: 25px;">
+            <div class="image-container" style="height: 350px; margin-bottom: 25px;">
                 <span class="image-placeholder">🎭</span>
             </div>
-            <h3 id="s5_h3" style="color: var(--cor-principal); font-size: 1.8em; margin-bottom: 20px;"></h3>
-            <p class="text-content" id="s5_p1"></p>
-            <p class="text-content" id="s5_p2" style="margin-top: 20px;"></p>
-            <p class="text-content" id="s5_p3" style="margin-top: 20px;"></p>
+            <h3 id="s5_h3" style="color: var(--cor-principal); font-size: 1.9em; margin-bottom: 20px; font-weight: 800;"></h3>
+            <p id="s5_p1" style="line-height: 1.9; font-size: 1.1em; color: var(--cor-texto-secundario); margin-bottom: 20px;"></p>
+            <p id="s5_p2" style="line-height: 1.9; font-size: 1.1em; color: var(--cor-texto-secundario); margin-bottom: 20px;"></p>
+            <p id="s5_p3" style="line-height: 1.9; font-size: 1.1em; color: var(--cor-texto-secundario);"></p>
         </div>
 
         <footer>
