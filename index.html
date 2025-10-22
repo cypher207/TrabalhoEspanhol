@@ -108,7 +108,7 @@
             pointer-events: none;
         }
 
-        /* IMAGEM DO TOPO DA ABERTURA (AGORA É A ANTIGA IMAGEM FINAL) */
+        /* IMAGEM DO TOPO DA ABERTURA */
         .opening-top-image {
             width: 90%;
             max-width: 1100px;
@@ -136,7 +136,7 @@
             }
         }
         
-        /* Imagem Central da Abertura (a original não foi movida, apenas a do topo) */
+        /* Imagem Central da Abertura */
         .opening-central-image {
             width: 220px;
             height: 220px;
@@ -310,6 +310,18 @@
             border: 3px solid rgba(168, 85, 247, 0.4);
             position: relative;
             overflow: hidden;
+        }
+
+        /* Estilo da bandeira adicionada */
+        #flagImage {
+            width: 150px;
+            height: 90px;
+            object-fit: cover;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border: 4px solid var(--cor-texto-claro);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
+            animation: fadeIn 1s ease-out 0.8s backwards;
         }
 
         header::before {
@@ -634,7 +646,7 @@
             opacity: 1;
         }
 
-        /* IMAGEM DO MODAL FINAL (AGORA É A ANTIGA IMAGEM DO TOPO DA ABERTURA) */
+        /* IMAGEM DO MODAL FINAL */
         .modal-image {
             width: 90vw;
             height: 87vh;
@@ -919,6 +931,8 @@
         </div>
 
         <header>
+            <img id="flagImage" src="https://i.imgur.com/awGerYT.png" alt="Bandeira da Costa Rica">
+            
             <h1 id="mainTitle"></h1>
             <p class="subtitle" id="subTitle"></p>
         </header>
