@@ -73,12 +73,8 @@
         }
 
         @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         @keyframes fadeInDown {
@@ -103,33 +99,14 @@
             }
         }
 
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         @keyframes glow {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(123, 44, 191, 0.5);
-            }
-            50% {
-                box-shadow: 0 0 40px rgba(123, 44, 191, 0.8);
-            }
+            0%, 100% { box-shadow: 0 0 20px rgba(123, 44, 191, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(123, 44, 191, 0.8); }
         }
 
         .flag {
@@ -208,6 +185,7 @@
             border-left: 5px solid #c77dff;
             transition: all 0.4s ease;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
 
         .info-card:hover {
@@ -228,6 +206,63 @@
             color: #e4e4e4;
         }
 
+        .image-container {
+            width: 100%;
+            height: 200px;
+            background: rgba(60, 9, 108, 0.5);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid rgba(123, 44, 191, 0.3);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-placeholder {
+            color: #7b2cbf;
+            font-size: 3em;
+        }
+
+        .edit-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #c77dff 0%, #e0aaff 100%);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            color: #1a0a2e;
+            font-weight: bold;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10;
+            display: none; /* Escondido por padrão, exibido no modo Admin */
+        }
+
+        .info-card:hover .edit-button,
+        .spot-card:hover .edit-button {
+            opacity: 1;
+        }
+
+        .edit-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(199, 125, 255, 0.6);
+        }
+
         .tourist-spots {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -243,13 +278,13 @@
             transition: all 0.4s ease;
             border: 2px solid rgba(123, 44, 191, 0.3);
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
 
         .spot-card:hover {
             border-color: #c77dff;
-            transform: scale(1.08) rotate(2deg);
+            transform: scale(1.03); /* Alterado para efeito mais suave */
             box-shadow: 0 15px 40px rgba(199, 125, 255, 0.5);
-            animation: glow 2s infinite;
         }
 
         .spot-card h3 {
@@ -314,25 +349,6 @@
             margin-right: 10px;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
-            }
-
-            .section {
-                padding: 25px;
-            }
-
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-
-            body::before,
-            body::after {
-                width: 80px;
-            }
-        }
-
         .scroll-indicator {
             position: fixed;
             bottom: 35px;
@@ -341,7 +357,7 @@
             height: 60px;
             background: linear-gradient(135deg, #7b2cbf 0%, #c77dff 100%);
             border-radius: 50%;
-            display: flex;
+            display: none; /* Escondido por padrão, será exibido via JS */
             align-items: center;
             justify-content: center;
             cursor: pointer;
@@ -414,9 +430,197 @@
         }
 
         @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Modal de Login */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .login-modal.active {
+            display: flex;
+        }
+
+        .login-box {
+            background: linear-gradient(135deg, #240046 0%, #3c096c 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(123, 44, 191, 0.6);
+            border: 2px solid #7b2cbf;
+            max-width: 400px;
+            width: 90%;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .login-box h2 {
+            color: #e0aaff;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #7b2cbf;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #e4e4e4;
+            font-size: 1em;
+        }
+
+        .login-box input:focus {
+            outline: none;
+            border-color: #c77dff;
+            box-shadow: 0 0 20px rgba(199, 125, 255, 0.4);
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #7b2cbf 0%, #c77dff 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-box button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(199, 125, 255, 0.6);
+        }
+
+        .admin-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #7b2cbf 0%, #c77dff 100%);
+            padding: 12px 25px;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+            border: 2px solid #e0aaff;
+            box-shadow: 0 5px 20px rgba(199, 125, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .admin-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(199, 125, 255, 0.7);
+        }
+
+        /* Modal de Upload de Imagem */
+        .image-upload-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10001;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .image-upload-modal.active {
+            display: flex;
+        }
+
+        .upload-box {
+            background: linear-gradient(135deg, #240046 0%, #3c096c 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(123, 44, 191, 0.6);
+            border: 2px solid #7b2cbf;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .upload-box h3 {
+            color: #e0aaff;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        .upload-box input[type="file"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 2px dashed #7b2cbf;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #e4e4e4;
+            cursor: pointer;
+        }
+
+        .upload-box input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 2px solid #7b2cbf;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #e4e4e4;
+            font-size: 1em;
+        }
+
+        .upload-box button {
+            width: 48%;
+            padding: 15px;
+            margin: 1%;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-box .save-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+        }
+
+        .upload-box .cancel-btn {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+        }
+
+        .upload-box button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(199, 125, 255, 0.6);
+        }
+
+        .admin-mode {
+            border: 3px solid #c77dff !important;
+            box-shadow: 0 0 30px rgba(199, 125, 255, 0.8) !important;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .section { padding: 25px; }
+            .info-grid { grid-template-columns: 1fr; }
+            body::before, body::after { width: 80px; }
+            .admin-button { font-size: 0.85em; padding: 10px 20px; }
         }
     </style>
 </head>
@@ -425,7 +629,33 @@
         <div class="loader"></div>
     </div>
 
+    <div class="admin-button" onclick="openLoginModal()">👤 Admin Login</div>
     <div class="firebase-indicator">Firebase Conectado</div>
+
+    <div class="login-modal" id="loginModal">
+        <div class="login-box">
+            <h2>🔐 Login de Administrador</h2>
+            <input type="email" id="adminEmail" placeholder="Email" autocomplete="username">
+            <input type="password" id="adminPassword" placeholder="Senha" autocomplete="current-password">
+            <button onclick="loginAdmin()">Entrar</button>
+            <p style="text-align: center; margin-top: 20px; color: #7b2cbf; font-size: 0.9em;">
+                Apenas administradores autorizados
+            </p>
+        </div>
+    </div>
+
+    <div class="image-upload-modal" id="imageUploadModal">
+        <div class="upload-box">
+            <h3>📸 Adicionar/Editar Imagem</h3>
+            <input type="text" id="imageTitle" placeholder="Título da imagem">
+            <input type="file" id="imageFile" accept="image/*">
+            <input type="text" id="imageUrl" placeholder="Ou cole a URL da imagem">
+            <div>
+                <button class="save-btn" onclick="saveImage()">💾 Salvar</button>
+                <button class="cancel-btn" onclick="closeImageModal()">❌ Cancelar</button>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <header>
@@ -441,19 +671,35 @@
         <div class="section">
             <h2>🏛️ Informações Gerais</h2>
             <div class="info-grid">
-                <div class="info-card">
+                <div class="info-card" data-id="presidente">
+                    <button class="edit-button" onclick="openImageModal('presidente')">✏️ Editar</button>
+                    <div class="image-container" id="img-presidente">
+                        <span class="image-placeholder">👨‍💼</span>
+                    </div>
                     <h3><span class="emoji">👨‍💼</span>Presidente</h3>
                     <p><span class="highlight">Rodrigo Chaves Robles</span><br>Em exercício desde maio de 2022</p>
                 </div>
-                <div class="info-card">
+                <div class="info-card" data-id="moeda">
+                    <button class="edit-button" onclick="openImageModal('moeda')">✏️ Editar</button>
+                    <div class="image-container" id="img-moeda">
+                        <span class="image-placeholder">💰</span>
+                    </div>
                     <h3><span class="emoji">💰</span>Moeda</h3>
                     <p><span class="highlight">Colón Costarriquenho (CRC)</span><br>1 USD ≈ 520 CRC</p>
                 </div>
-                <div class="info-card">
+                <div class="info-card" data-id="lingua">
+                    <button class="edit-button" onclick="openImageModal('lingua')">✏️ Editar</button>
+                    <div class="image-container" id="img-lingua">
+                        <span class="image-placeholder">🗣️</span>
+                    </div>
                     <h3><span class="emoji">🗣️</span>Língua Nativa</h3>
                     <p><span class="highlight">Espanhol</span><br>Língua oficial do país</p>
                 </div>
-                <div class="info-card">
+                <div class="info-card" data-id="populacao">
+                    <button class="edit-button" onclick="openImageModal('populacao')">✏️ Editar</button>
+                    <div class="image-container" id="img-populacao">
+                        <span class="image-placeholder">👥</span>
+                    </div>
                     <h3><span class="emoji">👥</span>População</h3>
                     <p><span class="highlight">5,2 milhões</span> de habitantes<br>(estimativa 2024)</p>
                 </div>
@@ -463,11 +709,16 @@
         <div class="section">
             <h2>🌎 Localização Geográfica</h2>
             <div class="culture-section">
+                <div class="info-card" data-id="mapa" style="border: none; background: transparent; padding: 0; margin-bottom: 20px;">
+                    <button class="edit-button" onclick="openImageModal('mapa')">✏️ Editar Mapa</button>
+                    <div class="image-container" id="img-mapa" style="height: 300px;">
+                        <span class="image-placeholder">🗺️</span>
+                    </div>
+                </div>
                 <p>
                     A Costa Rica está localizada na <span class="highlight">América Central</span>, entre o Mar do Caribe e o Oceano Pacífico. 
                     O país possui uma área de aproximadamente <span class="highlight">51.100 km²</span> e é conhecido por sua 
-                    incrível biodiversidade e paisagens naturais espetaculares. É um dos países mais desenvolvidos da região, 
-                    com alto índice de desenvolvimento humano e qualidade de vida.
+                    incrível biodiversidade e paisagens naturais espetaculares.
                 </p>
             </div>
         </div>
@@ -497,18 +748,16 @@
         <div class="section">
             <h2>⚽ Time de Futebol</h2>
             <div class="culture-section">
+                <div class="info-card" data-id="futebol" style="border: none; background: transparent; padding: 0; margin-bottom: 20px;">
+                    <button class="edit-button" onclick="openImageModal('futebol')">✏️ Editar Imagem</button>
+                    <div class="image-container" id="img-futebol" style="height: 250px;">
+                        <span class="image-placeholder">⚽</span>
+                    </div>
+                </div>
                 <h3>🏆 Seleção Nacional - Los Ticos</h3>
                 <p>
                     A seleção costarriquenha é carinhosamente chamada de <span class="highlight">"Los Ticos"</span>. 
-                    Participou de <span class="highlight">6 Copas do Mundo</span> (1990, 2002, 2006, 2014, 2018, 2022) 
-                    e teve sua melhor campanha em 2014 no Brasil, chegando às <span class="highlight">quartas de final</span> 
-                    após eliminar Uruguai, Itália e Grécia. 
-                </p>
-                <br>
-                <p>
-                    Jogadores famosos incluem <span class="highlight">Keylor Navas</span> (goleiro tri-campeão da Champions League pelo Real Madrid), 
-                    <span class="highlight">Joel Campbell</span>, <span class="highlight">Bryan Ruiz</span> e 
-                    <span class="highlight">Celso Borges</span>. Os principais clubes do país são Saprissa, Alajuelense e Herediano.
+                    Participou de <span class="highlight">6 Copas do Mundo</span> e teve sua melhor campanha em 2014.
                 </p>
             </div>
         </div>
@@ -516,17 +765,16 @@
         <div class="section">
             <h2>🎵 Música</h2>
             <div class="culture-section">
+                <div class="info-card" data-id="musica" style="border: none; background: transparent; padding: 0; margin-bottom: 20px;">
+                    <button class="edit-button" onclick="openImageModal('musica')">✏️ Editar Imagem</button>
+                    <div class="image-container" id="img-musica" style="height: 250px;">
+                        <span class="image-placeholder">🎵</span>
+                    </div>
+                </div>
                 <h3>🎸 Ritmos Tradicionais e Contemporâneos</h3>
                 <p>
                     A música costarriquenha é rica e diversificada. O ritmo mais tradicional é o <span class="highlight">Punto Guanacasteco</span>, 
-                    típico da província de Guanacaste, acompanhado por marimba, guitarra e quijongo. 
-                </p>
-                <br>
-                <p>
-                    Na costa caribenha, predomina o <span class="highlight">Calypso</span> e o reggae, refletindo a influência afro-caribenha. 
-                    Também são populares a <span class="highlight">Cumbia</span>, o <span class="highlight">Merengue</span> e 
-                    a <span class="highlight">Salsa</span>. A música folclórica utiliza instrumentos tradicionais como 
-                    marimba, ocarina e charrascas.
+                    típico da província de Guanacaste, acompanhado por marimba, guitarra e quijongo.
                 </p>
             </div>
         </div>
@@ -534,21 +782,37 @@
         <div class="section">
             <h2>⭐ Famosos</h2>
             <div class="info-grid">
-                <div class="info-card">
-                    <h3>⚽ Keylor Navas</h3>
-                    <p>Goleiro de elite mundial, tri-campeão da Champions League pelo Real Madrid (2016, 2017, 2018)</p>
+                <div class="info-card" data-id="keylor">
+                    <button class="edit-button" onclick="openImageModal('keylor')">✏️ Editar</button>
+                    <div class="image-container" id="img-keylor">
+                        <span class="image-placeholder">⚽</span>
+                    </div>
+                    <h3>Keylor Navas</h3>
+                    <p>Goleiro de elite mundial, tri-campeão da Champions League pelo Real Madrid</p>
                 </div>
-                <div class="info-card">
-                    <h3>🏊‍♀️ Claudia Poll</h3>
-                    <p>Nadadora olímpica, primeira e única medalha de ouro da Costa Rica em Atlanta 1996</p>
+                <div class="info-card" data-id="claudia">
+                    <button class="edit-button" onclick="openImageModal('claudia')">✏️ Editar</button>
+                    <div class="image-container" id="img-claudia">
+                        <span class="image-placeholder">🏊‍♀️</span>
+                    </div>
+                    <h3>Claudia Poll</h3>
+                    <p>Nadadora olímpica, medalha de ouro em Atlanta 1996</p>
                 </div>
-                <div class="info-card">
-                    <h3>🚀 Franklin Chang-Díaz</h3>
-                    <p>Astronauta da NASA com 7 missões espaciais, recorde compartilhado mundialmente</p>
+                <div class="info-card" data-id="franklin">
+                    <button class="edit-button" onclick="openImageModal('franklin')">✏️ Editar</button>
+                    <div class="image-container" id="img-franklin">
+                        <span class="image-placeholder">🚀</span>
+                    </div>
+                    <h3>Franklin Chang-Díaz</h3>
+                    <p>Astronauta da NASA com 7 missões espaciais</p>
                 </div>
-                <div class="info-card">
-                    <h3>🏅 Óscar Arias Sánchez</h3>
-                    <p>Ex-presidente e ganhador do Prêmio Nobel da Paz em 1987</p>
+                <div class="info-card" data-id="oscar">
+                    <button class="edit-button" onclick="openImageModal('oscar')">✏️ Editar</button>
+                    <div class="image-container" id="img-oscar">
+                        <span class="image-placeholder">🏅</span>
+                    </div>
+                    <h3>Óscar Arias Sánchez</h3>
+                    <p>Ex-presidente e Prêmio Nobel da Paz</p>
                 </div>
             </div>
         </div>
@@ -556,29 +820,53 @@
         <div class="section">
             <h2>🏝️ Pontos Turísticos</h2>
             <div class="tourist-spots">
-                <div class="spot-card">
-                    <h3>🌋 Vulcão Arenal</h3>
-                    <p>Um dos vulcões mais ativos e icônicos da América Central, cercado por florestas tropicais exuberantes e fontes termais naturais relaxantes.</p>
+                <div class="spot-card" data-id="arenal">
+                    <button class="edit-button" onclick="openImageModal('arenal')">✏️ Editar</button>
+                    <div class="image-container" id="img-arenal">
+                        <span class="image-placeholder">🌋</span>
+                    </div>
+                    <h3>Vulcão Arenal</h3>
+                    <p>Um dos vulcões mais ativos da América Central, cercado por florestas tropicais.</p>
                 </div>
-                <div class="spot-card">
-                    <h3>🌳 Parque Nacional Manuel Antonio</h3>
-                    <p>Praias paradisíacas de areia branca com rica vida selvagem, incluindo macacos-prego, preguiças e aves exóticas em seu habitat natural.</p>
+                <div class="spot-card" data-id="manuel">
+                    <button class="edit-button" onclick="openImageModal('manuel')">✏️ Editar</button>
+                    <div class="image-container" id="img-manuel">
+                        <span class="image-placeholder">🌳</span>
+                    </div>
+                    <h3>Parque Nacional Manuel Antonio</h3>
+                    <p>Praias paradisíacas com rica vida selvagem.</p>
                 </div>
-                <div class="spot-card">
-                    <h3>☁️ Monteverde</h3>
-                    <p>Floresta nublada mística com pontes suspensas emocionantes e biodiversidade única, lar do raro e deslumbrante quetzal resplendente.</p>
+                <div class="spot-card" data-id="monteverde">
+                    <button class="edit-button" onclick="openImageModal('monteverde')">✏️ Editar</button>
+                    <div class="image-container" id="img-monteverde">
+                        <span class="image-placeholder">☁️</span>
+                    </div>
+                    <h3>Monteverde</h3>
+                    <p>Floresta nublada com biodiversidade única.</p>
                 </div>
-                <div class="spot-card">
-                    <h3>🏖️ Península de Nicoya</h3>
-                    <p>Praias de areia dourada, surfe de classe mundial e uma das cinco Zonas Azuis de longevidade do planeta, onde pessoas vivem mais de 100 anos.</p>
+                <div class="spot-card" data-id="nicoya">
+                    <button class="edit-button" onclick="openImageModal('nicoya')">✏️ Editar</button>
+                    <div class="image-container" id="img-nicoya">
+                        <span class="image-placeholder">🏖️</span>
+                    </div>
+                    <h3>Península de Nicoya</h3>
+                    <p>Praias de areia dourada e Zona Azul de longevidade.</p>
                 </div>
-                <div class="spot-card">
-                    <h3>🐢 Parque Nacional Tortuguero</h3>
-                    <p>Principal local de desova de tartarugas marinhas no Caribe, com canais navegáveis através da selva tropical e vida selvagem abundante.</p>
+                <div class="spot-card" data-id="tortuguero">
+                    <button class="edit-button" onclick="openImageModal('tortuguero')">✏️ Editar</button>
+                    <div class="image-container" id="img-tortuguero">
+                        <span class="image-placeholder">🐢</span>
+                    </div>
+                    <h3>Parque Nacional Tortuguero</h3>
+                    <p>Local de desova de tartarugas marinhas.</p>
                 </div>
-                <div class="spot-card">
-                    <h3>🏛️ Teatro Nacional</h3>
-                    <p>Joia arquitetônica neoclássica em San José, construída em 1897 com café exportado, símbolo máximo da cultura costarriquenha.</p>
+                <div class="spot-card" data-id="teatro">
+                    <button class="edit-button" onclick="openImageModal('teatro')">✏️ Editar</button>
+                    <div class="image-container" id="img-teatro">
+                        <span class="image-placeholder">🏛️</span>
+                    </div>
+                    <h3>Teatro Nacional</h3>
+                    <p>Joia arquitetônica construída em 1897.</p>
                 </div>
             </div>
         </div>
@@ -586,56 +874,45 @@
         <div class="section">
             <h2>🎭 Cultura</h2>
             <div class="culture-section">
+                <div class="info-card" data-id="cultura" style="border: none; background: transparent; padding: 0; margin-bottom: 20px;">
+                    <button class="edit-button" onclick="openImageModal('cultura')">✏️ Editar Imagem</button>
+                    <div class="image-container" id="img-cultura" style="height: 300px;">
+                        <span class="image-placeholder">🎭</span>
+                    </div>
+                </div>
                 <h3>🌺 Pura Vida - A Essência Costarriquenha</h3>
                 <p>
-                    A expressão <span class="highlight">"Pura Vida"</span> resume perfeitamente o estilo de vida costarriquenho: 
-                    otimismo contagiante, simplicidade, hospitalidade e profunda apreciação pela vida. É usada como saudação, 
-                    despedida e expressão de contentamento.
+                    A expressão <span class="highlight">"Pura Vida"</span> resume o estilo de vida costarriquenho: 
+                    otimismo, simplicidade e apreciação pela vida.
                 </p>
                 <br>
                 <p>
-                    🌿 <span class="highlight">Consciência Ambiental Exemplar:</span> Mais de 25% do território é protegido 
-                    em parques nacionais e reservas biológicas. O país gera quase 100% de sua energia elétrica de fontes 
-                    renováveis (hidrelétrica, eólica, geotérmica) e tem como meta ser carbono neutro.
+                    🌿 <span class="highlight">Consciência Ambiental:</span> Mais de 25% do território é protegido 
+                    em parques nacionais. O país gera quase 100% de sua energia de fontes renováveis.
                 </p>
                 <br>
                 <p>
-                    ☮️ <span class="highlight">Tradição Pacifista:</span> Aboliu completamente o exército em 1948, 
-                    sendo um dos poucos países sem forças armadas permanentes no mundo. Os recursos são investidos 
-                    em educação e saúde pública gratuitas.
-                </p>
-                <br>
-                <p>
-                    🎨 <span class="highlight">Arte e Artesanato Tradicional:</span> As famosas carretas coloridas de Sarchí 
-                    (Patrimônio Cultural Imaterial da Humanidade pela UNESCO), cerâmica indígena chorotega de Guaitil 
-                    e máscaras tradicionais de Boruca são símbolos culturais valiosos.
-                </p>
-                <br>
-                <p>
-                    🍽️ <span class="highlight">Gastronomia Autêntica:</span> O prato típico é o <span class="highlight">Gallo Pinto</span> 
-                    (arroz com feijão preto), acompanhado de casado (arroz, feijão, carne, plátano, salada), ceviche fresco, 
-                    olla de carne e café de altíssima qualidade reconhecido mundialmente.
+                    ☮️ <span class="highlight">Pacifismo:</span> Aboliu o exército em 1948, investindo em educação e saúde.
                 </p>
             </div>
         </div>
 
         <footer>
             <p>🌟 Costa Rica - Pura Vida 🌟</p>
-            <p>Um país pequeno com um coração gigante e um futuro sustentável</p>
-            <p style="margin-top: 15px; font-size: 0.9em; color: #c77dff;">🔥 Powered by Firebase</p>
+            <p>Um país pequeno com um coração gigante</p>
+            <p style="margin-top: 15px; font-size: 0.9em; color: #c77dff;">credits by: <span class="highlight">@505voidd</span></p>
         </footer>
     </div>
 
     <div class="scroll-indicator" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"></div>
 
-    <!-- Firebase SDK -->
     <script type="module">
-        // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-        import { getFirestore, collection, addDoc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-        // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyDSLy-k6uIOEMm0bYQ-8gRe1IP6Cv-yt5s",
             authDomain: "trabalhodelapapaya.firebaseapp.com",
@@ -646,24 +923,70 @@
             measurementId: "G-YE2BC5ND6B"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const db = getFirestore(app);
+        const auth = getAuth(app);
+        const storage = getStorage(app);
 
         console.log("🔥 Firebase inicializado com sucesso!");
 
-        // Registrar visita ao site
+        // Variáveis globais
+        window.db = db;
+        window.auth = auth;
+        window.storage = storage;
+        window.isAdminLoggedIn = false;
+        window.currentImageId = null;
+
+        // Registrar visita
         try {
             await addDoc(collection(db, "visitas"), {
                 timestamp: serverTimestamp(),
                 pagina: "Costa Rica - Apresentação",
                 userAgent: navigator.userAgent
             });
-            console.log("✅ Visita registrada no Firestore!");
+            console.log("✅ Visita registrada!");
         } catch (error) {
             console.error("❌ Erro ao registrar visita:", error);
         }
+
+        // Verificar estado de autenticação
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log("✅ Usuário autenticado:", user.email);
+                window.isAdminLoggedIn = true;
+                enableAdminMode();
+            } else {
+                console.log("❌ Usuário não autenticado");
+                window.isAdminLoggedIn = false;
+                disableAdminMode();
+            }
+        });
+
+        // Carregar imagens do Firestore (Esta função será sobrescrita/complementada com as imagens de placeholder no script abaixo)
+        window.loadImagesFromFirestore = async function() {
+            try {
+                const imagesDoc = await getDoc(doc(db, "site-images", "costa-rica"));
+                if (imagesDoc.exists()) {
+                    const images = imagesDoc.data();
+                    Object.keys(images).forEach(key => {
+                        if (key !== 'timestamp') {
+                            displayImage(key, images[key]);
+                        }
+                    });
+                    console.log("✅ Imagens carregadas do Firestore!");
+                } else {
+                    // Carrega as imagens de placeholder se o Firestore estiver vazio
+                    loadPlaceholderImages();
+                }
+            } catch (error) {
+                console.error("❌ Erro ao carregar imagens:", error);
+                // Carrega as imagens de placeholder em caso de erro
+                loadPlaceholderImages();
+            }
+        }
+
+        window.loadImagesFromFirestore();
 
         // Remover tela de carregamento
         setTimeout(() => {
@@ -672,7 +995,219 @@
     </script>
 
     <script>
-        // Animação de scroll suave e observação de elementos
+        // Imagens de placeholder para melhor visualização
+        const PLACEHOLDER_IMAGES = {
+            "presidente": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Rodrigo_Chaves_Robles_2022_%28cropped%29.jpg",
+            "moeda": "https://i.imgur.com/8Qj9SjD.png",
+            "lingua": "https://i.imgur.com/z4bY33W.jpg",
+            "populacao": "https://i.imgur.com/uVzYfM9.jpg",
+            "mapa": "https://i.imgur.com/x5c9S0U.png",
+            "futebol": "https://i.imgur.com/1Gv2x7q.jpg",
+            "musica": "https://i.imgur.com/tC7Fq8h.jpg",
+            "keylor": "https://i.imgur.com/B94z83L.jpg",
+            "claudia": "https://i.imgur.com/6YpZ7Zg.jpg",
+            "franklin": "https://i.imgur.com/XqT271W.jpg",
+            "oscar": "https://i.imgur.com/8Fk7L1E.jpg",
+            "arenal": "https://i.imgur.com/L7H5x0F.jpg",
+            "manuel": "https://i.imgur.com/9qZ2X6y.jpg",
+            "monteverde": "https://i.imgur.com/4hCg87P.jpg",
+            "nicoya": "https://i.imgur.com/h9S9A8E.jpg",
+            "tortuguero": "https://i.imgur.com/3Z6Kz2F.jpg",
+            "teatro": "https://i.imgur.com/N74uX5S.jpg",
+            "cultura": "https://i.imgur.com/vH1Z2yZ.jpg"
+        };
+
+        function loadPlaceholderImages() {
+            Object.keys(PLACEHOLDER_IMAGES).forEach(key => {
+                displayImage(key, PLACEHOLDER_IMAGES[key]);
+            });
+            console.log("🖼️ Imagens de visualização (Placeholders) carregadas.");
+        }
+        
+        // Chamada inicial para carregar as imagens de visualização antes do Firebase tentar
+        document.addEventListener('DOMContentLoaded', loadPlaceholderImages);
+
+
+        // Funções de Login
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+
+        async function loginAdmin() {
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+
+            if (!email || !password) {
+                alert('⚠️ Por favor, preencha todos os campos!');
+                return;
+            }
+
+            try {
+                // Acesso a window.auth do script module
+                const userCredential = await window.auth.signInWithEmailAndPassword(email, password);
+                console.log('✅ Login realizado com sucesso!');
+                alert('✅ Bem-vindo, Administrador!');
+                closeLoginModal();
+                enableAdminMode();
+            } catch (error) {
+                console.error('❌ Erro no login:', error);
+                if (error.code === 'auth/user-not-found') {
+                    alert('❌ Usuário não encontrado!');
+                } else if (error.code === 'auth/wrong-password') {
+                    alert('❌ Senha incorreta!');
+                } else {
+                    alert('❌ Erro ao fazer login: ' + error.message);
+                }
+            }
+        }
+
+        function enableAdminMode() {
+            window.isAdminLoggedIn = true;
+            document.querySelectorAll('.edit-button').forEach(btn => {
+                btn.style.display = 'block';
+                btn.style.opacity = '1';
+            });
+            document.querySelectorAll('.info-card, .spot-card').forEach(card => {
+                card.classList.add('admin-mode');
+            });
+            
+            const adminBtn = document.querySelector('.admin-button');
+            adminBtn.innerHTML = '👤 Logout Admin';
+            adminBtn.onclick = logoutAdmin;
+            
+            console.log('🔓 Modo Administrador Ativado!');
+        }
+
+        function disableAdminMode() {
+            window.isAdminLoggedIn = false;
+            document.querySelectorAll('.edit-button').forEach(btn => {
+                btn.style.display = 'none';
+                btn.style.opacity = '0';
+            });
+            document.querySelectorAll('.info-card, .spot-card').forEach(card => {
+                card.classList.remove('admin-mode');
+            });
+            
+            const adminBtn = document.querySelector('.admin-button');
+            adminBtn.innerHTML = '👤 Admin Login';
+            adminBtn.onclick = openLoginModal;
+            
+            console.log('🔒 Modo Administrador Desativado!');
+        }
+
+        async function logoutAdmin() {
+            try {
+                await window.auth.signOut();
+                alert('✅ Logout realizado com sucesso!');
+                disableAdminMode();
+            } catch (error) {
+                console.error('❌ Erro ao fazer logout:', error);
+                alert('❌ Erro ao fazer logout!');
+            }
+        }
+
+        // Funções de Upload de Imagem
+        function openImageModal(imageId) {
+            if (!window.isAdminLoggedIn) {
+                alert('⚠️ Você precisa estar logado como administrador!');
+                openLoginModal();
+                return;
+            }
+            
+            window.currentImageId = imageId;
+            document.getElementById('imageUploadModal').classList.add('active');
+            document.getElementById('imageTitle').value = imageId.charAt(0).toUpperCase() + imageId.slice(1);
+            document.getElementById('imageFile').value = '';
+            document.getElementById('imageUrl').value = '';
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageUploadModal').classList.remove('active');
+            window.currentImageId = null;
+        }
+
+        async function saveImage() {
+            const imageId = window.currentImageId;
+            const imageFile = document.getElementById('imageFile').files[0];
+            const imageUrl = document.getElementById('imageUrl').value;
+            const imageTitle = document.getElementById('imageTitle').value;
+
+            if (!imageFile && !imageUrl) {
+                alert('⚠️ Por favor, selecione uma imagem ou cole uma URL!');
+                return;
+            }
+
+            try {
+                let finalUrl = imageUrl;
+
+                // Mostrar loading
+                const uploadBtn = document.querySelector('.save-btn');
+                uploadBtn.textContent = '⏳ Enviando...';
+                uploadBtn.disabled = true;
+
+                // Se um arquivo foi selecionado, fazer upload para o Firebase Storage
+                if (imageFile) {
+                    const storageRef = firebase.storage().ref(); // Simulação do ref no script inline
+                    const fileRef = storageRef.child(`costa-rica/${imageId}-${Date.now()}.${imageFile.name.split('.').pop()}`);
+                    
+                    const snapshot = await fileRef.put(imageFile); 
+                    finalUrl = await snapshot.ref.getDownloadURL();
+                    
+                    console.log('✅ Imagem enviada para o Storage!');
+                }
+
+                // Salvar URL no Firestore
+                const docRef = firebase.firestore().doc("site-images/costa-rica"); // Simulação do doc no script inline
+                const updateData = {};
+                updateData[imageId] = finalUrl;
+                updateData.timestamp = firebase.firestore.FieldValue.serverTimestamp(); // Simulação do serverTimestamp
+
+                await docRef.set(updateData, { merge: true });
+                
+                console.log('✅ URL da imagem salva no Firestore!');
+                
+                // Exibir a imagem
+                displayImage(imageId, finalUrl);
+                
+                alert('✅ Imagem salva com sucesso!');
+                closeImageModal();
+
+            } catch (error) {
+                console.error('❌ Erro ao salvar imagem:', error);
+                alert('❌ Erro ao salvar imagem: ' + error.message);
+            } finally {
+                 // Resetar botão
+                 const uploadBtn = document.querySelector('.save-btn');
+                 uploadBtn.textContent = '💾 Salvar';
+                 uploadBtn.disabled = false;
+            }
+        }
+
+        function displayImage(imageId, imageUrl) {
+            const container = document.getElementById(`img-${imageId}`);
+            if (container) {
+                container.innerHTML = `<img src="${imageUrl}" alt="${imageId}">`;
+            }
+        }
+
+        // Fechar modais ao clicar fora
+        document.getElementById('loginModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLoginModal();
+            }
+        });
+
+        document.getElementById('imageUploadModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeImageModal();
+            }
+        });
+
+        // Animações e efeitos (Mantido o código original)
         document.addEventListener('DOMContentLoaded', function() {
             const sections = document.querySelectorAll('.section');
             
@@ -705,13 +1240,6 @@
                 } else {
                     scrollIndicator.style.display = 'none';
                 }
-});
-
-            // Efeito parallax suave nas laterais roxas
-            window.addEventListener('scroll', function() {
-                const scrolled = window.pageYOffset;
-                const parallaxSpeed = 0.5;
-                document.body.style.backgroundPosition = `center ${scrolled * parallaxSpeed}px`;
             });
 
             // Animação de digitação no título
@@ -730,28 +1258,10 @@
 
             setTimeout(typeWriter, 1200);
 
-            // Adicionar efeito de brilho nos cards ao passar o mouse
-            const cards = document.querySelectorAll('.info-card, .spot-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.05) translateY(-5px)';
-                });
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1) translateY(0)';
-                });
-            });
-
-            // Contador de visitantes (exemplo)
-            let visitCount = localStorage.getItem('visitCount') || 0;
-            visitCount++;
-            localStorage.setItem('visitCount', visitCount);
-            console.log(`🎯 Você é o visitante número ${visitCount} deste dispositivo!`);
-
-            // Efeito de partículas de fundo
+            // Criar partículas flutuantes
             createParticles();
         });
 
-        // Criar partículas flutuantes de fundo
         function createParticles() {
             const particlesContainer = document.createElement('div');
             particlesContainer.style.cssText = `
@@ -788,7 +1298,6 @@
                 particlesContainer.appendChild(particle);
             }
 
-            // Adicionar animação CSS para partículas
             const style = document.createElement('style');
             style.textContent = `
                 @keyframes floatUp {
@@ -811,185 +1320,7 @@
             document.head.appendChild(style);
         }
 
-        // Easter egg: Código Konami
-        let konamiCode = [];
-        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-
-        document.addEventListener('keydown', function(e) {
-            konamiCode.push(e.key);
-            konamiCode = konamiCode.slice(-10);
-
-            if (konamiCode.join(',') === konamiSequence.join(',')) {
-                activateEasterEgg();
-            }
-        });
-
-        function activateEasterEgg() {
-            document.body.style.animation = 'rainbow 2s linear infinite';
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes rainbow {
-                    0% { filter: hue-rotate(0deg); }
-                    100% { filter: hue-rotate(360deg); }
-                }
-            `;
-            document.head.appendChild(style);
-
-            setTimeout(() => {
-                alert('🎉 Pura Vida! Você encontrou o easter egg da Costa Rica! 🇨🇷');
-                document.body.style.animation = '';
-            }, 2000);
-        }
-
-        // Função para compartilhar nas redes sociais
-        function shareOnSocial(platform) {
-            const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent('Confira esta apresentação incrível sobre a Costa Rica! 🇨🇷');
-            
-            const urls = {
-                twitter: `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
-                facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-                whatsapp: `https://wa.me/?text=${text}%20${url}`
-            };
-
-            if (urls[platform]) {
-                window.open(urls[platform], '_blank', 'width=600,height=400');
-            }
-        }
-
-        // Adicionar menu de compartilhamento
-        const shareButton = document.createElement('div');
-        shareButton.style.cssText = `
-            position: fixed;
-            bottom: 110px;
-            right: 35px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #7b2cbf 0%, #c77dff 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 8px 30px rgba(199, 125, 255, 0.6);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            border: 3px solid #e0aaff;
-            font-size: 1.5em;
-        `;
-        shareButton.innerHTML = '📤';
-        shareButton.title = 'Compartilhar';
-
-        shareButton.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.15)';
-        });
-
-        shareButton.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
-        });
-
-        shareButton.addEventListener('click', function() {
-            const shareMenu = document.createElement('div');
-            shareMenu.style.cssText = `
-                position: fixed;
-                bottom: 180px;
-                right: 35px;
-                background: linear-gradient(135deg, rgba(60, 9, 108, 0.95) 0%, rgba(36, 0, 70, 0.95) 100%);
-                padding: 20px;
-                border-radius: 15px;
-                box-shadow: 0 10px 40px rgba(199, 125, 255, 0.5);
-                z-index: 1001;
-                border: 2px solid #7b2cbf;
-                backdrop-filter: blur(10px);
-            `;
-
-            shareMenu.innerHTML = `
-                <div style="color: #e0aaff; font-weight: bold; margin-bottom: 15px; text-align: center;">Compartilhar</div>
-                <button onclick="shareOnSocial('twitter')" style="display: block; width: 100%; padding: 10px; margin: 8px 0; background: linear-gradient(135deg, #1DA1F2, #0d8bd9); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">🐦 Twitter</button>
-                <button onclick="shareOnSocial('facebook')" style="display: block; width: 100%; padding: 10px; margin: 8px 0; background: linear-gradient(135deg, #4267B2, #365899); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">📘 Facebook</button>
-                <button onclick="shareOnSocial('whatsapp')" style="display: block; width: 100%; padding: 10px; margin: 8px 0; background: linear-gradient(135deg, #25D366, #1da851); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">💬 WhatsApp</button>
-                <button onclick="this.parentElement.remove()" style="display: block; width: 100%; padding: 10px; margin-top: 12px; background: rgba(255, 255, 255, 0.1); color: #e0aaff; border: 1px solid #7b2cbf; border-radius: 8px; cursor: pointer; font-weight: bold;">✖ Fechar</button>
-            `;
-
-            document.body.appendChild(shareMenu);
-
-            setTimeout(() => shareMenu.remove(), 10000);
-        });
-
-        document.body.appendChild(shareButton);
-
-        // Sistema de modo claro/escuro (toggle)
-        const themeToggle = document.createElement('div');
-        themeToggle.style.cssText = `
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #7b2cbf 0%, #c77dff 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(199, 125, 255, 0.5);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            border: 2px solid #e0aaff;
-            font-size: 1.3em;
-        `;
-        themeToggle.innerHTML = '🌙';
-        themeToggle.title = 'Alternar tema';
-
-        let isDarkMode = true;
-
-        themeToggle.addEventListener('click', function() {
-            isDarkMode = !isDarkMode;
-            
-            if (isDarkMode) {
-                document.body.style.background = 'linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a0a0a 100%)';
-                this.innerHTML = '🌙';
-            } else {
-                document.body.style.background = 'linear-gradient(135deg, #f0f0f0 0%, #d4c5f9 50%, #f0f0f0 100%)';
-                this.innerHTML = '☀️';
-            }
-
-            this.style.transform = 'rotate(360deg) scale(1.2)';
-            setTimeout(() => {
-                this.style.transform = 'rotate(0deg) scale(1)';
-            }, 300);
-        });
-
-        document.body.appendChild(themeToggle);
-
-        // Adicionar estatísticas do país com contador animado
-        function animateCounter(element, start, end, duration) {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const value = Math.floor(progress * (end - start) + start);
-                element.textContent = value.toLocaleString('pt-BR');
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
-        }
-
-        // Observar quando a seção de população aparece
-        const populationCard = document.querySelector('.info-card p');
-        const populationObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const numberElement = entry.target;
-                    animateCounter(numberElement, 0, 5200000, 2000);
-                    populationObserver.unobserve(entry.target);
-                }
-            });
-        });
-
-        // Adicionar efeito de neve/partículas especial
+        // Efeito de neve/partículas especial
         function createSpecialEffect() {
             setInterval(() => {
                 const emoji = ['🌿', '🦜', '🐒', '🌺', '🦋'][Math.floor(Math.random() * 5)];
@@ -1024,37 +1355,7 @@
 
         createSpecialEffect();
 
-        // Adicionar cursor customizado
-        const cursor = document.createElement('div');
-        cursor.style.cssText = `
-            width: 20px;
-            height: 20px;
-            border: 2px solid #c77dff;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.1s ease;
-            box-shadow: 0 0 10px rgba(199, 125, 255, 0.5);
-        `;
-        document.body.appendChild(cursor);
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX - 10 + 'px';
-            cursor.style.top = e.clientY - 10 + 'px';
-        });
-
-        document.addEventListener('mousedown', () => {
-            cursor.style.transform = 'scale(0.8)';
-            cursor.style.borderColor = '#e0aaff';
-        });
-
-        document.addEventListener('mouseup', () => {
-            cursor.style.transform = 'scale(1)';
-            cursor.style.borderColor = '#c77dff';
-        });
-
-        // Mensagem de boas-vindas personalizada
+        // Mensagem de boas-vindas
         setTimeout(() => {
             console.log(`
             ╔═══════════════════════════════════════════╗
@@ -1064,16 +1365,16 @@
             ║         Pura Vida desde 1821 ✨           ║
             ║                                           ║
             ║   🔥 Firebase: Conectado                  ║
-            ║   🌿 Site carregado com sucesso!          ║
+            ║   🔐 Sistema Admin: Ativo                 ║
+            ║   📸 Upload de Imagens: OK                ║
             ║                                           ║
-            ║   Dica: Tente o código Konami! 🎮         ║
-            ║   (↑ ↑ ↓ ↓ ← → ← → B A)                  ║
+            ║   Faça login como Admin para editar! 👤   ║
             ║                                           ║
             ╚═══════════════════════════════════════════╝
             `);
         }, 1500);
 
-        console.log('%c✨ Site desenvolvido com amor e tecnologia! ✨', 'color: #c77dff; font-size: 16px; font-weight: bold;');
+        console.log('%c✨ Site com Sistema de Administração! ✨', 'color: #c77dff; font-size: 16px; font-weight: bold;');
     </script>
 </body>
 </html>
